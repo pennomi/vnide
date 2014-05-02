@@ -11,9 +11,17 @@ Rectangle {
         contentWidth: 1000
         contentHeight: 1000
 
-        Node {
-            x: 5
-            y: 30
+        // Show the nodes on top of the lines
+        Repeater {
+            id: nodeRepeater
+            model: nodes
+            delegate: Node {
+                x: model.x
+                y: model.y
+                selected: model.selected
+                parentNodeIDs: model.parentNodeIDs
+                childNodeIDs: model.childNodeIDs
+            }
         }
 
     }

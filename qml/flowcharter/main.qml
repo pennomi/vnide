@@ -6,6 +6,34 @@ Rectangle {
     height: 600
     color: "black"
 
+    ListModel {
+        id: nodes
+
+        property int selectedIndex: 0
+
+        ListElement {
+            nid: 314159
+            x: 5
+            y: 30
+            selected: false
+            parentNodeIDs: []
+            childNodeIDs: [
+                ListElement { nid: 9277 }
+            ]
+        }
+
+        ListElement {
+            nid: 9277
+            x: 120
+            y: 30
+            selected: false
+            parentNodeIDs: [
+                ListElement { nid: 314159 }
+            ]
+            childNodeIDs: []
+        }
+    }
+
     Grid {
         anchors.fill: parent
         columns: 2
