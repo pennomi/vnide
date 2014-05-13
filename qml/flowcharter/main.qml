@@ -1,4 +1,5 @@
 import QtQuick 2.0
+import "panels" as Panels
 
 Rectangle {
     id: app  // Globally we can use app to access this root element
@@ -40,19 +41,19 @@ Rectangle {
         rows: 2
         spacing: 2
 
-        FlowchartPanel {
+        Panels.FlowchartPanel {
             width: parent.width * .8
             height: parent.height * .8
         }
-        EditPanel {
+        Panels.EditPanel {
             width: parent.width * .2
             height: parent.height * .8
         }
-        InsertPanel {
+        Panels.InsertPanel {
             width: parent.width * .8
             height: parent.height * .2
         }
-        PreviewPanel {
+        Panels.PreviewPanel {
             width: parent.width * .2
             height: parent.height * .2
         }
