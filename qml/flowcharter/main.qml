@@ -30,6 +30,30 @@ Rectangle {
                              childNodes: {},
                          });
         }
+
+        function insertType(type) {
+            // calculate next nid
+            var nextNid = 0;
+            for (var i=0; i<nodes.count; i++) {
+                nextNid = Math.max(nextNid, nodes.get(i).nid + 1)
+            }
+
+            // insert after selectedIndex
+            var insertAfter = nodes.get(selectedIndex);
+            var newParentNodes = {};
+            newParentNodes[insertAfter.nid] = "";
+            nodes.append({
+                             nid: nextNid,
+                             x: 0,
+                             y: 0,
+                             selected: false,
+                             parentNodes: newParentNodes,
+                             childNodes:  insertAfter.childNodes
+                         });
+            var newChildNodes = {};
+            newChildNodes[nextNid] = "";
+            insertAfter.childNodes = newChildNodes;
+        }
     }
 
     Grid {
