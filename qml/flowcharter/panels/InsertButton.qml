@@ -20,7 +20,7 @@ Rectangle {
         anchors.fill: parent
         onClicked: {
             console.log("Clicked " + title);
-
+            nodes.insertType(title)
         }
     }
 

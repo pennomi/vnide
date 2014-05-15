@@ -3,10 +3,10 @@ import QtQuick 2.0
 Rectangle {
     id: genericNode
 
-    property int nid: 0
-    property bool selected
-    property variant parentNodeIDs: []
-    property variant childNodeIDs: []
+    property int nid: model.nid
+
+    x: model.x
+    y: model.y
 
     width: 100
     height: 80
@@ -16,8 +16,7 @@ Rectangle {
     border.width: 2
     scale: selected ? 1.2 : 1.0
 
-
-
+    // TODO: get the line list to populate correctly initially
 
     // Repopulates the lineList
     function recalculateLines(recurse) {
@@ -32,17 +31,19 @@ Rectangle {
         }
 
         // Generate all child lines for this node
-        for (var j=0; j<genericNode.childNodeIDs.count; j++) {
-            var node_data = genericNode.childNodeIDs.get(j);
-            var child = nodesByID[node_data.nid];
+        for (var key in model.childNodes) {
+            var child = nodesByID[key];
             lineList.append({"x2": child.x, "y2": child.y + height/2,})
         }
 
-        // If a child moves, the parent needs updated
-        if(recurse) {
-            for (var i=0; i<genericNode.parentNodeIDs.count; i++) {
-                var recurse_nid = genericNode.parentNodeIDs.get(i).nid;
-                nodeRepeater.updateLinesForNid(recurse_nid);
+        // If a child moves, all parents need updated...
+        if(!recurse) return;  // ...(but don't update ALL the nodes!)
+
+        for (var i=0; i<nodes.count; i++) {
+            var nodeElement = nodeRepeater.itemAt(i);
+            if (String(nodeElement.nid) in model.parentNodes) {
+                nodeElement.recalculateLines();
+                return;
             }
         }
     }
@@ -51,10 +52,6 @@ Rectangle {
 
     ListModel {
         id: lineList
-
-        Component.onCompleted: {
-            genericNode.recalculateLines();
-        }
     }
 
     Repeater {

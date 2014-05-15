@@ -2,7 +2,7 @@ import QtQuick 2.0
 import "panels" as Panels
 
 Rectangle {
-    id: app  // Globally we can use app to access this root element
+    id: app
     width: 800
     height: 600
     color: "black"
@@ -12,26 +12,23 @@ Rectangle {
 
         property int selectedIndex: 0
 
-        ListElement {
-            nid: 314159
-            x: 5
-            y: 30
-            selected: false
-            parentNodeIDs: []
-            childNodeIDs: [
-                ListElement { nid: 9277 }
-            ]
-        }
-
-        ListElement {
-            nid: 9277
-            x: 120
-            y: 30
-            selected: false
-            parentNodeIDs: [
-                ListElement { nid: 314159 }
-            ]
-            childNodeIDs: []
+        Component.onCompleted: {
+            nodes.append({
+                             nid: 314159,
+                             x: 5,
+                             y: 30,
+                             selected: false,
+                             parentNodes: {},
+                             childNodes: { 9277: "" },
+                         });
+            nodes.append({
+                             nid: 9277,
+                             x: 120,
+                             y: 30,
+                             selected: false,
+                             parentNodes: { 314159: "" },
+                             childNodes: {},
+                         });
         }
     }
 

@@ -15,25 +15,7 @@ Rectangle {
         Repeater {
             id: nodeRepeater
             model: nodes
-            delegate: Nodes.Node {
-                nid: model.nid
-                x: model.x
-                y: model.y
-                selected: model.selected
-                parentNodeIDs: model.parentNodeIDs
-                childNodeIDs: model.childNodeIDs
-            }
-
-            // This function forces the lines to update
-            function updateLinesForNid(nid) {
-                for (var i=0; i<nodes.count; i++) {
-                    var nodeElement = nodeRepeater.itemAt(i);
-                    if (nodeElement.nid === nid) {
-                        nodeElement.recalculateLines();
-                        return;
-                    }
-                }
-            }
+            delegate: Nodes.Node {}
         }
 
     }
