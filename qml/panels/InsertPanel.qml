@@ -11,9 +11,9 @@ Rectangle {
         Row {
             id: buttonRow
             anchors.verticalCenter: parent.verticalCenter
-            x: parent.height * .125
-            height: parent.height * .75
-            spacing: parent.height * .125
+            x: 5
+            height: 40
+            spacing: 5
 
             InsertButton {
                 color: "red"

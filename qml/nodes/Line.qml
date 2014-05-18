@@ -17,6 +17,21 @@ Rectangle {
     width: getWidth(x1,y1,x2,y2);
     rotation: getSlope(x1,y1,x2,y2);
 
+
+    DropArea {
+        x: 0
+        width: parent.width
+        y: -10
+        height: parent.height + 20
+
+        onDropped: {
+            console.log("dropped " + nid)
+            console.log(drag.source)
+        }
+        onEntered: console.log("entered " + nid)
+        onExited: console.log("exited " + nid)
+    }
+
     function getWidth(sx1,sy1,sx2,sy2) {
         return Math.sqrt(Math.pow((sx2-sx1),2)+Math.pow((sy2-sy1),2));
     }

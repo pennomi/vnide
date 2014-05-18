@@ -12,15 +12,15 @@ Rectangle {
     height: 80
     radius: 5
     color: "red"
-    border.color: "black"
+    border.color: selected ? "yellow" : "black"
     border.width: 2
-    scale: selected ? 1.2 : 1.0
+    //scale: selected ? 1.2 : 1.0
 
     // TODO: get the line list to populate correctly initially
 
     // Repopulates the lineList
     function recalculateLines(recurse) {
-        console.log(nid + ": recalculate lines")
+        //console.log(nid + ": recalculate lines")
         lineList.clear()
 
         // Build a dictionary of nids to positions (TODO: Cache somehow)
@@ -49,7 +49,6 @@ Rectangle {
     }
 
 
-
     ListModel {
         id: lineList
     }
@@ -70,11 +69,15 @@ Rectangle {
 
 
 
-
+    Text {
+        anchors.centerIn: parent
+        text: nid
+    }
 
 
 
     MouseArea {
+        id: mouseArea
         anchors.fill: parent
         onClicked: {
             nodes.setProperty(nodes.selectedIndex, "selected", false)
@@ -91,7 +94,6 @@ Rectangle {
             nodes.setProperty(index, "y", genericNode.y);
             genericNode.recalculateLines(true)
         }
-
         drag { target: genericNode }
     }
 
