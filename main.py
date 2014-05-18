@@ -1,14 +1,14 @@
 import sys
 
-from OpenGL import GL
-from PyQt5.QtCore import QUrl
-from PyQt5.QtWidgets import QApplication
-from PyQt5.QtQuick import QQuickView
+# noinspection PyUnresolvedReferences
+from OpenGL import GL  # HEADS UP! This is required to not segfault on Ubuntu
+# noinspection PyUnresolvedReferences
+from PyQt5 import QtCore, QtWidgets, QtQuick
 
-app = QApplication(sys.argv)
+app = QtWidgets.QApplication(sys.argv)
 
-view = QQuickView()
-view.setSource(QUrl("qml/main.qml"))
+view = QtQuick.QQuickView()
+view.setSource(QtCore.QUrl("qml/main.qml"))
 view.show()
 
 app.exec()
