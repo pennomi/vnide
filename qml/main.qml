@@ -34,4 +34,11 @@ Rectangle {
         }
     }
 
+    Component.onCompleted: {
+        console.log("Node: " + node);
+        for (var attr in node) {
+            console.log(" * " + attr)
+        }
+    }
+
 }
