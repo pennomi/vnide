@@ -1,43 +1,102 @@
 # noinspection PyUnresolvedReferences
-from PyQt5.QtCore import QObject, pyqtProperty
+from PyQt5 import QtCore
 
 
-class QMLProperty():
-    def __init__(self, type, value):
-        self.t = type
-        self.value = value
+class Node(QtCore.QObject):
+    def __init__(self):
+        super(Node, self).__init__()
+        self._property_data = dict(
+            id="12ab52be98c0",
+            x=0,
+            y=0
+        )
 
-    # TODO: def for private and public names, etc.
+    # id
+    id_changed = QtCore.pyqtSignal('QString', name='idChanged')
+
+    @QtCore.pyqtProperty('QString', notify=id_changed)
+    def id(self):
+        return self._property_data["id"]
+
+    @id.setter
+    def id(self, value):
+        self._property_data["id"] = value
+        self.id_changed.emit(value)
+
+    # x
+    x_changed = QtCore.pyqtSignal(int, name='xChanged')
+
+    @QtCore.pyqtProperty(int, notify=x_changed)
+    def x(self):
+        return self._property_data["x"]
+
+    @x.setter
+    def x(self, value):
+        self._property_data["x"] = value
+        self.x_changed.emit(value)
+
+    # y
+    y_changed = QtCore.pyqtSignal(int, name='yChanged')
+
+    @QtCore.pyqtProperty(int, notify=y_changed)
+    def y(self):
+        return self._property_data["y"]
+
+    @y.setter
+    def y(self, value):
+        self._property_data["y"] = value
+        self.y_changed.emit(value)
 
 
-class QMLObject(QObject):
-    foobie = QMLProperty(int, 1)
+class SimpleListModel(QtCore.QAbstractListModel):
+    def __init__(self, mlist):
+        super(SimpleListModel, self).__init__()
+        self._items = mlist
 
-    def __new__(cls):
-        print("__new__")
+    data_changed = QtCore.pyqtSignal(
+        QtCore.QModelIndex, QtCore.QModelIndex, name='dataChanged')
 
-        for attr_name in [a for a in dir(cls) if not a.startswith("_")]:
-            attr = getattr(cls, attr_name)
-            if isinstance(attr, QMLProperty):
-                print("Found property to wrap:", attr_name)
-                private_attr_name = "__{}".format(attr_name)
+    def rowCount(self, parent=QtCore.QModelIndex()):
+        return len(self._items)
 
-                # define getters and setters
-                def getter(self):
-                    return getattr(self, private_attr_name)
+    def data(self, index, role=QtCore.Qt.DisplayRole):
+        if role == QtCore.Qt.DisplayRole:
+            return self._items[index.row()]
+        elif role == QtCore.Qt.EditRole:
+            # Asking for the editable form of the data
+            # See the comment in setData().
+            return self._items[index.row()]
+        else:
+            return QtCore.QVariant()
 
-                def setter(self, value):
-                    return setattr(self, private_attr_name, value)
+    def setData(self, index, value, role=QtCore.Qt.EditRole):
+        print("set data ", index, value, role)
+        if role == QtCore.Qt.EditRole:
+            self._items[index.row()] = value
+            self.data_changed.emit(index, index)
+            return True
+        # unhandled change.
+        return False
 
-                # copy the data to the new location
-                setattr(cls, private_attr_name, attr.value)
+    def flags(self, index):
+        return QtCore.Qt.ItemIsSelectable | QtCore.Qt.ItemIsEditable | QtCore.Qt.ItemIsEnabled
 
-                # override the old property with the new shiny one
-                setattr(cls, attr_name, pyqtProperty(attr.t, getter, setter))
+    def removeRows(self, row, count, parent=QtCore.QModelIndex()):
+        if row < 0 or row > len(self._items):
+            return
+        self.beginRemoveRows(parent, row, row + count - 1)
+        while count != 0:
+            del self._items[row]
+            count -= 1
+        self.endRemoveRows()
 
-        return super(QMLObject, cls).__new__(cls)
-
-
-if __name__ == "__main__":
-    q = QMLObject()
-    print(q.foobie)
+    # while we could use QAbstractItemModel::insertRows(), we'd have to
+    # shoehorn around the API to get things done: we'd need to call setData()
+    # etc. The easier way, in this case, is to use our own method to do the
+    # heavy lifting.
+    def append(self, item):
+        # The str() cast is because we don't want to be storing a Qt type in
+        # here.
+        self.beginInsertRows(QtCore.QModelIndex(), len(self._items), len(self._items))
+        self._items.append(item)
+        self.endInsertRows()

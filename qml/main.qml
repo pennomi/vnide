@@ -34,11 +34,37 @@ Rectangle {
         }
     }
 
-    Component.onCompleted: {
+    Repeater {
+        model: nodeList
+        delegate: Rectangle {
+                Component.onCompleted: {
+                    console.log("Model: " + model)
+                    if (index == 1) {
+                        model.display.x = 55;
+                    }
+                    console.log("model.display.x " + model.display.x)
+                }
+                x: model.display.x
+                y: model.display.y
+                width: 120
+                height: 20
+                color: "blue"
+
+                Text {
+                    anchors.fill: parent
+                    text: display.id
+                    color: "white"
+                }
+            }
+    }
+
+    /*Component.onCompleted: {
         console.log("Node: " + node);
         for (var attr in node) {
-            console.log(" * " + attr)
+            console.log(" * " + attr + " = " + node[attr])
         }
-    }
+        node.x = 55;
+        console.log("node.x " + node.x)
+    }*/
 
 }
