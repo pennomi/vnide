@@ -40,12 +40,12 @@ Rectangle {
                 Component.onCompleted: {
                     console.log("Model: " + model)
                     if (index == 1) {
-                        model.display.x = 55;
+                        display.x = 55;
                     }
-                    console.log("model.display.x " + model.display.x)
+                    console.log("display.x " + display.x)
                 }
-                x: model.display.x
-                y: model.display.y
+                x: display.x
+                y: display.y
                 width: 120
                 height: 20
                 color: "blue"
@@ -55,16 +55,15 @@ Rectangle {
                     text: display.id
                     color: "white"
                 }
+
+                MouseArea {
+                    anchors.fill: parent
+                    drag { target: parent }
+                    onClicked: {
+                        nodeList.append(model.display)
+                    }
+                }
             }
     }
-
-    /*Component.onCompleted: {
-        console.log("Node: " + node);
-        for (var attr in node) {
-            console.log(" * " + attr + " = " + node[attr])
-        }
-        node.x = 55;
-        console.log("node.x " + node.x)
-    }*/
 
 }

@@ -60,14 +60,13 @@ class SimpleListModel(QtCore.QAbstractListModel):
         return len(self._items)
 
     def data(self, index, role=QtCore.Qt.DisplayRole):
-        if role == QtCore.Qt.DisplayRole:
-            return self._items[index.row()]
-        elif role == QtCore.Qt.EditRole:
-            # Asking for the editable form of the data
-            # See the comment in setData().
-            return self._items[index.row()]
-        else:
-            return QtCore.QVariant()
+        return self._items[index.row()]
+        #if role == QtCore.Qt.DisplayRole:
+        #    return self._items[index.row()]
+        #elif role == QtCore.Qt.EditRole:
+        #    return self._items[index.row()]
+        #else:
+        #    return QtCore.QVariant()
 
     def setData(self, index, value, role=QtCore.Qt.EditRole):
         print("set data ", index, value, role)
