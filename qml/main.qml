@@ -38,17 +38,27 @@ Rectangle {
         model: nodeList
         delegate: Rectangle {
                 Component.onCompleted: {
-                    console.log("Model: " + model)
                     if (index == 1) {
                         display.x = 55;
                     }
-                    console.log("display.x " + display.x)
                 }
                 x: display.x
                 y: display.y
-                width: 120
-                height: 20
+                width: 300
+                height: 30 + listy.count * 30
                 color: "blue"
+
+                ListView {
+                    y: 30
+                    id: listy
+                    anchors.fill: parent
+                    model: display.exitConditions
+                    delegate: Text {
+                        height: 30
+                        width: 100
+                        text: display.text
+                    }
+                }
 
                 Text {
                     anchors.fill: parent
