@@ -4,7 +4,7 @@ import sys
 from OpenGL import GL  # HEADS UP! This is required to not segfault on Ubuntu
 # noinspection PyUnresolvedReferences
 from PyQt5 import QtCore, QtWidgets, QtQuick
-from nodes import Node, SimpleListModel
+from nodes import Node, NodeList
 
 # Make PyQt stop on a Ctrl-C... it's not a clean shutdown, BTW.
 import signal
@@ -12,7 +12,7 @@ signal.signal(signal.SIGINT, signal.SIG_DFL)
 
 
 # Generate the data
-nodeList = SimpleListModel([Node(), Node(), Node()])
+nodeList = NodeList([Node(), Node(), Node()])
 #nodeList.append(node)
 
 # Show the window
