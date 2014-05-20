@@ -50,8 +50,9 @@ Rectangle {
 
                 ListView {
                     y: 30
+                    width: parent.width
+                    anchors.bottom: parent.bottom
                     id: listy
-                    anchors.fill: parent
                     model: display.exitConditions
                     delegate: Text {
                         height: 30
