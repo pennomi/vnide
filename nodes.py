@@ -49,9 +49,9 @@ class Node(QtCore.QObject):
 
 
 class SimpleListModel(QtCore.QAbstractListModel):
-    def __init__(self, mlist):
+    def __init__(self, initial_list):
         super(SimpleListModel, self).__init__()
-        self._items = mlist
+        self._items = initial_list
 
     data_changed = QtCore.pyqtSignal(
         QtCore.QModelIndex, QtCore.QModelIndex, name='dataChanged')
@@ -61,12 +61,6 @@ class SimpleListModel(QtCore.QAbstractListModel):
 
     def data(self, index, role=QtCore.Qt.DisplayRole):
         return self._items[index.row()]
-        #if role == QtCore.Qt.DisplayRole:
-        #    return self._items[index.row()]
-        #elif role == QtCore.Qt.EditRole:
-        #    return self._items[index.row()]
-        #else:
-        #    return QtCore.QVariant()
 
     def setData(self, index, value, role=QtCore.Qt.EditRole):
         print("set data ", index, value, role)
@@ -78,7 +72,9 @@ class SimpleListModel(QtCore.QAbstractListModel):
         return False
 
     def flags(self, index):
-        return QtCore.Qt.ItemIsSelectable | QtCore.Qt.ItemIsEditable | QtCore.Qt.ItemIsEnabled
+        return (QtCore.Qt.ItemIsSelectable |
+                QtCore.Qt.ItemIsEditable |
+                QtCore.Qt.ItemIsEnabled)
 
     def removeRows(self, row, count, parent=QtCore.QModelIndex()):
         if row < 0 or row > len(self._items):
@@ -89,13 +85,13 @@ class SimpleListModel(QtCore.QAbstractListModel):
             count -= 1
         self.endRemoveRows()
 
-    # while we could use QAbstractItemModel::insertRows(), we'd have to
-    # shoehorn around the API to get things done: we'd need to call setData()
-    # etc. The easier way, in this case, is to use our own method to do the
-    # heavy lifting.
+    # simpler API than insertRows
     def append(self, item):
-        # The str() cast is because we don't want to be storing a Qt type in
-        # here.
-        self.beginInsertRows(QtCore.QModelIndex(), len(self._items), len(self._items))
+        index = len(self._items)
+        self.beginInsertRows(QtCore.QModelIndex(), index, index)
         self._items.append(item)
         self.endInsertRows()
+
+    @QtCore.pyqtSlot()
+    def insertNode(self):
+        print("SLOT!")

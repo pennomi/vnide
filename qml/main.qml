@@ -60,7 +60,7 @@ Rectangle {
                     anchors.fill: parent
                     drag { target: parent }
                     onClicked: {
-                        nodeList.append(model.display)
+                        nodeList.insertNode()
                     }
                 }
             }
