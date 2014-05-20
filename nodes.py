@@ -1,16 +1,16 @@
 # noinspection PyUnresolvedReferences
 from PyQt5 import QtCore
+from uuid import uuid4
 from qt import SimpleListModel
 
 
 class Node(QtCore.QObject):
-    def __init__(self):
+    def __init__(self, **kwargs):
         super(Node, self).__init__()
         self._property_data = dict(
-            id="12ab52be98c0",
-            x=0,
-            y=0
+            id=str(uuid4()), x=0, y=0, type="root",
         )
+        self._property_data.update(kwargs)
 
     # id
     id_changed = QtCore.pyqtSignal('QString', name='idChanged')
@@ -47,6 +47,18 @@ class Node(QtCore.QObject):
     def y(self, value):
         self._property_data["y"] = value
         self.y_changed.emit(value)
+
+    # type
+    type_changed = QtCore.pyqtSignal("QString", name='typeChanged')
+
+    @QtCore.pyqtProperty("QString", notify=type_changed)
+    def type(self):
+        return self._property_data["type"]
+
+    @type.setter
+    def type(self, value):
+        self._property_data["type"] = value
+        self.type_changed.emit(value)
 
 
 class NodeList(SimpleListModel):
