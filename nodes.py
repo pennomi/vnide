@@ -1,29 +1,29 @@
 # noinspection PyUnresolvedReferences
 from PyQt5 import QtCore
 from uuid import uuid4
-from qt import SimpleListModel
+from qt import ListModel
 
 
 class Node(QtCore.QObject):
     def __init__(self, **kwargs):
         super(Node, self).__init__()
         self._property_data = dict(
-            id=str(uuid4()), x=0, y=0, type="root", selected=False,
-            exitConditions=SimpleListModel([])
+            nid=str(uuid4()), x=0, y=0, type="root", selected=False,
+            exitConditions=ListModel()
         )
         self._property_data.update(kwargs)
 
-    # id
-    id_changed = QtCore.pyqtSignal('QString', name='idChanged')
+    # nid
+    nid_changed = QtCore.pyqtSignal('QString', name='nidChanged')
 
-    @QtCore.pyqtProperty('QString', notify=id_changed)
-    def id(self):
-        return self._property_data["id"]
+    @QtCore.pyqtProperty('QString', notify=nid_changed)
+    def nid(self):
+        return self._property_data["nid"]
 
-    @id.setter
-    def id(self, value):
-        self._property_data["id"] = value
-        self.id_changed.emit(value)
+    @nid.setter
+    def nid(self, value):
+        self._property_data["nid"] = value
+        self.nid_changed.emit(value)
 
     # x
     x_changed = QtCore.pyqtSignal(int, name='xChanged')
@@ -132,7 +132,7 @@ class ExitCondition(QtCore.QObject):
         self.text_changed.emit(value)
 
 
-class NodeList(SimpleListModel):
+class NodeList(ListModel):
     @QtCore.pyqtSlot()
     def insertNode(self):
         print("SLOT!")

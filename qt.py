@@ -2,10 +2,10 @@
 from PyQt5 import QtCore
 
 
-class SimpleListModel(QtCore.QAbstractListModel):
-    def __init__(self, initial_list):
-        super(SimpleListModel, self).__init__()
-        self._items = initial_list
+class ListModel(QtCore.QAbstractListModel):
+    def __init__(self, *args):
+        super(ListModel, self).__init__()
+        self._items = list(args)
 
     data_changed = QtCore.pyqtSignal(
         QtCore.QModelIndex, QtCore.QModelIndex, name='dataChanged')

@@ -14,7 +14,7 @@ Rectangle {
 
         Repeater {
             id: nodeRepeater
-            model: nodes
+            model: nodeList
             delegate: Nodes.Node {}
         }
 

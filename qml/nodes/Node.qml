@@ -3,18 +3,18 @@ import QtQuick 2.0
 Rectangle {
     id: genericNode
 
-    property int nid: model.nid
+    property string nid: display.nid
 
-    x: model.x
-    y: model.y
+    x: display.x
+    y: display.y
 
     width: 100
     height: 80
     radius: 5
     color: "red"
-    border.color: selected ? "yellow" : "black"
+    border.color: display.selected ? "yellow" : "black"
     border.width: 2
-    //scale: selected ? 1.2 : 1.0
+    //scale: display.selected ? 1.2 : 1.0
 
     // TODO: get the line list to populate correctly initially
 
@@ -23,7 +23,7 @@ Rectangle {
         //console.log(nid + ": recalculate lines")
         lineList.clear()
 
-        // Build a dictionary of nids to positions (TODO: Cache somehow)
+        // Build a dictionary of nids to positions TODO: Cache somehow
         var nodesByID = {};
         for (var i=0; i<nodes.count; i++) {
             var n = nodes.get(i);
@@ -31,21 +31,20 @@ Rectangle {
         }
 
         // Generate all child lines for this node
-        for (var key in model.childNodes) {
+        for (var key in display.exitConditions) {
             var child = nodesByID[key];
             lineList.append({"x2": child.x, "y2": child.y + height/2,})
         }
 
-        // If a child moves, all parents need updated...
-        if(!recurse) return;  // ...(but don't update ALL the nodes!)
-
+        // TODO: If a child moves, all parents need updated in Python
+        /*if(!recurse) return;  // ...(but don't update ALL the nodes!)
         for (var i=0; i<nodes.count; i++) {
             var nodeElement = nodeRepeater.itemAt(i);
-            if (String(nodeElement.nid) in model.parentNodes) {
+            if (String(nodeElement.nid) in display.parentNodes) {
                 nodeElement.recalculateLines();
                 return;
             }
-        }
+        }*/
     }
 
 
