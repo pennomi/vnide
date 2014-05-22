@@ -1,6 +1,7 @@
 import QtQuick 2.0
 
 Rectangle {
+    // TODO: Convert this to use states for the drop hover interface
     id: l
     property alias x1: l.x
     property alias y1: l.y

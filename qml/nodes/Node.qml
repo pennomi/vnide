@@ -18,7 +18,7 @@ Rectangle {
 
     Text {
         anchors.centerIn: parent
-        text: nid
+        text: display.type
     }
 
     MouseArea {
@@ -56,7 +56,7 @@ Rectangle {
             y2: display.nextY - genericNode.y + genericNode.height / 2 //model.y2 - genericNode.y
             color: "black"
             onDropped: {
-                console.log("Dropperrific! " +  source.type);
+                nodeList.insertNodeAfterParent(nid, index, source)
             }
         }
     }

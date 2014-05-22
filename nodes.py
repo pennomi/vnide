@@ -179,19 +179,45 @@ class NodeList(ListModel):
     # noinspection PyProtectedMember
     def __init__(self, *args):
         super(NodeList, self).__init__(*args)
-        # TODO: This is hacky. Is there any other way?!?
+        # TODO: This is hacky (but effective). Is there any other way?!?
         for node in args:
             node._parent_list = weakref.proxy(self)
             for condition in node.exitConditions._items:
                 condition._parent_list = weakref.proxy(self)
 
     # TODO: mark _parent_list on appends too!
+    def append(self, item):
+        super(NodeList, self).append(item)
+        item._parent_list = weakref.proxy(self)
+        for condition in item.exitConditions._items:
+            condition._parent_list = weakref.proxy(self)
 
     def get_by_nid(self, nid):
+        # TODO: Wouldn't this be cooler as a dict-style access?
+        # TODO: And if you put in an int it's a list-style access? OooOOooh.
         for node in self._items:
             if node.nid == nid:
                 return node
 
-    @QtCore.pyqtSlot()
-    def insertNode(self):
-        print("SLOT!")
+    @QtCore.pyqtSlot('QString', int, 'QVariant')
+    def insertNodeAfterParent(self, nid, conditionIndex, dropData):
+        # TODO: one arg is the dropped thingy? (to get x, y, etc.)
+        # TODO: one arg should be condition index
+        print("Insert Node: {}:{} with data {} ({})".format(
+            nid, conditionIndex, dropData, dropData.property('title')))
+        # Fetch the parent
+        parent = self.get_by_nid(nid)
+        exitPoint = parent.exitConditions._items[conditionIndex]
+        # Generate the new node
+        new = Node(
+            type=dropData.property('title'),
+            x=dropData.x, y=dropData.y, selected=False,
+            exitConditions=ListModel(
+                ExitCondition(nextNode=exitPoint.nextNode,
+                              # these may be populated for some node types
+                              condition=None, text=None),
+            ))
+        self.append(new)
+        # Update the parent to have this as a child instead
+        exitPoint.nextNode = new.nid
+        # TODO: Send of any necessary signals and crap

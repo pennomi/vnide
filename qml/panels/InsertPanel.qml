@@ -17,32 +17,32 @@ Rectangle {
 
             InsertButton {
                 color: "red"
-                title: "Setting"
+                title: "setting"
             }
 
             InsertButton {
                 color: "green"
-                title: "Dialog"
+                title: "dialog"
             }
 
             InsertButton {
                 color: "blue"
-                title: "Choice"
+                title: "choice"
             }
 
             InsertButton {
                 color: "white"
-                title: "Script"
+                title: "script"
             }
 
             InsertButton {
                 color: "gray"
-                title: "Scripted Choice"
+                title: "scripted choice"
             }
 
             InsertButton {
                 color: "yellow"
-                title: "Macro"
+                title: "macro"
             }
         }
     }
