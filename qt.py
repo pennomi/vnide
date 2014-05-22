@@ -7,6 +7,10 @@ class ListModel(QtCore.QAbstractListModel):
         super(ListModel, self).__init__()
         self._items = list(args)
 
+    def __iter__(self):
+        for i in self._items:
+            yield i
+
     data_changed = QtCore.pyqtSignal(
         QtCore.QModelIndex, QtCore.QModelIndex, name='dataChanged')
 

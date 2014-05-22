@@ -22,7 +22,7 @@ n1 = Node(
 rootNode = Node(
     type="root", x=0, y=0,
     exitConditions=ListModel(
-        ExitCondition(nextNode=n2.nid, condition=None, text=None)
+        ExitCondition(nextNode=n1.nid, condition=None, text=None)
     ))
 nodeList = NodeList(rootNode, n1, n2)
 

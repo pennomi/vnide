@@ -16,87 +16,45 @@ Rectangle {
     border.width: 2
     //scale: display.selected ? 1.2 : 1.0
 
-    // TODO: get the line list to populate correctly initially
-
-    // Repopulates the lineList
-    function recalculateLines(recurse) {
-        //console.log(nid + ": recalculate lines")
-        lineList.clear()
-
-        // Build a dictionary of nids to positions TODO: Cache somehow
-        var nodesByID = {};
-        for (var i=0; i<nodes.count; i++) {
-            var n = nodes.get(i);
-            nodesByID[n.nid] = n;
-        }
-
-        // Generate all child lines for this node
-        for (var key in display.exitConditions) {
-            var child = nodesByID[key];
-            lineList.append({"x2": child.x, "y2": child.y + height/2,})
-        }
-
-        // TODO: If a child moves, all parents need updated in Python
-        /*if(!recurse) return;  // ...(but don't update ALL the nodes!)
-        for (var i=0; i<nodes.count; i++) {
-            var nodeElement = nodeRepeater.itemAt(i);
-            if (String(nodeElement.nid) in display.parentNodes) {
-                nodeElement.recalculateLines();
-                return;
-            }
-        }*/
-    }
-
-
-    ListModel {
-        id: lineList
-    }
-
-    Repeater {
-        id: lineRepeater
-        model: lineList
-        delegate: Line {
-            parent: genericNode.parent
-            x1: genericNode.width
-            y1: genericNode.height / 2
-            x2: model.x2 - genericNode.x
-            y2: model.y2 - genericNode.y
-            color: "black"
-        }
-    }
-
-
-
-
     Text {
         anchors.centerIn: parent
         text: nid
     }
 
-
-
     MouseArea {
         id: mouseArea
         anchors.fill: parent
         onClicked: {
-            nodes.setProperty(nodes.selectedIndex, "selected", false)
-            nodes.setProperty(index, "selected", true)
-            nodes.selectedIndex = index;
+            // TODO: This would cause an error. Refactor!
+            //nodes.setProperty(nodes.selectedIndex, "selected", false)
+            //nodes.setProperty(index, "selected", true)
+            //nodes.selectedIndex = index;
         }
         onMouseXChanged: {
-            nodes.setProperty(index, "x", genericNode.x);
-            nodes.setProperty(index, "y", genericNode.y);
-            genericNode.recalculateLines(true)
+            display.x = genericNode.x;
+            display.y = genericNode.y;
         }
         onMouseYChanged: {
-            nodes.setProperty(index, "x", genericNode.x);
-            nodes.setProperty(index, "y", genericNode.y);
-            genericNode.recalculateLines(true)
+            display.x = genericNode.x;
+            display.y = genericNode.y;
         }
         drag { target: genericNode }
     }
 
     Behavior on scale {
         NumberAnimation {}
+    }
+
+    Repeater {
+        id: lineRepeater
+        model: display.exitConditions
+        delegate: Line {
+            parent: genericNode.parent
+            x1: genericNode.width
+            y1: genericNode.height / 2
+            x2: display.nextX - genericNode.x //model.x2 - genericNode.x
+            y2: display.nextY - genericNode.y + genericNode.height / 2 //model.y2 - genericNode.y
+            color: "black"
+        }
     }
 }

@@ -2,6 +2,7 @@
 from PyQt5 import QtCore
 from uuid import uuid4
 from qt import ListModel
+import weakref
 
 
 class Node(QtCore.QObject):
@@ -12,6 +13,15 @@ class Node(QtCore.QObject):
             exitConditions=ListModel()
         )
         self._property_data.update(kwargs)
+
+        # connect the appropriate signals
+        self.x_changed.connect(self.notify_parents)
+        self.y_changed.connect(self.notify_parents)
+
+    # TODO: connect the xChanged and yChanged into the nextXChanged and
+    # nextYChanged for the parent node as well!
+    def notify_parents(self):
+        print("Foobie bletch!")
 
     # nid
     nid_changed = QtCore.pyqtSignal('QString', name='nidChanged')
@@ -131,8 +141,51 @@ class ExitCondition(QtCore.QObject):
         self._property_data["text"] = value
         self.text_changed.emit(value)
 
+    # Special properties (read-only convenience calculations)
+
+    # nextX
+    nextX_changed = QtCore.pyqtSignal(int, name='nextXChanged')
+
+    @QtCore.pyqtProperty(int, notify=nextX_changed)
+    def nextX(self):
+        # get the next node
+        try:
+            node = self._parent_list.get_by_nid(self.nextNode)
+            return node.x
+        except AttributeError:
+            print("No list found")
+            return 0
+
+    # nextY
+    nextY_changed = QtCore.pyqtSignal(int, name='nextYChanged')
+
+    @QtCore.pyqtProperty(int, notify=nextY_changed)
+    def nextY(self):
+        # get the next node
+        try:
+            node = self._parent_list.get_by_nid(self.nextNode)
+            return node.y
+        except AttributeError:
+            print("No list found")
+            return 0
+
 
 class NodeList(ListModel):
+    def __init__(self, *args):
+        super(NodeList, self).__init__(*args)
+        # TODO: This is hacky. Is there any other way?!?
+        for node in args:
+            # noinspection PyProtectedMember
+            for condition in node.exitConditions._items:
+                condition._parent_list = weakref.proxy(self)
+
+    # TODO: mark _parent_list on appends too!
+
+    def get_by_nid(self, nid):
+        for node in self._items:
+            if node.nid == nid:
+                return node
+
     @QtCore.pyqtSlot()
     def insertNode(self):
         print("SLOT!")
