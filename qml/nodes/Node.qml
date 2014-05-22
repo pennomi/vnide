@@ -55,6 +55,9 @@ Rectangle {
             x2: display.nextX - genericNode.x //model.x2 - genericNode.x
             y2: display.nextY - genericNode.y + genericNode.height / 2 //model.y2 - genericNode.y
             color: "black"
+            onDropped: {
+                console.log("Dropperrific! " +  source.type);
+            }
         }
     }
 }

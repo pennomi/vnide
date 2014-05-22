@@ -8,8 +8,6 @@ Rectangle {
     height: 600
     color: "black"
 
-    //Nodes.NodeList{ id: nodes }
-
     Grid {
         anchors.fill: parent
         columns: 2

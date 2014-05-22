@@ -8,6 +8,8 @@ Rectangle {
     property real x2: l.x
     property real y2: l.y
 
+    signal dropped(variant source)
+
     color: "black"
     height: 2
     smooth: true
@@ -17,19 +19,22 @@ Rectangle {
     width: getWidth(x1,y1,x2,y2);
     rotation: getSlope(x1,y1,x2,y2);
 
-
     DropArea {
         x: 0
-        width: parent.width
         y: -10
+        width: parent.width
         height: parent.height + 20
 
         onDropped: {
-            console.log("dropped " + nid)
-            console.log(drag.source)
+            l.dropped(drag.source)
+            l.color = "black";
         }
-        onEntered: console.log("entered " + nid)
-        onExited: console.log("exited " + nid)
+        onEntered: {
+            l.color = "yellow";
+        }
+        onExited: {
+            l.color = "black";
+        }
     }
 
     function getWidth(sx1,sy1,sx2,sy2) {
