@@ -27,6 +27,7 @@ rootNode = Node(
 nodeList = NodeList(rootNode, n1, n2)
 
 # Show the window
+# TODO: Handle resize events
 app = QtWidgets.QApplication(sys.argv)
 view = QtQuick.QQuickView()
 context = view.rootContext()
