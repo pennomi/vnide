@@ -18,10 +18,15 @@ class Node(QtCore.QObject):
         self.x_changed.connect(self.notify_parents)
         self.y_changed.connect(self.notify_parents)
 
-    # TODO: connect the xChanged and yChanged into the nextXChanged and
-    # nextYChanged for the parent node as well!
     def notify_parents(self):
-        print("Foobie bletch!")
+        try:
+            for node in self._parent_list:
+                for condition in node.exitConditions:
+                    if condition.nextNode == self.nid:
+                        condition.nextX_changed.emit(condition.nextX)
+                        condition.nextY_changed.emit(condition.nextY)
+        except AttributeError:
+            print("No parent list found")
 
     # nid
     nid_changed = QtCore.pyqtSignal('QString', name='nidChanged')
@@ -171,11 +176,12 @@ class ExitCondition(QtCore.QObject):
 
 
 class NodeList(ListModel):
+    # noinspection PyProtectedMember
     def __init__(self, *args):
         super(NodeList, self).__init__(*args)
         # TODO: This is hacky. Is there any other way?!?
         for node in args:
-            # noinspection PyProtectedMember
+            node._parent_list = weakref.proxy(self)
             for condition in node.exitConditions._items:
                 condition._parent_list = weakref.proxy(self)
 
