@@ -13,19 +13,21 @@ Rectangle {
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.top: parent.top
-        height: parent.height * .8
+        anchors.bottom: insert.top
+        anchors.bottomMargin: 3
     }
     Panels.InsertPanel {
         id: insert
-        anchors.top: flowchart.bottom
         anchors.bottom: parent.bottom
         anchors.left: parent.left
+        height: 120
         width: parent.width * .8
     }
     Panels.PreviewPanel {
-        anchors.top: flowchart.bottom
+        anchors.top: insert.top
         anchors.bottom: parent.bottom
         anchors.left: insert.right
+        anchors.leftMargin: 3
         anchors.right: parent.right
     }
 }
