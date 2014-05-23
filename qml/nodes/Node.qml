@@ -31,6 +31,8 @@ Rectangle {
             //nodes.selectedIndex = index;
         }
         onMouseXChanged: {
+            // TODO: Don't allow dragging to negative values. OR! Find a way to
+            // make the Flickables less sucky
             display.x = genericNode.x;
             display.y = genericNode.y;
         }

@@ -2,7 +2,6 @@
 from PyQt5 import QtCore
 from uuid import uuid4
 from qt import ListModel
-import weakref
 
 
 class Node(QtCore.QObject):
@@ -15,18 +14,13 @@ class Node(QtCore.QObject):
         self._property_data.update(kwargs)
 
         # connect the appropriate signals
-        self.x_changed.connect(self.notify_parents)
-        self.y_changed.connect(self.notify_parents)
+        self.x_changed.connect(self.emit_moved)
+        self.y_changed.connect(self.emit_moved)
 
-    def notify_parents(self):
-        try:
-            for node in self._parent_list:
-                for condition in node.exitConditions:
-                    if condition.nextNode == self.nid:
-                        condition.nextX_changed.emit(condition.nextX)
-                        condition.nextY_changed.emit(condition.nextY)
-        except AttributeError:
-            print("No parent list found")
+    moved = QtCore.pyqtSignal("QString", name='moved')
+
+    def emit_moved(self):
+        self.moved.emit(self.nid)
 
     # nid
     nid_changed = QtCore.pyqtSignal('QString', name='nidChanged')
@@ -106,7 +100,7 @@ class ExitCondition(QtCore.QObject):
     def __init__(self, **kwargs):
         super(ExitCondition, self).__init__()
         self._property_data = dict(
-            nextNode=None, condititon=None, text=None
+            nextNode=None, condititon=None, text=None, nextX=0, nextY=0,
         )
         self._property_data.update(kwargs)
 
@@ -146,55 +140,58 @@ class ExitCondition(QtCore.QObject):
         self._property_data["text"] = value
         self.text_changed.emit(value)
 
-    # Special properties (read-only convenience calculations)
-
     # nextX
     nextX_changed = QtCore.pyqtSignal(int, name='nextXChanged')
 
     @QtCore.pyqtProperty(int, notify=nextX_changed)
     def nextX(self):
-        # get the next node
-        try:
-            node = self._parent_list.get_by_nid(self.nextNode)
-            return node.x
-        except AttributeError:
-            print("No list found")
-            return 0
+        return self._property_data["nextX"]
+
+    @nextX.setter
+    def nextX(self, value):
+        self._property_data["nextX"] = value
+        self.nextX_changed.emit(value)
 
     # nextY
     nextY_changed = QtCore.pyqtSignal(int, name='nextYChanged')
 
     @QtCore.pyqtProperty(int, notify=nextY_changed)
     def nextY(self):
-        # get the next node
-        try:
-            node = self._parent_list.get_by_nid(self.nextNode)
-            return node.y
-        except AttributeError:
-            print("No list found")
-            return 0
+        return self._property_data["nextY"]
+
+    @nextY.setter
+    def nextY(self, value):
+        self._property_data["nextY"] = value
+        self.nextY_changed.emit(value)
 
 
 class NodeList(ListModel):
     # noinspection PyProtectedMember
     def __init__(self, *args):
         super(NodeList, self).__init__(*args)
-        # TODO: This is hacky (but effective). Is there any other way?!?
         for node in args:
-            node._parent_list = weakref.proxy(self)
-            for condition in node.exitConditions._items:
-                condition._parent_list = weakref.proxy(self)
+            node.moved.connect(self.nodeMovedHandler)
+            self.nodeMovedHandler(node.nid)
 
-    # TODO: mark _parent_list on appends too!
     def append(self, item):
         super(NodeList, self).append(item)
-        item._parent_list = weakref.proxy(self)
-        for condition in item.exitConditions._items:
-            condition._parent_list = weakref.proxy(self)
+        item.moved.connect(self.nodeMovedHandler)
+
+    node_moved = QtCore.pyqtSignal('QString', name='nodeMoved')
+
+    def nodeMovedHandler(self, nid):
+        movingNode = self.get_by_nid(nid)
+        for node in self:
+            for condition in node.exitConditions:
+                if condition.nextNode == nid:
+                    # calculate nextX & nextY for the condition
+                    condition.nextX = movingNode.x
+                    condition.nextY = movingNode.y
+        self.node_moved.emit(nid)
 
     def get_by_nid(self, nid):
-        # TODO: Wouldn't this be cooler as a dict-style access?
-        # TODO: And if you put in an int it's a list-style access? OooOOooh.
+        # TODO: Wouldn't this be cooler as a dict access?
+        # TODO: And if you put in an int it's a list access?
         for node in self._items:
             if node.nid == nid:
                 return node
@@ -211,13 +208,22 @@ class NodeList(ListModel):
         # Generate the new node
         new = Node(
             type=dropData.property('title'),
-            x=dropData.x, y=dropData.y, selected=False,
+            x=parent.x + 150, y=parent.y, selected=False,
             exitConditions=ListModel(
                 ExitCondition(nextNode=exitPoint.nextNode,
                               # these may be populated for some node types
                               condition=None, text=None),
             ))
         self.append(new)
+
         # Update the parent to have this as a child instead
         exitPoint.nextNode = new.nid
-        # TODO: Send of any necessary signals and crap
+
+        # Send off any necessary signals
+        self.nodeMovedHandler(exitPoint.nextNode)
+
+        for condition in new.exitConditions:
+            # calculate nextX & nextY for the condition
+            child = self.get_by_nid(condition.nextNode)
+            condition.nextX = child.x
+            condition.nextY = child.y

@@ -43,7 +43,7 @@ class ListModel(QtCore.QAbstractListModel):
             count -= 1
         self.endRemoveRows()
 
-    # simpler API than insertRows
+    # simpler API than insertRows?
     def append(self, item):
         index = len(self._items)
         self.beginInsertRows(QtCore.QModelIndex(), index, index)
