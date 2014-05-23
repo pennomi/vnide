@@ -14,7 +14,7 @@ Rectangle {
         anchors.right: parent.right
         anchors.top: parent.top
         anchors.bottom: insert.top
-        anchors.bottomMargin: 3
+        anchors.bottomMargin: 2
     }
     Panels.InsertPanel {
         id: insert
@@ -27,7 +27,7 @@ Rectangle {
         anchors.top: insert.top
         anchors.bottom: parent.bottom
         anchors.left: insert.right
-        anchors.leftMargin: 3
+        anchors.leftMargin: 2
         anchors.right: parent.right
     }
 }
