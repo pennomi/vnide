@@ -13,7 +13,7 @@ signal.signal(signal.SIGINT, signal.SIG_DFL)
 
 
 # Generate the data
-n2 = Node(type="dialog", x=240, y=30, selected=False, )
+n2 = Node(type="end", x=240, y=30, selected=False, )
 n1 = Node(
     type="scene", x=120, y=30, selected=False,
     exitConditions=ListModel(

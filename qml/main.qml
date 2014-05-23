@@ -8,27 +8,24 @@ Rectangle {
     height: 600
     color: "black"
 
-    Grid {
-        anchors.fill: parent
-        columns: 2
-        rows: 2
-        spacing: 2
-
-        Panels.FlowchartPanel {
-            width: parent.width * .8
-            height: parent.height * .8
-        }
-        Panels.EditPanel {
-            width: parent.width * .2
-            height: parent.height * .8
-        }
-        Panels.InsertPanel {
-            width: parent.width * .8
-            height: parent.height * .2
-        }
-        Panels.PreviewPanel {
-            width: parent.width * .2
-            height: parent.height * .2
-        }
+    Panels.FlowchartPanel {
+        id: flowchart
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.top: parent.top
+        height: parent.height * .8
+    }
+    Panels.InsertPanel {
+        id: insert
+        anchors.top: flowchart.bottom
+        anchors.bottom: parent.bottom
+        anchors.left: parent.left
+        width: parent.width * .8
+    }
+    Panels.PreviewPanel {
+        anchors.top: flowchart.bottom
+        anchors.bottom: parent.bottom
+        anchors.left: insert.right
+        anchors.right: parent.right
     }
 }

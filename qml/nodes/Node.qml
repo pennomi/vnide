@@ -4,6 +4,7 @@ Rectangle {
     id: genericNode
 
     property string nid: display.nid
+    property string type: display.type
 
     x: display.x
     y: display.y
@@ -18,17 +19,21 @@ Rectangle {
 
     Text {
         anchors.centerIn: parent
-        text: display.type
+        text: type
     }
 
     MouseArea {
         id: mouseArea
         anchors.fill: parent
         onClicked: {
-            // TODO: This would cause an error. Refactor!
+            // TODO: Toggle selected
+            console.log("TODO: Toggle `selected`!")
             //nodes.setProperty(nodes.selectedIndex, "selected", false)
             //nodes.setProperty(index, "selected", true)
             //nodes.selectedIndex = index;
+        }
+        onDoubleClicked: {
+            console.log("TODO: Open for editing!")
         }
         onMouseXChanged: {
             // TODO: Don't allow dragging to negative values. OR! Find a way to

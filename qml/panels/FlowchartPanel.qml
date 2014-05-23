@@ -18,8 +18,7 @@ Rectangle {
             var maxX = -99999;
             var maxY = -99999;
             for (var i=0; i<nodeRepeater.count; i++) {
-
-                var child = nodeRepeater.itemAt(i);
+                var child = nodeRepeater.itemAt(i).item;
                 minX = Math.min(child.x, minX);
                 minY = Math.min(child.y, minY);
                 maxX = Math.max(child.x + child.width, maxX);
@@ -47,9 +46,8 @@ Rectangle {
         Repeater {
             id: nodeRepeater
             model: nodeList
-            delegate: Nodes.Node {}
+            delegate: Nodes.NodeLoader {}
         }
 
     }
-
 }
