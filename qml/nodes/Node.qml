@@ -37,7 +37,7 @@ Item {
                 y1: node.height / 2 - weight / 2
                 x2: display.nextX - node.x //model.x2 - node.x
                 y2: display.nextY - node.y + node.height / 2 //model.y2 - node.y
-                weight: 12
+                weight: 10
                 onDropped: {
                     nodeList.insertNodeAfterParent(nid, index, source)
                 }
