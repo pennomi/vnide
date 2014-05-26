@@ -1,10 +1,14 @@
 import QtQuick 2.0
 
-Rectangle {
-    id: genericNode
+Item {
+    id: node
+    // Make all children of this actually appear in the editor
+    default property alias contents: editor.children
 
+    property string color: "red"
     property string nid: display.nid
     property string type: display.type
+    property bool editing: false
 
     signal beganEditing()
     signal endedEditing()
@@ -14,38 +18,58 @@ Rectangle {
     width: 100
     height: 80
 
-    radius: 5
-    color: "red"
-    border.color: display.selected ? "yellow" : "black"
-    border.width: 2
-    //scale: display.selected ? 1.2 : 1.0
+    Rectangle {
+        id: icon
+        radius: 5
+        color: node.color
+        border.color: display.selected ? "yellow" : "black"
+        border.width: 2
+        anchors.fill: parent
+        opacity: editing ? 0.0 : 1.0
+        Behavior on opacity { NumberAnimation {} }
 
-    // States
-    state: "unselected"
+        Text {
+            anchors.centerIn: parent
+            text: type
+        }
+    }
 
+    Rectangle {
+        id: editor
+        anchors.fill: parent
+        color: node.color
+        opacity: editing ? 1.0 : 0.0
+        Behavior on opacity { NumberAnimation {} }
+    }
+
+    Item {
+        id: lines
+        Repeater {
+            id: lineRepeater
+            model: display.exitConditions
+            delegate: Line {
+                parent: node.parent
+                x1: node.width
+                y1: node.height / 2
+                x2: display.nextX - node.x //model.x2 - node.x
+                y2: display.nextY - node.y + node.height / 2 //model.y2 - node.y
+                color: "black"
+                onDropped: {
+                    nodeList.insertNodeAfterParent(nid, index, source)
+                }
+            }
+        }
+        opacity: editing ? 0.0 : 1.0
+        Behavior on opacity { NumberAnimation {} }
+    }
+
+    // States and size animations
     states: [
         State {
-            name: "unselected"
-            PropertyChanges {
-                target: genericNode
-
-                x: display.x
-                y: display.y
-            }
-        },
-        State {
-            name: "selected"
-            PropertyChanges {
-                target: genericNode
-
-                x: display.x
-                y: display.y
-            }
-        },
-        State {
             name: "editing"
+            when: editing
             PropertyChanges {
-                target: genericNode
+                target: node
                 x: flickable.contentX
                 y: flickable.contentY
                 width: flickable.width
@@ -67,65 +91,35 @@ Rectangle {
         NumberAnimation {}
     }
 
-
-
-    Text {
-        anchors.centerIn: parent
-        text: type
-    }
-
+    // Mouse Actions
     MouseArea {
         id: mouseArea
         anchors.fill: parent
-
-        // TODO: is selected even necessary? Could be useful for copy/paste.
-        // TODO: But how would that work anyway?
-        /*onClicked: {
-            // TODO: Toggle selected
-            console.log("TODO: Toggle `selected`!")
-            //nodes.setProperty(nodes.selectedIndex, "selected", false)
-            //nodes.setProperty(index, "selected", true)
-            //nodes.selectedIndex = index;
-        }*/
         onDoubleClicked: {
-            if (genericNode.state == "editing") {
-                genericNode.state = "unselected";
-                genericNode.endedEditing();
+            if (node.state == "editing") {
+                node.state = "not editing";
+                node.editing = false;
+                node.endedEditing();
             } else {
-                genericNode.state = "editing";
-                genericNode.beganEditing();
+                node.state = "editing";
+                node.editing = true;
+                node.beganEditing();
             }
         }
         onMouseXChanged: {
-            if (genericNode.state == "editing") return;
+            if (node.state == "editing") return;
             // TODO: Don't allow dragging to negative values. OR! Find a way to
             // make the Flickables less sucky
-            display.x = genericNode.x;
-            display.y = genericNode.y;
+            display.x = node.x;
+            display.y = node.y;
         }
         onMouseYChanged: {
-            if (genericNode.state == "editing") return;
-            display.x = genericNode.x;
-            display.y = genericNode.y;
+            if (node.state == "editing") return;
+            display.x = node.x;
+            display.y = node.y;
         }
         drag {
-            target: genericNode.state == "editing" ? undefined : genericNode
-        }
-    }
-
-    Repeater {
-        id: lineRepeater
-        model: display.exitConditions
-        delegate: Line {
-            parent: genericNode.parent
-            x1: genericNode.width
-            y1: genericNode.height / 2
-            x2: display.nextX - genericNode.x //model.x2 - genericNode.x
-            y2: display.nextY - genericNode.y + genericNode.height / 2 //model.y2 - genericNode.y
-            color: "black"
-            onDropped: {
-                nodeList.insertNodeAfterParent(nid, index, source)
-            }
+            target: node.state == "editing" ? undefined : node
         }
     }
 }
