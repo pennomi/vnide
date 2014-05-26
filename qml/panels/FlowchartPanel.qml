@@ -3,7 +3,7 @@ import "../nodes" as Nodes
 
 Rectangle {
     id: panel
-    color: "#dddddd"
+    color: "white"
 
     Connections {
         target: nodeList

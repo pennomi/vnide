@@ -21,5 +21,5 @@ Loader {
     Component { id: rootNode; RootNode {} }
     Component { id: endNode; EndNode {} }
     Component { id: scriptNode; ScriptNode {} }
-    Component { id: unknownNode; Node {} }
+    Component { id: unknownNode; UnknownNode {} }
 }

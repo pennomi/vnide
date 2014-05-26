@@ -1,13 +1,8 @@
 import QtQuick 2.0
 
 BorderImage {
-    border { left: 2; top: 0; right: 8; bottom: 0 }
-    horizontalTileMode: BorderImage.Repeat
-    verticalTileMode: BorderImage.Stretch
-    source: "arrow.svg"
-
-    // TODO: Convert this to use states for the drop hover interface
     id: l
+    property alias weight: l.height
     property alias x1: l.x
     property alias y1: l.y
 
@@ -16,11 +11,14 @@ BorderImage {
 
     signal dropped(variant source)
 
-    height: 12
     smooth: true
 
-    transformOrigin: Item.Left;
+    border { left: 2; top: 0; right: 8; bottom: 0 }
+    horizontalTileMode: BorderImage.Repeat
+    verticalTileMode: BorderImage.Stretch
+    source: "arrow.svg"
 
+    transformOrigin: Item.Left;
     width: getWidth(x1,y1,x2,y2);
     rotation: getSlope(x1,y1,x2,y2);
 
@@ -30,6 +28,8 @@ BorderImage {
         width: parent.width
         height: parent.height + 20
 
+        // TODO: This should be converted to a state with `when`, but also,
+        // this will currently not work. We need a yellow arrow.
         onDropped: {
             l.dropped(drag.source)
             l.color = "black";

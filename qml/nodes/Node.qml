@@ -4,6 +4,7 @@ Item {
     id: node
     // Make all children of this actually appear in the editor
     default property alias contents: editor.children
+    property alias iconComponent: iconLoader.sourceComponent
 
     property string color: "red"
     property string nid: display.nid
@@ -15,44 +16,15 @@ Item {
 
     x: display.x
     y: display.y
-    width: 100
-    height: 80
 
     // Hook up to the loader to forward the signals
     onBeganEditing: loader.beganEditing();
     onEndedEditing: loader.endedEditing();
 
 
-    Rectangle {
-        id: icon
-        radius: 5
-        color: node.color
-        border.color: display.selected ? "yellow" : "black"
-        border.width: 2
+    Loader {
+        id: iconLoader
         anchors.fill: parent
-        opacity: editing ? 0.0 : 1.0
-        Behavior on opacity { NumberAnimation {} }
-
-        Text {
-            anchors.centerIn: parent
-            text: type
-        }
-
-        /*BorderImage {
-            anchors.fill: parent
-            border { left: 30; top: 30; right: 30; bottom: 30 }
-            horizontalTileMode: BorderImage.Stretch
-            verticalTileMode: BorderImage.Stretch
-            source: "border.png"
-        }*/
-    }
-
-    Rectangle {
-        id: editor
-        anchors.fill: parent
-        color: node.color
-        opacity: editing ? 1.0 : 0.0
-        Behavior on opacity { NumberAnimation {} }
     }
 
     Item {
@@ -61,17 +33,23 @@ Item {
             id: lineRepeater
             model: display.exitConditions
             delegate: Line {
-                parent: node.parent
                 x1: node.width
-                y1: node.height / 2
+                y1: node.height / 2 - weight / 2
                 x2: display.nextX - node.x //model.x2 - node.x
                 y2: display.nextY - node.y + node.height / 2 //model.y2 - node.y
+                weight: 12
                 onDropped: {
                     nodeList.insertNodeAfterParent(nid, index, source)
                 }
             }
         }
-        opacity: editing ? 0.0 : 1.0
+    }
+
+    Rectangle {
+        id: editor
+        anchors.fill: parent
+        color: node.color
+        opacity: editing ? 1.0 : 0.0
         Behavior on opacity { NumberAnimation {} }
     }
 
