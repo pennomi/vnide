@@ -18,6 +18,11 @@ Item {
     width: 100
     height: 80
 
+    // Hook up to the loader to forward the signals
+    onBeganEditing: loader.beganEditing();
+    onEndedEditing: loader.endedEditing();
+
+
     Rectangle {
         id: icon
         radius: 5
@@ -32,6 +37,14 @@ Item {
             anchors.centerIn: parent
             text: type
         }
+
+        /*BorderImage {
+            anchors.fill: parent
+            border { left: 30; top: 30; right: 30; bottom: 30 }
+            horizontalTileMode: BorderImage.Stretch
+            verticalTileMode: BorderImage.Stretch
+            source: "border.png"
+        }*/
     }
 
     Rectangle {
@@ -53,7 +66,6 @@ Item {
                 y1: node.height / 2
                 x2: display.nextX - node.x //model.x2 - node.x
                 y2: display.nextY - node.y + node.height / 2 //model.y2 - node.y
-                color: "black"
                 onDropped: {
                     nodeList.insertNodeAfterParent(nid, index, source)
                 }

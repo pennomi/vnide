@@ -18,27 +18,8 @@ Loader {
     }
 
     // Each node type gets defined here.
-    Component {
-        id: rootNode
-        RootNode {
-            onBeganEditing: loader.beganEditing();
-            onEndedEditing: loader.endedEditing();
-        }
-    }
-
-    Component {
-        id: endNode
-        EndNode {
-            onBeganEditing: loader.beganEditing();
-            onEndedEditing: loader.endedEditing();
-        }
-    }
-
-    Component {
-        id: unknownNode
-        Node {
-            onBeganEditing: loader.beganEditing();
-            onEndedEditing: loader.endedEditing();
-        }
-    }
+    Component { id: rootNode; RootNode {} }
+    Component { id: endNode; EndNode {} }
+    Component { id: scriptNode; ScriptNode {} }
+    Component { id: unknownNode; Node {} }
 }

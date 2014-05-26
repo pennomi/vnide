@@ -1,6 +1,12 @@
 import QtQuick 2.0
 
-Rectangle {
+BorderImage {
+    border { left: 3; top: 0; right: 15; bottom: 0 }
+    horizontalTileMode: BorderImage.Stretch
+    verticalTileMode: BorderImage.Stretch
+    source: "arrow.svg"
+
+
     // TODO: Convert this to use states for the drop hover interface
     id: l
     property alias x1: l.x
@@ -11,8 +17,8 @@ Rectangle {
 
     signal dropped(variant source)
 
-    color: "black"
-    height: 2
+    //color: "black"
+    height: 25
     smooth: true
 
     transformOrigin: Item.TopLeft;
