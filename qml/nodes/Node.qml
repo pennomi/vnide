@@ -6,6 +6,9 @@ Rectangle {
     property string nid: display.nid
     property string type: display.type
 
+    signal beganEditing()
+    signal endedEditing()
+
     x: display.x
     y: display.y
     width: 100
@@ -86,9 +89,11 @@ Rectangle {
         }*/
         onDoubleClicked: {
             if (genericNode.state == "editing") {
-                genericNode.state = "unselected"
+                genericNode.state = "unselected";
+                genericNode.endedEditing();
             } else {
-                genericNode.state = "editing"
+                genericNode.state = "editing";
+                genericNode.beganEditing();
             }
         }
         onMouseXChanged: {

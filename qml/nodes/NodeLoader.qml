@@ -1,6 +1,10 @@
 import QtQuick 2.0
 
 Loader {
+    id: loader
+    signal beganEditing()
+    signal endedEditing()
+
     sourceComponent: {
         var types = {
             root: rootNode,
@@ -13,18 +17,28 @@ Loader {
         }
     }
 
+    // Each node type gets defined here.
     Component {
         id: rootNode
-        RootNode {}
+        RootNode {
+            onBeganEditing: loader.beganEditing();
+            onEndedEditing: loader.endedEditing();
+        }
     }
 
     Component {
         id: endNode
-        EndNode {}
+        EndNode {
+            onBeganEditing: loader.beganEditing();
+            onEndedEditing: loader.endedEditing();
+        }
     }
 
     Component {
         id: unknownNode
-        Node {}
+        Node {
+            onBeganEditing: loader.beganEditing();
+            onEndedEditing: loader.endedEditing();
+        }
     }
 }

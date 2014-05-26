@@ -46,7 +46,17 @@ Rectangle {
         Repeater {
             id: nodeRepeater
             model: nodeList
-            delegate: Nodes.NodeLoader {}
+            delegate: Nodes.NodeLoader {
+                onBeganEditing: {
+                    flickable.interactive = false;
+                    z = 1.0  // Push it to the front
+                }
+                onEndedEditing: {
+                    flickable.interactive = true;
+                    z = 0.0  // Put it back where it belongs
+                }
+                Behavior on z { NumberAnimation {} }  // Avoids jerkiness
+            }
         }
 
     }
