@@ -1,11 +1,10 @@
 import QtQuick 2.0
 
 BorderImage {
-    border { left: 3; top: 0; right: 15; bottom: 0 }
-    horizontalTileMode: BorderImage.Stretch
+    border { left: 2; top: 0; right: 8; bottom: 0 }
+    horizontalTileMode: BorderImage.Repeat
     verticalTileMode: BorderImage.Stretch
     source: "arrow.svg"
-
 
     // TODO: Convert this to use states for the drop hover interface
     id: l
@@ -17,11 +16,10 @@ BorderImage {
 
     signal dropped(variant source)
 
-    //color: "black"
-    height: 25
+    height: 12
     smooth: true
 
-    transformOrigin: Item.TopLeft;
+    transformOrigin: Item.Left;
 
     width: getWidth(x1,y1,x2,y2);
     rotation: getSlope(x1,y1,x2,y2);
