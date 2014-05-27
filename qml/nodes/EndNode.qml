@@ -14,8 +14,17 @@ Node {
             width: 2
         }
         Image {
-            source: "bug.svg"
+            source: {
+                switch(display.endNodeType) {
+                    case "stop": return "stop.svg"
+                    case "return": return "return.svg"
+                    case "exception": return "bug.svg"
+                }
+
+
+            }
             anchors.fill: parent
+            anchors.margins: 5
         }
     }
 }

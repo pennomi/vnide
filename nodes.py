@@ -9,7 +9,7 @@ class Node(QtCore.QObject):
         super(Node, self).__init__()
         self._property_data = dict(
             nid=str(uuid4()), x=0, y=0, type="root", selected=False,
-            exitConditions=ListModel()
+            exitConditions=ListModel(), endNodeType="stop",
         )
         self._property_data.update(kwargs)
 
@@ -94,6 +94,18 @@ class Node(QtCore.QObject):
     def exitConditions(self, value):
         self._property_data["exitConditions"] = value
         self.exitConditions_changed.emit(value)
+
+    # endNodeType
+    endNodeType_changed = QtCore.pyqtSignal("QString", name='endNodeTypeChanged')
+
+    @QtCore.pyqtProperty("QString", notify=endNodeType_changed)
+    def endNodeType(self):
+        return self._property_data["endNodeType"]
+
+    @endNodeType.setter
+    def endNodeType(self, value):
+        self._property_data["endNodeType"] = value
+        self.endNodeType_changed.emit(value)
 
 
 class ExitCondition(QtCore.QObject):
