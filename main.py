@@ -1,30 +1,22 @@
+import json
 import sys
 
 # noinspection PyUnresolvedReferences
 from OpenGL import GL  # HEADS UP! This is required to not segfault on Ubuntu
 # noinspection PyUnresolvedReferences
 from PyQt5 import QtCore, QtWidgets, QtQuick
-from nodes import Node, NodeList, ExitCondition
-from qt import ListModel
+from nodes import Node, NodeList
 
 # Make PyQt stop on a Ctrl-C... it's not a clean shutdown, BTW.
 import signal
 signal.signal(signal.SIGINT, signal.SIG_DFL)
 
 
-# Generate the data
-n2 = Node(type="end", x=240, y=30, selected=False, )
-n1 = Node(
-    type="script", x=120, y=30, selected=False,
-    exitConditions=ListModel(
-        ExitCondition(nextNode=n2.nid, condition=None, text=None)
-    ))
-rootNode = Node(
-    type="root", x=0, y=0,
-    exitConditions=ListModel(
-        ExitCondition(nextNode=n1.nid, condition=None, text=None)
-    ))
-nodeList = NodeList(rootNode, n1, n2)
+# Load the data
+with open("save1.json", "r") as infile:
+    node_data = json.load(infile)
+nodes = [Node(**n) for n in node_data["nodes"]]
+nodeList = NodeList(*nodes)
 
 # Show the window
 # TODO: Handle resize events

@@ -1,0 +1,25 @@
+{   "author": "Thane Brimhall",
+    "nodes": [
+        {   "nid": "0",
+            "type": "root",
+            "x": 0,
+            "y": 0,
+            "exitConditions": [
+                { "nextNode": "1" }
+            ]
+        },
+        {   "nid": "1",
+            "type": "script",
+            "x": 120,
+            "y": 30,
+            "exitConditions": [
+                { "nextNode": "2" }
+            ]
+        },
+        {   "nid": "2",
+            "type": "end",
+            "x": 240,
+            "y": 30
+        }
+    ]
+}

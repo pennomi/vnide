@@ -7,6 +7,15 @@ from qt import ListModel
 class Node(QtCore.QObject):
     def __init__(self, **kwargs):
         super(Node, self).__init__()
+
+        # make exitConditions a ListModel if it's not already
+        exits = kwargs.get("exitConditions", ListModel())
+        if not isinstance(exits, ListModel):
+            exits = [ExitCondition(**e) for e in exits]
+            exits = ListModel(*exits)
+        kwargs["exitConditions"] = exits
+
+        # Create defaults and override them with our specified data
         self._property_data = dict(
             nid=str(uuid4()), x=0, y=0, type="root", selected=False,
             exitConditions=ListModel(), endNodeType="stop",
@@ -14,13 +23,10 @@ class Node(QtCore.QObject):
         self._property_data.update(kwargs)
 
         # connect the appropriate signals
-        self.x_changed.connect(self.emit_moved)
-        self.y_changed.connect(self.emit_moved)
+        self.x_changed.connect(lambda i: self.moved.emit(self.nid))
+        self.y_changed.connect(lambda i: self.moved.emit(self.nid))
 
     moved = QtCore.pyqtSignal("QString", name='moved')
-
-    def emit_moved(self):
-        self.moved.emit(self.nid)
 
     # nid
     nid_changed = QtCore.pyqtSignal('QString', name='nidChanged')
