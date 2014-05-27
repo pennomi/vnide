@@ -3,23 +3,139 @@
         {   "nid": "0",
             "type": "root",
             "x": 0,
-            "y": 0,
+            "y": 100,
             "exitConditions": [
                 { "nextNode": "1" }
             ]
         },
         {   "nid": "1",
-            "type": "script",
+            "type": "scene",
             "x": 120,
-            "y": 30,
+            "y": 100,
             "exitConditions": [
                 { "nextNode": "2" }
             ]
         },
         {   "nid": "2",
-            "type": "end",
+            "type": "dialog",
             "x": 240,
-            "y": 30
+            "y": 100,
+            "exitConditions": [
+                { "nextNode": "3" }
+            ]
+        },
+        {   "nid": "3",
+            "type": "choice",
+            "x": 360,
+            "y": 100,
+            "exitConditions": [
+                {
+                    "nextNode": "4",
+                    "condition": "player.fighter",
+                    "text": "Fight!"
+                },
+                {
+                    "nextNode": "5",
+                    "condition": "player.runner",
+                    "text": "Run Away!"
+                },
+                {
+                    "nextNode": "6",
+                    "condition": "",
+                    "text": "Drop dead."
+                }
+            ]
+        },
+        {   "nid": "4",
+            "type": "macro",
+            "x": 480,
+            "y": 0,
+            "exitConditions": [
+                { "nextNode": "7" }
+            ]
+        },
+        {   "nid": "5",
+            "type": "script",
+            "x": 480,
+            "y": 100,
+            "exitConditions": [
+                { "nextNode": "8" }
+            ]
+        },
+        {   "nid": "6",
+            "type": "end",
+            "endNodeType": "exception",
+            "x": 480,
+            "y": 200
+        },
+        {   "nid": "7",
+            "type": "dialog",
+            "x": 600,
+            "y": 0,
+            "exitConditions": [
+                { "nextNode": "9" }
+            ]
+        },
+        {   "nid": "8",
+            "type": "dialog",
+            "x": 600,
+            "y": 100,
+            "exitConditions": [
+                { "nextNode": "9" }
+            ]
+        },
+        {   "nid": "9",
+            "type": "scene",
+            "x": 720,
+            "y": 100,
+            "exitConditions": [
+                { "nextNode": "10" }
+            ]
+        },
+        {   "nid": "10",
+            "type": "router",
+            "x": 840,
+            "y": 100,
+            "exitConditions": [
+                {
+                    "nextNode": "11",
+                    "condition": "player.fighter"
+                },
+                {
+                    "nextNode": "12",
+                    "condition": "player.runner"
+                }
+            ]
+        },
+        {   "nid": "11",
+            "type": "dialog",
+            "x": 960,
+            "y": 50,
+            "exitConditions": [
+                { "nextNode": "13" }
+            ]
+        },
+        {   "nid": "12",
+            "type": "dialog",
+            "x": 960,
+            "y": 150,
+            "exitConditions": [
+                { "nextNode": "13" }
+            ]
+        },
+        {   "nid": "13",
+            "type": "dialog",
+            "x": 1080,
+            "y": 100,
+            "exitConditions": [
+                { "nextNode": "14" }
+            ]
+        },
+        {   "nid": "14",
+            "type": "end",
+            "endNodeType": "stop",
+            "x": 1200,
+            "y": 100
         }
     ]
 }
