@@ -49,8 +49,26 @@ Item {
         id: editor
         anchors.fill: parent
         color: node.color
+        visible: editing
         opacity: editing ? 1.0 : 0.0
         Behavior on opacity { NumberAnimation {} }
+        Behavior on visible { NumberAnimation {} }
+
+        Image {
+            id: closeImage
+            source: "close.svg"
+            width: 64
+            height: 64
+            anchors.right: parent.right
+            MouseArea {
+                anchors.fill: parent
+                onClicked: {
+                    node.state = "not editing";
+                    node.editing = false;
+                    node.endedEditing();
+                }
+            }
+        }
     }
 
     // States and size animations
@@ -85,16 +103,13 @@ Item {
     MouseArea {
         id: mouseArea
         anchors.fill: parent
-        onDoubleClicked: {
-            if (node.state == "editing") {
-                node.state = "not editing";
-                node.editing = false;
-                node.endedEditing();
-            } else {
-                node.state = "editing";
-                node.editing = true;
-                node.beganEditing();
-            }
+        // If we've disabled the flickable, this should be as well.
+        enabled: flickable.interactive
+
+        onClicked: {
+            node.state = "editing";
+            node.editing = true;
+            node.beganEditing();
         }
         onMouseXChanged: {
             if (node.state == "editing") return;
