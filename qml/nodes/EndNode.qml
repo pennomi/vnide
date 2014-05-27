@@ -30,9 +30,9 @@ Node {
                     anchors.margins: 5
                     source: {
                         switch(model.endNodeType) {
-                            case "stop": return "stop.svg"
-                            case "return": return "return.svg"
-                            case "exception": return "bug.svg"
+                            case "stop": return "icons/stop.svg"
+                            case "return": return "icons/return.svg"
+                            case "exception": return "icons/bug.svg"
                         }
                     }
                 }
@@ -56,9 +56,9 @@ Node {
         Image {
             source: {
                 switch(display.endNodeType) {
-                    case "stop": return "stop.svg"
-                    case "return": return "return.svg"
-                    case "exception": return "bug.svg"
+                    case "stop": return "icons/stop.svg"
+                    case "return": return "icons/return.svg"
+                    case "exception": return "icons/bug.svg"
                 }
             }
             anchors.fill: parent

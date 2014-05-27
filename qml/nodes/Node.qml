@@ -28,11 +28,11 @@ Item {
     }
 
     Item {
-        id: lines
+        id: arrows
         Repeater {
-            id: lineRepeater
+            id: arrowRepeater
             model: display.exitConditions
-            delegate: Line {
+            delegate: Arrow {
                 x1: node.width
                 y1: node.height / 2 - weight / 2
                 x2: display.nextX - node.x //model.x2 - node.x
@@ -56,7 +56,7 @@ Item {
 
         Image {
             id: closeImage
-            source: "close.svg"
+            source: "icons/close.svg"
             width: 64
             height: 64
             anchors.right: parent.right

@@ -16,7 +16,7 @@ BorderImage {
     border { left: 2; top: 0; right: 8; bottom: 0 }
     horizontalTileMode: BorderImage.Repeat
     verticalTileMode: BorderImage.Stretch
-    source: "arrow.svg"
+    source: "icons/arrow.svg"
 
     transformOrigin: Item.Left;
     width: getWidth(x1,y1,x2,y2);
