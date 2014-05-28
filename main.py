@@ -13,7 +13,7 @@ signal.signal(signal.SIGINT, signal.SIG_DFL)
 
 
 # Load the data
-with open("save1.json", "r") as infile:
+with open("saves/testproj/main.flow", "r") as infile:
     node_data = json.load(infile)
 nodes = [Node(**n) for n in node_data["nodes"]]
 nodeList = NodeList(*nodes)
