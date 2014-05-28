@@ -3,7 +3,7 @@
         {   "nid": "0",
             "type": "root",
             "x": 0,
-            "y": 100,
+            "y": 200,
             "exitConditions": [
                 { "nextNode": "1" }
             ]
@@ -11,7 +11,7 @@
         {   "nid": "1",
             "type": "scene",
             "x": 120,
-            "y": 100,
+            "y": 200,
             "exitConditions": [
                 { "nextNode": "2" }
             ]
@@ -19,7 +19,7 @@
         {   "nid": "2",
             "type": "dialog",
             "x": 240,
-            "y": 100,
+            "y": 200,
             "exitConditions": [
                 { "nextNode": "3" }
             ]
@@ -27,7 +27,7 @@
         {   "nid": "3",
             "type": "choice",
             "x": 360,
-            "y": 100,
+            "y": 200,
             "exitConditions": [
                 {
                     "nextNode": "4",
@@ -49,7 +49,7 @@
         {   "nid": "4",
             "type": "macro",
             "x": 480,
-            "y": 0,
+            "y": 100,
             "exitConditions": [
                 { "nextNode": "7" }
             ]
@@ -57,7 +57,7 @@
         {   "nid": "5",
             "type": "script",
             "x": 480,
-            "y": 100,
+            "y": 200,
             "exitConditions": [
                 { "nextNode": "8" }
             ]
@@ -66,12 +66,12 @@
             "type": "end",
             "dataType": "exception",
             "x": 480,
-            "y": 200
+            "y": 300
         },
         {   "nid": "7",
             "type": "dialog",
             "x": 600,
-            "y": 0,
+            "y": 100,
             "exitConditions": [
                 { "nextNode": "9" }
             ]
@@ -79,7 +79,7 @@
         {   "nid": "8",
             "type": "dialog",
             "x": 600,
-            "y": 100,
+            "y": 200,
             "exitConditions": [
                 { "nextNode": "9" }
             ]
@@ -87,7 +87,7 @@
         {   "nid": "9",
             "type": "scene",
             "x": 720,
-            "y": 100,
+            "y": 200,
             "exitConditions": [
                 { "nextNode": "10" }
             ]
@@ -95,7 +95,7 @@
         {   "nid": "10",
             "type": "router",
             "x": 840,
-            "y": 100,
+            "y": 200,
             "exitConditions": [
                 {
                     "nextNode": "11",
@@ -110,7 +110,7 @@
         {   "nid": "11",
             "type": "dialog",
             "x": 960,
-            "y": 50,
+            "y": 150,
             "exitConditions": [
                 { "nextNode": "13" }
             ]
@@ -118,7 +118,7 @@
         {   "nid": "12",
             "type": "dialog",
             "x": 960,
-            "y": 150,
+            "y": 250,
             "exitConditions": [
                 { "nextNode": "13" }
             ]
@@ -126,7 +126,7 @@
         {   "nid": "13",
             "type": "dialog",
             "x": 1080,
-            "y": 100,
+            "y": 200,
             "exitConditions": [
                 { "nextNode": "14" }
             ]
@@ -135,7 +135,7 @@
             "type": "end",
             "dataType": "stop",
             "x": 1200,
-            "y": 100
+            "y": 200
         }
     ]
 }

@@ -15,7 +15,7 @@ Item {
     signal endedEditing()
 
     x: display.x
-    y: display.y
+    y: display.y - node.height/2
 
     // Hook up to the loader to forward the signals
     onBeganEditing: loader.beganEditing();
@@ -35,8 +35,8 @@ Item {
             delegate: Arrow {
                 x1: node.width
                 y1: node.height / 2 - weight / 2
-                x2: display.nextX - node.x //model.x2 - node.x
-                y2: display.nextY - node.y + node.height / 2 //model.y2 - node.y
+                x2: display.nextX - node.x
+                y2: display.nextY - node.y
                 weight: 10
                 onDropped: {
                     nodeList.insertNodeAfterParent(nid, index, source)
@@ -116,13 +116,9 @@ Item {
             // TODO: Don't allow dragging to negative values. OR! Find a way to
             // make the Flickables less sucky
             display.x = node.x;
-            display.y = node.y;
+            display.y = node.y + height/2;
         }
-        onMouseYChanged: {
-            if (node.state == "editing") return;
-            display.x = node.x;
-            display.y = node.y;
-        }
+        onMouseYChanged: onMouseXChanged
         drag {
             target: node.state == "editing" ? undefined : node
         }
