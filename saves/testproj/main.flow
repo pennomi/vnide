@@ -64,7 +64,7 @@
         },
         {   "nid": "6",
             "type": "end",
-            "endNodeType": "exception",
+            "dataType": "exception",
             "x": 480,
             "y": 200
         },
@@ -133,7 +133,7 @@
         },
         {   "nid": "14",
             "type": "end",
-            "endNodeType": "stop",
+            "dataType": "stop",
             "x": 1200,
             "y": 100
         }

@@ -16,20 +16,20 @@ Node {
         spacing: 10
         Repeater {
             model: ListModel {
-                ListElement { endNodeType: "stop" }
-                ListElement { endNodeType: "return" }
-                ListElement { endNodeType: "exception" }
+                ListElement { dataType: "stop" }
+                ListElement { dataType: "return" }
+                ListElement { dataType: "exception" }
             }
             delegate: Rectangle{
                 width: 64
                 height: width
                 border.color: "yellow"
-                border.width: display.endNodeType == model.endNodeType ? 2 : 0
+                border.width: display.dataType == model.dataType ? 2 : 0
                 Image {
                     anchors.fill: parent
                     anchors.margins: 5
                     source: {
-                        switch(model.endNodeType) {
+                        switch(model.dataType) {
                             case "stop": return "icons/stop.svg"
                             case "return": return "icons/return.svg"
                             case "exception": return "icons/bug.svg"
@@ -39,7 +39,7 @@ Node {
                 MouseArea {
                     anchors.fill: parent
                     onClicked: {
-                        display.endNodeType = model.endNodeType
+                        display.dataType = model.dataType
                     }
                 }
             }
@@ -55,7 +55,7 @@ Node {
         }
         Image {
             source: {
-                switch(display.endNodeType) {
+                switch(display.dataType) {
                     case "stop": return "icons/stop.svg"
                     case "return": return "icons/return.svg"
                     case "exception": return "icons/bug.svg"

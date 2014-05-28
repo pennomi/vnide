@@ -17,8 +17,11 @@ class Node(QtCore.QObject):
 
         # Create defaults and override them with our specified data
         self._property_data = dict(
-            nid=str(uuid4()), x=0, y=0, type="root", selected=False,
-            exitConditions=ListModel(), endNodeType="stop",
+            nid=str(uuid4()), x=0, y=0, selected=False,
+            exitConditions=ListModel(),
+            text="", filename="",
+            type="root",  # TODO: should always be specified. Add exceptions.
+            dataType="stop",  # TODO: depends on what node type it is.
         )
         self._property_data.update(kwargs)
 
@@ -101,17 +104,41 @@ class Node(QtCore.QObject):
         self._property_data["exitConditions"] = value
         self.exitConditions_changed.emit(value)
 
-    # endNodeType
-    endNodeType_changed = QtCore.pyqtSignal("QString", name='endNodeTypeChanged')
+    # dataType
+    dataType_changed = QtCore.pyqtSignal("QString", name='dataTypeChanged')
 
-    @QtCore.pyqtProperty("QString", notify=endNodeType_changed)
-    def endNodeType(self):
-        return self._property_data["endNodeType"]
+    @QtCore.pyqtProperty("QString", notify=dataType_changed)
+    def dataType(self):
+        return self._property_data["dataType"]
 
-    @endNodeType.setter
-    def endNodeType(self, value):
-        self._property_data["endNodeType"] = value
-        self.endNodeType_changed.emit(value)
+    @dataType.setter
+    def dataType(self, value):
+        self._property_data["dataType"] = value
+        self.dataType_changed.emit(value)
+
+    # text
+    text_changed = QtCore.pyqtSignal("QString", name='textChanged')
+
+    @QtCore.pyqtProperty("QString", notify=text_changed)
+    def text(self):
+        return self._property_data["text"]
+
+    @text.setter
+    def text(self, value):
+        self._property_data["text"] = value
+        self.text_changed.emit(value)
+
+    # filename
+    filename_changed = QtCore.pyqtSignal("QString", name='filenameChanged')
+
+    @QtCore.pyqtProperty("QString", notify=filename_changed)
+    def filename(self):
+        return self._property_data["filename"]
+
+    @filename.setter
+    def filename(self, value):
+        self._property_data["filename"] = value
+        self.filename_changed.emit(value)
 
 
 class ExitCondition(QtCore.QObject):
