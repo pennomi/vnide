@@ -2,12 +2,12 @@ import QtQuick 2.0
 
 Node {
     id: node
-    color: "#22ff22"
+    color: "#224422"
     width: 100
     height: 80
 
     iconComponent: Rectangle {
-        radius: 5
+        radius: 2
         color: node.color
         border {
             color: "black"

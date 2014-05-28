@@ -20,6 +20,8 @@
             "type": "dialog",
             "x": 240,
             "y": 200,
+            "filename": "elf.png",
+            "text": "Let us fight!",
             "exitConditions": [
                 { "nextNode": "3" }
             ]
@@ -72,6 +74,8 @@
             "type": "dialog",
             "x": 600,
             "y": 100,
+            "filename": "dwarf.png",
+            "text": "Very well. Graaaah!",
             "exitConditions": [
                 { "nextNode": "9" }
             ]
@@ -80,6 +84,8 @@
             "type": "dialog",
             "x": 600,
             "y": 200,
+            "filename": "elf.png",
+            "text": "You're running away? Coward!",
             "exitConditions": [
                 { "nextNode": "9" }
             ]
@@ -111,6 +117,8 @@
             "type": "dialog",
             "x": 960,
             "y": 150,
+            "filename": "dwarf.png",
+            "text": "And that's how I got this scar.",
             "exitConditions": [
                 { "nextNode": "13" }
             ]
@@ -119,6 +127,8 @@
             "type": "dialog",
             "x": 960,
             "y": 250,
+            "filename": "dwarf.png",
+            "text": "And so I lived to see another day.",
             "exitConditions": [
                 { "nextNode": "13" }
             ]
@@ -127,6 +137,8 @@
             "type": "dialog",
             "x": 1080,
             "y": 200,
+            "filename": "",
+            "text": "The End",
             "exitConditions": [
                 { "nextNode": "14" }
             ]
