@@ -191,9 +191,9 @@ class NodeList(ListModel):
             node.moved.connect(self.nodeMovedHandler)
             self.nodeMovedHandler(node.nid)
 
-    def append(self, item):
-        super(NodeList, self).append(item)
-        item.moved.connect(self.nodeMovedHandler)
+    def append(self, node):
+        super(NodeList, self).append(node)
+        node.moved.connect(self.nodeMovedHandler)
 
     node_moved = QtCore.pyqtSignal('QString', name='nodeMoved')
 

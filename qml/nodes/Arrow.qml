@@ -19,8 +19,8 @@ BorderImage {
     source: "icons/arrow.svg"
 
     transformOrigin: Item.Left;
-    width: getWidth(x1,y1,x2,y2);
-    rotation: getSlope(x1,y1,x2,y2);
+    width: getWidth(x1, y1, x2, y2 - weight/2);
+    rotation: getSlope(x1, y1, x2, y2 - weight/2);
 
     DropArea {
         x: 0
