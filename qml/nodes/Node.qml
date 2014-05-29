@@ -21,11 +21,10 @@ Item {
     onBeganEditing: loader.beganEditing();
     onEndedEditing: loader.endedEditing();
 
+    height: iconLoader.item.height
+    width: iconLoader.item.width
 
-    Loader {
-        id: iconLoader
-        anchors.fill: parent
-    }
+    Loader { id: iconLoader }
 
     Item {
         id: arrows

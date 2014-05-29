@@ -3,11 +3,11 @@ import QtQuick 2.0
 Node {
     id: node
     color: "white"
-    width: 32
-    height: width
 
     iconComponent: Rectangle {
-        radius: node.width / 2
+        width: 32
+        height: width
+        radius: width / 2
         color: node.color
         border {
             color: "black"
