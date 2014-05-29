@@ -8,6 +8,8 @@ Rectangle {
     height: 600
     color: "black"
 
+    Style { id: style }
+
     Panels.FlowchartPanel {
         id: flowchart
         anchors.left: parent.left

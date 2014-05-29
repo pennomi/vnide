@@ -6,7 +6,7 @@ Item {
     default property alias contents: editor.children
     property alias iconComponent: iconLoader.sourceComponent
 
-    property string color: "red"
+    property string color: style.white
     property string nid: display.nid
     property string type: display.type
     property bool editing: false

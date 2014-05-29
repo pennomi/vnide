@@ -2,7 +2,7 @@ import QtQuick 2.0
 
 Node {
     id: node
-    color: "white"
+    color: style.white
 
     Text {
         id: titleText
