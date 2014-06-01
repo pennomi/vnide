@@ -24,6 +24,10 @@ Item {
     height: iconLoader.item.height
     width: iconLoader.item.width
 
+    function arrowYPos(index) {
+        return node.height / 2;
+    }
+
     Loader { id: iconLoader }
 
     Item {
@@ -33,7 +37,7 @@ Item {
             model: display.exitConditions
             delegate: Arrow {
                 x1: node.width
-                y1: node.height / 2 - weight / 2
+                y1: arrowYPos(index) - weight / 2
                 x2: display.nextX - node.x
                 y2: display.nextY - node.y
                 weight: 10
