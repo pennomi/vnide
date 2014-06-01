@@ -3,7 +3,6 @@ import "../nodes" as Nodes
 
 Rectangle {
     id: panel
-    color: "white"
 
     function recalculateBounds() {
         // Remember where the person was looking
