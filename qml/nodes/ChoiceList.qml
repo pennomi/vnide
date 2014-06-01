@@ -11,6 +11,10 @@ Rectangle {
         color: style.black
     }
 
+    function itemAt(index) {
+        return choiceRepeater.itemAt(index)
+    }
+
     Column {
         id: col
         x: padding
@@ -18,6 +22,7 @@ Rectangle {
         width: childrenRect.width
         spacing: padding
         Repeater {
+            id: choiceRepeater
             model: display.exitConditions
             delegate: Rectangle {
                 color: "#00000000"

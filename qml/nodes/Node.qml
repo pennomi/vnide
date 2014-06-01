@@ -5,7 +5,7 @@ Item {
     // Make all children of this actually appear in the editor
     default property alias contents: editor.children
     property alias iconComponent: iconLoader.sourceComponent
-
+    property alias icon: iconLoader.item
     property string color: style.white
     property string nid: display.nid
     property string type: display.type
