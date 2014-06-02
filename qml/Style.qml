@@ -7,4 +7,6 @@ Item {
     property string yellow: "#FFD300"
     property string red: "#C40233"
     property string green: "#009F6B"
+
+    property int leftBorderPadding: 12
 }

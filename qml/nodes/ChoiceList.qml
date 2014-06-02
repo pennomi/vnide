@@ -1,15 +1,17 @@
 import QtQuick 2.0
 
-Rectangle {
+BorderImage {
+    source: "borders/frame.svg"
+    border {
+        top: 43
+        bottom: 4
+        left: 25
+        right: 4
+    }
+
     property real padding: 5
     height: childrenRect.height + padding * 2
-    width: childrenRect.width + padding * 2
-    color: node.color
-    radius: 5
-    border {
-        width: 2
-        color: style.black
-    }
+    width: childrenRect.width + style.leftBorderPadding
 
     function itemAt(index) {
         return choiceRepeater.itemAt(index)
@@ -17,7 +19,7 @@ Rectangle {
 
     Column {
         id: col
-        x: padding
+        x: style.leftBorderPadding
         y: padding
         width: childrenRect.width
         spacing: padding
@@ -35,6 +37,8 @@ Rectangle {
                     height: display.text ? 10 : 0
                     font.pointSize: 10
                     text: display.text
+                    x: padding * 2
+                    width: paintedWidth + padding
                 }
                 Text {
                     anchors.top: choiceText.bottom
@@ -43,9 +47,14 @@ Rectangle {
                     font.pointSize: height
                     font.italic: true
                     text: display.condition
+                    x: padding * 2
+                    width: paintedWidth + padding
                 }
+
+                // TODO: This will be a shiny separator
                 Rectangle {
                     visible: index  // only show if not the first item
+                    x: -1
                     height: 1
                     width: col.width
                     color: style.black
