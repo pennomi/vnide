@@ -10,7 +10,6 @@ Rectangle {
         id: label
         height: 30
         width: 100
-        text: "Condition"
     }
     Rectangle {
         anchors.top: label.top
@@ -24,6 +23,8 @@ Rectangle {
             id: input
             anchors.fill: parent
             anchors.margins: 3
+
+
         }
     }
 }

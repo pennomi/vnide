@@ -12,40 +12,23 @@ Node {
 
     Text {
         id: editorTitle
+        x: 50
         text: "Choice Editor"
     }
 
     ListView {
+        x: 50
         anchors {
             top: editorTitle.bottom
             topMargin: 20
             bottom: parent.bottom
         }
         width: parent.width
-        spacing: 15
+        spacing: 10
         model: display.exitConditions
         delegate: Rectangle {
             width: childrenRect.width
             height: childrenRect.height
-
-            /*Text {
-                id: textLabel
-                height: 30
-                width: 100
-                text: "Choice Text"
-            }
-            Rectangle {
-                anchors.left: textLabel.right
-                anchors.leftMargin: 10
-                height: textLabel.height
-                width: 200
-                border.color: "black"
-                border.width: 1
-                TextInput {
-                    anchors.fill: parent
-                    anchors.margins: 3
-                }
-            }*/
 
             EditorField {
                 id: choiceEditor
