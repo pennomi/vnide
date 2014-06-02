@@ -7,7 +7,7 @@ Node {
 
     function arrowYPos(index) {
         var item = icon.itemAt(index);
-        return item.mapToItem(icon, 0, item.height / 2).y;
+        return item.mapToItem(icon, 0, item.height / 2).y + icon.padding;
     }
 
     Text {
