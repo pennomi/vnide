@@ -2,17 +2,14 @@ import QtQuick 2.0
 
 Node {
     id: node
-
-    width: 100
+    width: 120
     height: 80
 
     Text {
         anchors {
             fill: parent
-            topMargin: 5
-            bottomMargin: 5
-            rightMargin: 5
-            leftMargin: style.leftBorderPadding
+            margins: 5
+            leftMargin: 24
         }
         text: display.text
         font.pointSize: 10
