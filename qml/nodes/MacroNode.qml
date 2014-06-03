@@ -4,7 +4,7 @@ Node {
     id: node
     color: "#22ff22"
 
-    iconComponent: Rectangle {
+    Rectangle {
         width: 100
         height: 80
         radius: 5

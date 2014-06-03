@@ -1,34 +1,45 @@
 import QtQuick 2.0
 
-Item {
+BorderImage {
     id: node
+    source: "borders/frame.svg"
+    border {
+        top: 43
+        bottom: 4
+        left: 25
+        right: 4
+    }
     // Make all children of this actually appear in the editor
-    default property alias contents: editor.children
-    property alias iconComponent: iconLoader.sourceComponent
-    property alias icon: iconLoader.item
+    //default property alias contents: editor.children
+    property Component editorComponent
+    //property alias editor: editorLoader.item
     property string color: style.white
     property string nid: display.nid
     property string type: display.type
     property bool editing: false
 
-    signal beganEditing()
-    signal endedEditing()
-
     x: display.x
     y: display.y - node.height/2
 
-    // Hook up to the loader to forward the signals
-    onBeganEditing: loader.beganEditing();
-    onEndedEditing: loader.endedEditing();
-
-    height: iconLoader.item.height
-    width: iconLoader.item.width
+    height: childrenRect.height
+    width: childrenRect.width
 
     function arrowYPos(index) {
         return node.height / 2;
     }
 
-    Loader { id: iconLoader }
+    /*Loader {
+        id: editorLoader
+        visible: editing
+        Behavior on visible { NumberAnimation {} }
+
+        parent: flickable
+        x: flickable.contentX
+        y: flickable.contentY
+        width: flickable.width
+        height: flickable.height
+
+    }*/
 
     Item {
         id: arrows
@@ -47,47 +58,6 @@ Item {
             }
         }
     }
-
-    Rectangle {
-        id: editor
-        anchors.fill: parent
-        color: node.color
-        visible: editing
-        opacity: editing ? 1.0 : 0.0
-        Behavior on opacity { NumberAnimation {} }
-        Behavior on visible { NumberAnimation {} }
-
-        Image {
-            id: closeImage
-            source: "icons/close.svg"
-            width: 64
-            height: 64
-            anchors.right: parent.right
-            MouseArea {
-                anchors.fill: parent
-                onClicked: {
-                    node.state = "not editing";
-                    node.editing = false;
-                    node.endedEditing();
-                }
-            }
-        }
-    }
-
-    // States and size animations
-    states: [
-        State {
-            name: "editing"
-            when: editing
-            PropertyChanges {
-                target: node
-                x: flickable.contentX
-                y: flickable.contentY
-                width: flickable.width
-                height: flickable.height
-            }
-        }
-    ]
 
     Behavior on x {
         NumberAnimation {}
@@ -110,12 +80,15 @@ Item {
         enabled: flickable.interactive
 
         onClicked: {
-            node.state = "editing";
+            if (!node.editorComponent){
+                console.log("No source component. Not editing.")
+                return;
+            }
+            editorFrame.node = node;
             node.editing = true;
-            node.beganEditing();
         }
         onMouseXChanged: {
-            if (node.state == "editing") return;
+            if (editing) return;
             // TODO: Don't allow dragging to negative values. OR! Find a way to
             // make the Flickables less sucky
             display.x = node.x;
@@ -123,7 +96,7 @@ Item {
         }
         onMouseYChanged: onMouseXChanged
         drag {
-            target: node.state == "editing" ? undefined : node
+            target: /*editing ? undefined : */node
         }
     }
 }

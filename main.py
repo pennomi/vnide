@@ -22,6 +22,7 @@ nodeList = NodeList(*nodes)
 # TODO: Handle resize events
 app = QtWidgets.QApplication(sys.argv)
 view = QtQuick.QQuickView()
+view.setResizeMode(QtQuick.QQuickView.SizeRootObjectToView)
 context = view.rootContext()
 context.setContextProperty("nodeList", nodeList)
 view.setSource(QtCore.QUrl("qml/main.qml"))

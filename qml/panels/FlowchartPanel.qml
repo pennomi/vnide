@@ -39,26 +39,17 @@ Rectangle {
     Flickable {
         id: flickable
         anchors.fill: parent
-
         contentWidth: childrenRect.width
         contentHeight: childrenRect.height
+        interactive: !editorFrame.editing
 
         Repeater {
             id: nodeRepeater
             model: nodeList
             onItemAdded: recalculateBounds()
-            delegate: Nodes.NodeLoader {
-                onBeganEditing: {
-                    flickable.interactive = false;
-                    z = 1.0  // Push it to the front
-                }
-                onEndedEditing: {
-                    flickable.interactive = true;
-                    z = 0.0  // Put it back where it belongs
-                }
-                Behavior on z { NumberAnimation {} }  // Avoids jerkiness
-            }
+            delegate: Nodes.NodeLoader {}
         }
-
     }
+
+    EditorFrame { id: editorFrame }
 }

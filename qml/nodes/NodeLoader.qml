@@ -2,8 +2,6 @@ import QtQuick 2.0
 
 Loader {
     id: loader
-    signal beganEditing()
-    signal endedEditing()
 
     sourceComponent: {
         var types = {
