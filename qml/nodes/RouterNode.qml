@@ -2,6 +2,8 @@ import QtQuick 2.0
 
 Node {
     id: node
+    width: choices.width
+    height: choices.height
     ChoiceList { id: choices }
 
     function arrowYPos(index) {

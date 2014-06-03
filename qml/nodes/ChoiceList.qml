@@ -1,10 +1,11 @@
 import QtQuick 2.0
 import "../elements" as Elements
 
-Elements.NodeBorder {
+Rectangle {
+    color: "#00000000"
     property real padding: 5
-    height: col.height + padding * 2
-    width: col.width + style.leftBorderPadding - 1
+    height: childrenRect.height + padding * 2
+    width: childrenRect.width + style.leftBorderPadding - 1
 
     function itemAt(index) {
         return choiceRepeater.itemAt(index)
@@ -43,7 +44,8 @@ Elements.NodeBorder {
                     width: paintedWidth + padding
                 }
 
-                // TODO: This will be a shiny separator
+                // TODO: This will be a shiny separator and needs the same
+                //       shader as the NodeBorder
                 Rectangle {
                     visible: index  // only show if not the first item
                     x: -3
