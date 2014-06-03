@@ -2,7 +2,7 @@ import QtQuick 2.0
 
 Node {
     id: node
-    width: 120
+    width: 110
     height: 80
 
     Text {

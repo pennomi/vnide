@@ -3,8 +3,8 @@ import "../elements" as Elements
 
 Elements.NodeBorder {
     property real padding: 5
-    height: childrenRect.height + padding * 2
-    width: childrenRect.width + style.leftBorderPadding - 1
+    height: col.height + padding * 2
+    width: col.width + style.leftBorderPadding - 1
 
     function itemAt(index) {
         return choiceRepeater.itemAt(index)
@@ -49,24 +49,24 @@ Elements.NodeBorder {
                     x: -3
                     height: 3
                     width: col.width
-                    color: "#686868"
+                    color: "#632121"
                     Rectangle {
                         height: 1
                         width: parent.width
-                        color: "#424242"
+                        color: "#9c3434"
                     }
                     Rectangle {
                         y: 2
                         height: 1
                         width: parent.width
-                        color: "#2f2f2f"
+                        color: "#471717"
                     }
                     Rectangle {
                         x: 1
                         y: 3
                         height: 2
                         width: parent.width - 2
-                        color: "#a5a5a5"
+                        color: "#d27878"
                     }
                 }
             }

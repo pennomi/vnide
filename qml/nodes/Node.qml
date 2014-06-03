@@ -11,9 +11,6 @@ Elements.NodeBorder {
     x: display.x
     y: display.y - node.height/2
 
-    height: childrenRect.height
-    width: childrenRect.width
-
     function arrowYPos(index) {
         return node.height / 2;
     }
