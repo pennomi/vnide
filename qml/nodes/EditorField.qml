@@ -1,6 +1,7 @@
 import QtQuick 2.0
 
-Rectangle {
+Item {
+    id: container
     property alias title: label.text
     property alias text: input.text
     height: childrenRect.height
@@ -23,8 +24,6 @@ Rectangle {
             id: input
             anchors.fill: parent
             anchors.margins: 3
-
-
         }
     }
 }
