@@ -1,19 +1,9 @@
 import QtQuick 2.0
+import "../elements" as Elements
 
-BorderImage {
+Elements.NodeBorder {
     id: node
-    source: "borders/frame.svg"
-    border {
-        top: 43
-        bottom: 4
-        left: 25
-        right: 4
-    }
-    // Make all children of this actually appear in the editor
-    //default property alias contents: editor.children
     property Component editorComponent
-    //property alias editor: editorLoader.item
-    property string color: style.white
     property string nid: display.nid
     property string type: display.type
     property bool editing: false
@@ -27,19 +17,6 @@ BorderImage {
     function arrowYPos(index) {
         return node.height / 2;
     }
-
-    /*Loader {
-        id: editorLoader
-        visible: editing
-        Behavior on visible { NumberAnimation {} }
-
-        parent: flickable
-        x: flickable.contentX
-        y: flickable.contentY
-        width: flickable.width
-        height: flickable.height
-
-    }*/
 
     Item {
         id: arrows
@@ -59,29 +36,14 @@ BorderImage {
         }
     }
 
-    Behavior on x {
-        NumberAnimation {}
-    }
-    Behavior on y {
-        NumberAnimation {}
-    }
-    Behavior on width {
-        NumberAnimation {}
-    }
-    Behavior on height {
-        NumberAnimation {}
-    }
-
-    // Mouse Actions
     MouseArea {
         id: mouseArea
         anchors.fill: parent
-        // If we've disabled the flickable, this should be as well.
         enabled: flickable.interactive
 
         onClicked: {
             if (!node.editorComponent){
-                console.log("No source component. Not editing.")
+                console.log("Editing not implemented for " + node + ".")
                 return;
             }
             editorFrame.node = node;
@@ -95,8 +57,6 @@ BorderImage {
             display.y = node.y + height/2;
         }
         onMouseYChanged: onMouseXChanged
-        drag {
-            target: /*editing ? undefined : */node
-        }
+        drag.target: node
     }
 }

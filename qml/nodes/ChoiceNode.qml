@@ -2,7 +2,6 @@ import QtQuick 2.0
 
 Node {
     id: node
-    color: style.blue
     ChoiceList { id: choices }
 
     function arrowYPos(index) {
@@ -11,22 +10,23 @@ Node {
     }
 
     editorComponent: ListView {
-        x: 50
-        //anchors {
-            //top: parent.top
-            //topMargin: 20
-            //bottom: parent.bottom
-        //}
-        //width: parent.width
         spacing: 10
         model: display.exitConditions
-        delegate: Rectangle {
-            width: childrenRect.width
+        delegate: conditionItem
+    }
+
+    Component {
+        id: conditionItem
+        Rectangle {
+            width: parent.width
             height: childrenRect.height
+            color: "#00000000"
 
             EditorField {
                 id: choiceEditor
                 anchors.topMargin: 5
+                anchors.left: parent.left
+                anchors.leftMargin: 32
                 title: "Choice"
                 text: display.text
             }
@@ -34,6 +34,8 @@ Node {
             EditorField {
                 anchors.top: choiceEditor.bottom
                 anchors.topMargin: 5
+                anchors.left: parent.left
+                anchors.leftMargin: 32
                 title: "Condition"
                 text: display.condition
             }

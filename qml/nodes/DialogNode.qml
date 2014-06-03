@@ -2,14 +2,18 @@ import QtQuick 2.0
 
 Node {
     id: node
-    color: "white"
 
     width: 100
     height: 80
 
     Text {
-        anchors.fill: parent
-        anchors.margins: 5
+        anchors {
+            fill: parent
+            topMargin: 5
+            bottomMargin: 5
+            rightMargin: 5
+            leftMargin: style.leftBorderPadding
+        }
         text: display.text
         font.pointSize: 10
         wrapMode: Text.WordWrap

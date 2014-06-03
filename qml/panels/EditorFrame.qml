@@ -1,17 +1,32 @@
 import QtQuick 2.0
+import "../elements" as Elements
 
-Rectangle {
+Elements.NodeBorder {
     id: editor
     property Item node
     property bool editing: node && node.editing
     visible: editing
     anchors.fill: flickable
-    color: "red"
 
-    Loader {
-        id: editorFormLoader
-        anchors.fill: parent
-        sourceComponent: editing ? node.editorComponent : undefined
+    // TODO: An alternate interface border for this, please.
+    Elements.NodeBorder {
+        anchors {
+            fill: parent
+            margins: 32
+        }
+
+        Loader {
+            id: editorFormLoader
+            anchors {
+                fill: parent
+                topMargin: 3
+                bottomMargin: 3
+                leftMargin: 3
+                rightMargin: 3
+            }
+            clip: true
+            sourceComponent: editing ? node.editorComponent : undefined
+        }
     }
 
     Image {

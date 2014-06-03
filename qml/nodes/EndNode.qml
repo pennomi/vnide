@@ -2,10 +2,9 @@ import QtQuick 2.0
 
 Node {
     id: node
-    color: style.white
-
     width: 48
     height: width
+
     Image {
         source: {
             switch(display.dataType) {
@@ -18,13 +17,7 @@ Node {
         anchors.margins: 5
     }
 
-    /*Text {
-        id: titleText
-        text: "Pick a style!"
-    }*/
     editorComponent: Row {
-        //anchors.top: parent.top
-        //anchors.topMargin: 32
         spacing: 10
         Repeater {
             model: ListModel {

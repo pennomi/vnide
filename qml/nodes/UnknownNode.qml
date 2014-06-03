@@ -2,13 +2,12 @@ import QtQuick 2.0
 
 Node {
     id: node
-    color: "#d9534f"
 
     Rectangle {
         width: 32
         height: width
         radius: width / 2
-        color: node.color
+        color: style.red
         border {
             color: "black"
             width: 2

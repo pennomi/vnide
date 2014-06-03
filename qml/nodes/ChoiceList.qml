@@ -1,14 +1,7 @@
 import QtQuick 2.0
+import "../elements" as Elements
 
-BorderImage {
-    source: "borders/frame.svg"
-    border {
-        top: 43
-        bottom: 4
-        left: 25
-        right: 4
-    }
-
+Elements.NodeBorder {
     property real padding: 5
     height: childrenRect.height + padding * 2
     width: childrenRect.width + style.leftBorderPadding - 1
