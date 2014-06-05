@@ -13,6 +13,7 @@ Item {
             left: 25
             right: 4
         }
+        // z: 1  // Reimplement this once it has a hole in it
 
         ColorizeEffect { hue: container.hue }
     }
