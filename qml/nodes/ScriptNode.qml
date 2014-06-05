@@ -1,16 +1,14 @@
 import QtQuick 2.0
+import "../elements" as Elements
 
 Node {
     id: node
+    width: 100
+    height: 80
 
-    Rectangle {
-        width: 100
-        height: 80
-        radius: 5
-        color: "#22ff22"
-        border {
-            color: "black"
-            width: 2
-        }
+    Elements.SyntaxHighlighter {
+        anchors.fill: parent
+        anchors.margins: 3
+        anchors.leftMargin: 12
     }
 }

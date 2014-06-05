@@ -1,0 +1,19 @@
+<html>
+<head>
+    <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1; user-scalable=no;target-densitydpi=72;" />
+    <link href="theme.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<pre><code data-language="javascript">/*
+ * do some jQuery magic on load
+ */
+$(document).ready(function() {
+    function showHiddenParagraphs() {
+        $("p.hidden").fadeIn(500);
+    }
+    setTimeout(showHiddenParagraphs, 1000);
+});</code>
+</pre>
+<script src="rainbow-custom.min.js"></script>
+</body>
+</html>
