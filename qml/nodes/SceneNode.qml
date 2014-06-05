@@ -2,15 +2,12 @@ import QtQuick 2.0
 
 Node {
     id: node
+    width: 100
+    height: 80
 
-    Rectangle {
-        width: 100
-        height: 80
-        radius: 2
-        color: "#224422"
-        border {
-            color: "black"
-            width: 2
-        }
+    Image {
+        anchors.fill: parent
+        source: "../../saves/testproj/resources/Tavern1600x1200_0.png"
+        fillMode: Image.PreserveAspectCrop
     }
 }
