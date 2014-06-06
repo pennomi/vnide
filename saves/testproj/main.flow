@@ -52,6 +52,7 @@
             "type": "macro",
             "x": 480,
             "y": 100,
+            "filename": "battle.flow",
             "exitConditions": [
                 { "nextNode": "7" }
             ]

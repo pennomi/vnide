@@ -8,8 +8,8 @@ Item {
         source: "borders/frame.svg"
         anchors.fill: parent
         border {
-            top: 43
-            bottom: 4
+            top: 35
+            bottom: 5
             left: 25
             right: 4
         }
