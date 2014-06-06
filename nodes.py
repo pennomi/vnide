@@ -145,7 +145,7 @@ class ExitCondition(QtCore.QObject):
     def __init__(self, **kwargs):
         super(ExitCondition, self).__init__()
         self._property_data = dict(
-            nextNode=None, condititon=None, text=None, nextX=0, nextY=0,
+            nextNode="", condititon="", text="", nextX=0, nextY=0,
         )
         self._property_data.update(kwargs)
 
@@ -243,6 +243,7 @@ class NodeList(ListModel):
 
     @QtCore.pyqtSlot('QString', int, 'QVariant')
     def insertNodeAfterParent(self, nid, conditionIndex, dropData):
+        # TODO: push all child nodes recursively
         # TODO: one arg is the dropped thingy? (to get x, y, etc.)
         # TODO: one arg should be condition index
         print("Insert Node: {}:{} with data {} ({})".format(
@@ -272,3 +273,11 @@ class NodeList(ListModel):
             child = self.get_by_nid(condition.nextNode)
             condition.nextX = child.x
             condition.nextY = child.y
+
+    @QtCore.pyqtSlot('QString')
+    def addCondition(self, nid):
+        node = self.get_by_nid(nid)
+        newEnd = Node(type="end", dataType="return")
+        self.append(newEnd)
+        condition = ExitCondition(nextNode=newEnd.nid, condition="")
+        node.exitConditions.append(condition)

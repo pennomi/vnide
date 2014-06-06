@@ -7,14 +7,35 @@ Node {
     ChoiceList { id: choices }
 
     function arrowYPos(index) {
-        var item = choices.itemAt(index);
-        return item.mapToItem(choices, 0, item.height / 2).y + choices.padding;
+        var h = choices.itemHeight;
+        var p = choices.padding;
+        return (p + h) * index + h / 2 + p;
     }
 
-    editorComponent: ListView {
-        spacing: 10
-        model: display.exitConditions
-        delegate: conditionItem
+    editorComponent: Rectangle {
+        anchors.fill: parent
+        ListView {
+            id: conditions
+            anchors.fill: parent
+            anchors.bottomMargin: 20
+            spacing: 10
+            model: display.exitConditions
+            delegate: conditionItem
+            clip: true
+        }
+        Image {
+            id: addButton
+            anchors {
+                top: conditions.bottom
+                bottom: parent.bottom
+            }
+            width: height
+            source: "icons/add.svg"
+            MouseArea {
+                anchors.fill: parent
+                onClicked: { nodeList.addCondition(nid) }
+            }
+        }
     }
 
     Component {

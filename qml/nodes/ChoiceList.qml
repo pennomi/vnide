@@ -3,6 +3,7 @@ import "../elements" as Elements
 
 Rectangle {
     color: "#00000000"
+    property real itemHeight: 32
     property real padding: 5
     height: childrenRect.height + padding * 2
     width: childrenRect.width + style.leftBorderPadding - 1
@@ -21,7 +22,7 @@ Rectangle {
             model: display.exitConditions
             delegate: Rectangle {
                 color: "#00000000"
-                height: 32
+                height: itemHeight
                 width: childrenRect.width
                 Text {
                     id: choiceText

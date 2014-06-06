@@ -7,7 +7,8 @@ Node {
     ChoiceList { id: choices }
 
     function arrowYPos(index) {
-        var item = choices.itemAt(index);
-        return item.mapToItem(choices, 0, item.height / 2).y + choices.padding;
+        var h = choices.itemHeight;
+        var p = choices.padding;
+        return (p + h) * index + h / 2 + p;
     }
 }
