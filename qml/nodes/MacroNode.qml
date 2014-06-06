@@ -21,12 +21,8 @@ Node {
     }
 
     editorComponent: EditorField {
-        anchors.top: parent.top
-        anchors.topMargin: 5
-        anchors.left: parent.left
-        anchors.leftMargin: 32
         title: "Filename"
         text: display.filename
-        onTextChanged: display.filename = text;
+        onEdited: { display.filename = newText; }
     }
 }

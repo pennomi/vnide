@@ -14,4 +14,11 @@ Node {
 
         text: display.text
     }
+
+    editorComponent: EditorField {
+        title: "Script"
+        text: display.text
+        multiline: true
+        onEdited: { display.text = newText; }
+    }
 }

@@ -31,7 +31,7 @@ Node {
                 anchors.leftMargin: 32
                 title: "Choice"
                 text: display.text
-                onTextChanged: display.text = text;
+                onEdited: { display.text = newText; }
             }
 
             EditorField {
@@ -41,7 +41,7 @@ Node {
                 anchors.leftMargin: 32
                 title: "Condition"
                 text: display.condition
-                onTextChanged: display.condition = text;
+                onEdited: { display.condition = newText; }
             }
         }
     }
