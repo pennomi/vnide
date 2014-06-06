@@ -58,6 +58,7 @@
         },
         {   "nid": "5",
             "type": "script",
+            "text": "campaign['foo'] = 'bar';\ncampaign[\"bob\"][\"hp\"] -= 1;",
             "x": 480,
             "y": 200,
             "exitConditions": [

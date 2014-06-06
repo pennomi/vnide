@@ -12,14 +12,6 @@ Node {
         anchors.margins: 3
         anchors.leftMargin: 12
 
-        text: '/*
- * do some true jQuery magic on load
- */
-$(document).ready(function() {
-    function showHiddenParagraphs() {
-        $("p.hidden").fadeIn(500);
-    }
-    foo.length + console.log(showHiddenParagraphs, 1000);
-});'
+        text: display.text
     }
 }

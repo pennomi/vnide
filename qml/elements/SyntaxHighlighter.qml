@@ -32,7 +32,7 @@ Rectangle {
             }
 
             // Do string matches first
-            t = t.replace(/\".*\"|\'\.*\'/g, '<font color="' + colors["string"] + '">$&</font>')
+            t = t.replace(/\"[^"]*\"|'[^']*'/g, '<font color="' + colors["string"] + '">$&</font>')
 
             // Then iterate over the patterns and match them all
             for (var p in patterns) {
