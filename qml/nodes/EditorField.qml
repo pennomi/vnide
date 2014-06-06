@@ -1,4 +1,5 @@
 import QtQuick 2.0
+import "../elements" as Elements
 
 Item {
     id: container
@@ -34,7 +35,8 @@ Item {
             Component.onCompleted: { text = container.text; }
             onTextChanged: { container.edited(text); }
         }
-        TextEdit {
+
+        Elements.FlickableTextEdit {
             id: edit
             anchors.fill: parent
             anchors.margins: 3
