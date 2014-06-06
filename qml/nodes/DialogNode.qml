@@ -24,4 +24,25 @@ Node {
         smooth: true
         source: display.filename ? "../../saves/testproj/resources/" + display.filename : ""
     }
+
+    editorComponent: Rectangle {
+        anchors.fill: parent
+
+        // TODO: Make this a file open dialog
+        EditorField {
+            id: speaker
+            title: "Speaker"
+            text: display.filename
+            onEdited: { display.filename = newText; }
+        }
+
+        EditorField {
+            anchors.top: speaker.bottom
+            anchors.topMargin: 5
+            title: "Text"
+            text: display.text
+            multiline: true
+            onEdited: { display.text = newText; }
+        }
+    }
 }

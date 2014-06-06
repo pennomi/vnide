@@ -21,6 +21,7 @@ Node {
     }
 
     editorComponent: EditorField {
+        // TODO: Make this a file open dialog
         title: "Filename"
         text: display.filename
         onEdited: { display.filename = newText; }
