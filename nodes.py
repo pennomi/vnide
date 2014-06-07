@@ -20,10 +20,11 @@ class Node(QtCore.QObject):
             nid=str(uuid4()), x=0, y=0, selected=False,
             exitConditions=ListModel(),
             text="", filename="",
-            type="root",  # TODO: should always be specified. Add exceptions.
-            dataType="stop",  # TODO: depends on what node type it is.
+            type="",
+            dataType="",
         )
         self._property_data.update(kwargs)
+        assert self._property_data['type'] != "", "Specify a node type!"
 
         # connect the appropriate signals
         self.x_changed.connect(lambda i: self.moved.emit(self.nid))

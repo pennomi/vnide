@@ -11,4 +11,6 @@ Node {
         var p = choices.padding;
         return (p + h) * index + h / 2 + p;
     }
+
+    editorComponent: ChoiceEditor { allowText: false }
 }
