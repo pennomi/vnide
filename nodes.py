@@ -31,6 +31,12 @@ class Node(QtCore.QObject):
 
     moved = QtCore.pyqtSignal("QString", name='moved')
 
+    def hasChildNid(self, nid):
+        for c in self.exitConditions:
+            if c.nextNode == nid:
+                return True
+        return False
+
     # nid
     nid_changed = QtCore.pyqtSignal('QString', name='nidChanged')
 
@@ -226,12 +232,11 @@ class NodeList(ListModel):
 
     def nodeMovedHandler(self, nid):
         movingNode = self.get_by_nid(nid)
-        for node in self:
-            for condition in node.exitConditions:
-                if condition.nextNode == nid:
-                    # calculate nextX & nextY for the condition
-                    condition.nextX = movingNode.x
-                    condition.nextY = movingNode.y
+        for condition in self.all_exit_conditions():
+            if condition.nextNode == nid:
+                # calculate nextX & nextY for the condition
+                condition.nextX = movingNode.x
+                condition.nextY = movingNode.y
         self.node_moved.emit(nid)
 
     def get_by_nid(self, nid):
@@ -240,6 +245,11 @@ class NodeList(ListModel):
         for node in self._items:
             if node.nid == nid:
                 return node
+
+    def all_exit_conditions(self):
+        for node in self:
+            for c in node.exitConditions:
+                yield c
 
     @QtCore.pyqtSlot('QString', int, 'QVariant')
     def insertNodeAfterParent(self, nid, conditionIndex, dropData):
@@ -289,10 +299,9 @@ class NodeList(ListModel):
         assert source.type == 'end', "Merge source must be an end node!"
 
         # Update the parents
-        for node in self:
-            for condition in node.exitConditions:
-                if condition.nextNode == source_nid:
-                    condition.nextNode = target_nid
+        for condition in self.all_exit_conditions():
+            if condition.nextNode == source_nid:
+                condition.nextNode = target_nid
 
         # Remove the source node
         source_index = self._items.index(source)
@@ -300,3 +309,33 @@ class NodeList(ListModel):
 
         # Send off signals
         self.nodeMovedHandler(target_nid)
+
+    @QtCore.pyqtSlot('QString')
+    def removeNode(self, nid):
+        node = self.get_by_nid(nid)
+        assert node.type not in ['root', 'end'], \
+            "Can't delete root or end nodes!"
+
+        # Calculate the parents
+        parents = [n for n in self if n.hasChildNid(nid)]
+
+        # If there's only one exitCondition, we reconnect the nodes
+        if len(node.exitConditions) == 1:
+            for c in self.all_exit_conditions():
+                if c.nextNode == nid:
+                    c.nextNode = node.exitConditions[0].nextNode
+                    self.nodeMovedHandler(c.nextNode)
+        # Otherwise, it sucks, but they're orphaned. Cap off the parents with
+        # end nodes.
+        else:
+            for p in parents:
+                newEnd = Node(type="end", dataType="return")
+                self.append(newEnd)
+                for c in p.exitConditions:
+                    if c.nextNode == nid:
+                        c.nextNode = newEnd.nid
+                self.nodeMovedHandler(newEnd.nid)
+
+        # Remove the node
+        index = self._items.index(node)
+        self.removeRows(index, 1)

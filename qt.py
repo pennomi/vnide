@@ -11,6 +11,15 @@ class ListModel(QtCore.QAbstractListModel):
         for i in self._items:
             yield i
 
+    def __len__(self):
+        return len(self._items)
+
+    def __getitem__(self, index):
+        return self._items[index]
+
+    def __setitem__(self, index, value):
+        self._items[index] = value
+
     data_changed = QtCore.pyqtSignal(
         QtCore.QModelIndex, QtCore.QModelIndex, name='dataChanged')
 

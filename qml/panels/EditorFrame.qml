@@ -36,10 +36,21 @@ Elements.NodeBorder {
         height: 64
         anchors.right: parent.right
         MouseArea {
+            id: closeArea
             anchors.fill: parent
-            onClicked: {
-                node.editing = false;
-            }
+            onClicked: { node.editing = false; }
+        }
+    }
+
+    Image {
+        source: "../nodes/icons/delete.svg"
+        width: 32
+        height: 32
+        anchors.right: parent.right
+        anchors.bottom: parent.bottom
+        MouseArea {
+            anchors.fill: parent
+            onClicked: { node.editing = false; nodeList.removeNode(node.nid) }
         }
     }
 }
