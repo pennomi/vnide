@@ -82,9 +82,7 @@ Node {
 
                 MouseArea {
                     anchors.fill: parent
-                    onClicked: {
-                        console.log("TODO: DELETE ME");
-                    }
+                    onClicked: { nodeList.removeCondition(nid, index) }
                 }
             }
         }

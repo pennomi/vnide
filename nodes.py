@@ -253,11 +253,8 @@ class NodeList(ListModel):
 
     @QtCore.pyqtSlot('QString', int, 'QVariant')
     def insertNodeAfterParent(self, nid, conditionIndex, dropData):
-        # TODO: push all child nodes recursively
+        # TODO: reposition all child nodes recursively
         # TODO: one arg is the dropped thingy? (to get x, y, etc.)
-        # TODO: one arg should be condition index
-        print("Insert Node: {}:{} with data {} ({})".format(
-            nid, conditionIndex, dropData, dropData.property('title')))
         # Fetch the parent
         parent = self.get_by_nid(nid)
         exitPoint = parent.exitConditions._items[conditionIndex]
@@ -291,6 +288,13 @@ class NodeList(ListModel):
         self.append(newEnd)
         condition = ExitCondition(nextNode=newEnd.nid, condition="")
         node.exitConditions.append(condition)
+
+    @QtCore.pyqtSlot('QString', int)
+    def removeCondition(self, nid, index):
+        node = self.get_by_nid(nid)
+        condition = node.exitConditions[index]
+        node.exitConditions.removeRows(index, 1)
+        # TODO: If this causes an orphaned exit node, delete it too
 
     @QtCore.pyqtSlot('QString', 'QString')
     def mergeNodes(self, source_nid, target_nid):
