@@ -32,13 +32,13 @@ BorderImage {
         // this will currently not work. We need a yellow arrow.
         onDropped: {
             l.dropped(drag.source)
-            l.color = "black";
+            l.source = "icons/arrow.svg";
         }
         onEntered: {
-            l.color = "yellow";
+            l.source = "icons/arrow_highlighted.svg";
         }
         onExited: {
-            l.color = "black";
+            l.source = "icons/arrow.svg";
         }
     }
 

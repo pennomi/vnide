@@ -64,6 +64,20 @@ Node {
                 text: display.condition
                 onEdited: { display.condition = newText; }
             }
+
+            Image {
+                source: "icons/delete.svg"
+                height: choiceEditor.height
+                width: height
+                anchors.left: choiceEditor.right
+
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: {
+                        console.log("TODO: DELETE ME");
+                    }
+                }
+            }
         }
     }
 }
