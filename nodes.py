@@ -281,3 +281,22 @@ class NodeList(ListModel):
         self.append(newEnd)
         condition = ExitCondition(nextNode=newEnd.nid, condition="")
         node.exitConditions.append(condition)
+
+    @QtCore.pyqtSlot('QString', 'QString')
+    def mergeNodes(self, source_nid, target_nid):
+        # Check that all is well
+        source = self.get_by_nid(source_nid)
+        assert source.type == 'end', "Merge source must be an end node!"
+
+        # Update the parents
+        for node in self:
+            for condition in node.exitConditions:
+                if condition.nextNode == source_nid:
+                    condition.nextNode = target_nid
+
+        # Remove the source node
+        source_index = self._items.index(source)
+        self.removeRows(source_index, 1)
+
+        # Send off signals
+        self.nodeMovedHandler(target_nid)

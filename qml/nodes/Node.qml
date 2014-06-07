@@ -63,9 +63,7 @@ Elements.NodeBorder {
     DropArea {
         anchors.fill: parent
         keys: node.type == "end" ? ["NoMergingAllowed"] : ["MergeEndNode"]
-        onDropped: {
-            console.log("TODO: Merge " + drag.source.nid + " into " + node.nid)
-        }
+        onDropped: { nodeList.mergeNodes(drag.source.nid, node.nid) }
     }
 
 
