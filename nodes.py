@@ -328,6 +328,7 @@ class NodeList(ListModel):
         # Otherwise, it sucks, but they're orphaned. Cap off the parents with
         # end nodes.
         else:
+            # TODO: Detect orphaned end nodes and kill them
             for p in parents:
                 newEnd = Node(type="end", dataType="return")
                 self.append(newEnd)

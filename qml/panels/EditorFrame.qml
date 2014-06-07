@@ -48,6 +48,7 @@ Elements.NodeBorder {
         height: 32
         anchors.right: parent.right
         anchors.bottom: parent.bottom
+        visible: node.type != "end" && node.type != "root"
         MouseArea {
             anchors.fill: parent
             onClicked: { node.editing = false; nodeList.removeNode(node.nid) }
