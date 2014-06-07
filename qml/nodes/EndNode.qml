@@ -5,6 +5,13 @@ Node {
     width: 48
     height: width
 
+    // End Nodes have special functionality on a drop
+    Drag.active: dragArea.drag.active
+    Drag.hotSpot.x: width / 2
+    Drag.hotSpot.y: height / 2
+    Drag.keys: ["MergeEndNode"]
+
+
     Image {
         source: {
             switch(display.dataType) {

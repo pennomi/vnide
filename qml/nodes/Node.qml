@@ -7,6 +7,7 @@ Elements.NodeBorder {
     property string nid: display.nid
     property string type: display.type
     property bool editing: false
+    property alias dragArea: mouseArea
 
     x: display.x
     y: display.y - node.height/2
@@ -55,5 +56,17 @@ Elements.NodeBorder {
         }
         onMouseYChanged: onMouseXChanged
         drag.target: node
+        onReleased: { parent.Drag.drop() }
     }
+
+    // End nodes can be dropped on another node to merge them
+    DropArea {
+        anchors.fill: parent
+        keys: node.type == "end" ? ["NoMergingAllowed"] : ["MergeEndNode"]
+        onDropped: {
+            console.log("TODO: Merge " + drag.source.nid + " into " + node.nid)
+        }
+    }
+
+
 }

@@ -27,14 +27,11 @@ Rectangle {
             nodeButton.opacity = 0.5
 
         }
-
         onReleased: {
             parent.Drag.drop()
             nodeButton.opacity = 1.0
             nodeButton.x = defaultLocation[0]
             nodeButton.y = defaultLocation[1]
-            // TODO: Insert this thing there. Should probably be handled on the line object instead.
-            //nodes.insertType(title)
         }
         drag { target: parent }
     }
@@ -42,5 +39,7 @@ Rectangle {
     Drag.active: dragArea.drag.active
     Drag.hotSpot.x: width / 2
     Drag.hotSpot.y: height / 2
+    Drag.keys: ["InsertNodeType"]
+
 
 }

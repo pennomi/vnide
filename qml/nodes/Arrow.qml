@@ -16,30 +16,20 @@ BorderImage {
     border { left: 2; top: 0; right: 8; bottom: 0 }
     horizontalTileMode: BorderImage.Repeat
     verticalTileMode: BorderImage.Stretch
-    source: "icons/arrow.svg"
+    source: dropper.containsDrag ? "icons/arrow_highlighted.svg" : "icons/arrow.svg"
 
     transformOrigin: Item.Left;
     width: getWidth(x1, y1, x2, y2 - weight/2);
     rotation: getSlope(x1, y1, x2, y2 - weight/2);
 
     DropArea {
+        id: dropper
         x: 0
         y: -10
+        keys: ["InsertNodeType"]
         width: parent.width
         height: parent.height + 20
-
-        // TODO: This should be converted to a state with `when`, but also,
-        // this will currently not work. We need a yellow arrow.
-        onDropped: {
-            l.dropped(drag.source)
-            l.source = "icons/arrow.svg";
-        }
-        onEntered: {
-            l.source = "icons/arrow_highlighted.svg";
-        }
-        onExited: {
-            l.source = "icons/arrow.svg";
-        }
+        onDropped: { l.dropped(drag.source) }
     }
 
     function getWidth(sx1,sy1,sx2,sy2) {

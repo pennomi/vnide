@@ -36,6 +36,15 @@ Node {
                 onClicked: { nodeList.addCondition(nid) }
             }
         }
+        Text {
+            anchors {
+                top: addButton.top
+                left: addButton.right
+                leftMargin: 5
+            }
+            height: addButton.height
+            text: "Add Another Choice"
+        }
     }
 
     Component {
