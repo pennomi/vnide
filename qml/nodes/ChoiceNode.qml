@@ -4,7 +4,9 @@ Node {
     id: node
     width: choices.width
     height: choices.height
-    ChoiceList { id: choices }
+    icon: "icons/choice.svg"
+    title: "Choice"
+    tint: "green"
 
     function arrowYPos(index) {
         var h = choices.itemHeight;
@@ -12,5 +14,6 @@ Node {
         return (p + h) * index + h / 2 + p;
     }
 
+    ChoiceList { id: choices }
     editorComponent: ChoiceEditor {}
 }

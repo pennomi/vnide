@@ -1,7 +1,6 @@
 import QtQuick 2.0
-import "../elements" as Elements
 
-Elements.NodeBorder {
+NodeBorder {
     id: node
     property Component editorComponent
     property string nid: display.nid
@@ -11,6 +10,9 @@ Elements.NodeBorder {
 
     x: display.x
     y: display.y - node.height/2
+
+    icon: "../nodes/icons/question.svg"
+    title: "Unknown"
 
     function arrowYPos(index) {
         return node.height / 2;

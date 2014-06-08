@@ -4,6 +4,10 @@ Node {
     id: node
     width: 110
     height: 80
+    icon: "icons/dialog.svg"
+    title: "Dialog"
+    tint: "white"
+
 
     Text {
         anchors {
@@ -22,6 +26,7 @@ Node {
         height: 32
         width: 32
         smooth: true
+        z: 2
         source: display.filename ? "../../saves/testproj/resources/" + display.filename : ""
     }
 

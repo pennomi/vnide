@@ -62,8 +62,9 @@ Rectangle {
                         y: 2
                         height: 1
                         width: parent.width
-                        color: "#471717"
+                        color: "#451515"
                     }
+                    ColorizeEffect { tint: node.tint }
                 }
             }
         }

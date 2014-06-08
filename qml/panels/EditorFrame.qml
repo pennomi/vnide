@@ -1,7 +1,7 @@
 import QtQuick 2.0
-import "../elements" as Elements
+import "../nodes" as Nodes
 
-Elements.NodeBorder {
+Nodes.NodeBorder {
     id: editor
     property Item node
     property bool editing: node && node.editing
@@ -9,7 +9,7 @@ Elements.NodeBorder {
     anchors.fill: flickable
 
     // TODO: An alternate interface border for this, please.
-    Elements.NodeBorder {
+    Nodes.NodeBorder {
         anchors {
             fill: parent
             margins: 32

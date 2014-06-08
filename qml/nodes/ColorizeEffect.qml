@@ -2,12 +2,8 @@ import QtQuick 2.0
 
 Item {
     id: container
-    property real hue: Math.random()
+    property color tint: "black"
     anchors.fill: parent
-
-    function normalize(x) {
-        return Math.min(Math.max(x, 0), 1)
-    }
 
     // Colorize the frame as necessary
     ShaderEffectSource {
@@ -20,12 +16,7 @@ Item {
         id: shader
         anchors.fill: parent
         property variant source: shaderSource
-        property color tint: {
-            var h = 6 * hue;
-            return Qt.rgba(normalize(Math.max(2 - h, h - 4)),
-                           normalize(Math.min(h, 4 - h)),
-                           normalize(Math.min(h - 2, 6 - h)))
-        }
+        property color tint: container.tint
         fragmentShader: "" +
             "uniform sampler2D source;" +
             "uniform lowp vec4 tint;" +
