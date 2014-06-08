@@ -7,7 +7,7 @@ Node {
     height: 80
     icon: "icons/script.svg"
     title: "Script"
-    tint: "blue"
+    tint: "orange"
 
     Elements.SyntaxHighlighter {
         anchors.fill: parent

@@ -6,7 +6,7 @@ Node {
     height: 80
     icon: "icons/scene.svg"
     title: "Scene"
-    tint: "black"
+    tint: "#5529dd"
 
     Image {
         anchors.fill: parent

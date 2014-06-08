@@ -6,7 +6,7 @@ Node {
     height: choices.height
     icon: "icons/router.svg"
     title: "Router"
-    tint: "teal"
+    tint: "#00aa44"
 
     ChoiceList { id: choices }
 

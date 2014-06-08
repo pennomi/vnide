@@ -6,7 +6,7 @@ Node {
     height: 60
     icon: "icons/macro.svg"
     title: "Macro"
-    tint: "blue"
+    tint: "yellow"
 
     Item {
         anchors.fill: parent

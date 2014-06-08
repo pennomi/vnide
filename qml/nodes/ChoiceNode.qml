@@ -6,7 +6,7 @@ Node {
     height: choices.height
     icon: "icons/choice.svg"
     title: "Choice"
-    tint: "green"
+    tint: "#00aa44"
 
     function arrowYPos(index) {
         var h = choices.itemHeight;
