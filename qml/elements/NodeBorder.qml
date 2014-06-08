@@ -13,7 +13,16 @@ Item {
             left: 25
             right: 4
         }
-        // z: 1  // Reimplement this once it has a hole in it
+        z: 1
+
+        ColorizeEffect { hue: container.hue }
+    }
+    Rectangle {
+        anchors {
+            fill: parent
+            leftMargin: 12
+        }
+        color: "#d27878"
 
         ColorizeEffect { hue: container.hue }
     }

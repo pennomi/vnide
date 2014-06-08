@@ -64,13 +64,6 @@ Rectangle {
                         width: parent.width
                         color: "#471717"
                     }
-                    Rectangle {
-                        x: 1
-                        y: 3
-                        height: 2
-                        width: parent.width - 2
-                        color: "#d27878"
-                    }
                 }
             }
         }
