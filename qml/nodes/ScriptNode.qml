@@ -5,13 +5,14 @@ Node {
     id: node
     width: 110
     height: 80
-    z: 9000
+    icon: "icons/script.svg"
+    title: "Script"
+    tint: "blue"
 
     Elements.SyntaxHighlighter {
         anchors.fill: parent
         anchors.margins: 3
         anchors.leftMargin: 12
-
         text: display.text
     }
 

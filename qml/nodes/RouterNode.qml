@@ -4,6 +4,10 @@ Node {
     id: node
     width: choices.width
     height: choices.height
+    icon: "icons/router.svg"
+    title: "Router"
+    tint: "teal"
+
     ChoiceList { id: choices }
 
     function arrowYPos(index) {

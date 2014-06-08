@@ -4,6 +4,9 @@ Node {
     id: node
     width: 48
     height: width
+    icon: "icons/end.svg"
+    title: "End"
+    tint: "red"
 
     // End Nodes have special functionality on a drop
     Drag.active: dragArea.drag.active

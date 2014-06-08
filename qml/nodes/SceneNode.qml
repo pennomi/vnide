@@ -4,9 +4,10 @@ Node {
     id: node
     width: 110
     height: 80
+    icon: "icons/scene.svg"
+    title: "Scene"
+    tint: "black"
 
-    // TODO: This should be wrapped in the Node Border or have a different
-    //       border altogether.
     Image {
         anchors.fill: parent
         anchors.margins: 3

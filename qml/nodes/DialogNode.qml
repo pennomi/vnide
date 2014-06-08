@@ -6,7 +6,7 @@ Node {
     height: 80
     icon: "icons/dialog.svg"
     title: "Dialog"
-    tint: "white"
+    tint: "gray"
 
 
     Text {

@@ -3,7 +3,10 @@ import QtQuick 2.0
 Node {
     id: node
     width: 100
-    height: 40
+    height: 60
+    icon: "icons/macro.svg"
+    title: "Macro"
+    tint: "blue"
 
     Item {
         anchors.fill: parent
