@@ -1,6 +1,16 @@
 # noinspection PyUnresolvedReferences
 from PyQt5 import QtCore
 
+'''
+# TEMPORARY thoughts on metaclass magic
+# type(QObject)
+class MagicQObject(QtCore.pyqtWrapperType):
+    def __call__(cls, *args, **kwargs):
+        print('__call__ of ', str(cls))
+        print('__call__ *args=', str(args))
+        return super().__call__(cls, *args, **kwargs)
+'''
+
 
 class ListModel(QtCore.QAbstractListModel):
     def __init__(self, *args):

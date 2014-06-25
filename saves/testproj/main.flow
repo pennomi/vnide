@@ -14,6 +14,14 @@
             "y": 200,
             "exitConditions": [
                 { "nextNode": "2" }
+            ],
+            "sprites": [
+                { "startX": 0,
+                  "startY": 0,
+                  "endX": 300,
+                  "endY": 0,
+                  "filename": "elf.png"
+                }
             ]
         },
         {   "nid": "2",
@@ -98,7 +106,8 @@
             "y": 200,
             "exitConditions": [
                 { "nextNode": "10" }
-            ]
+            ],
+            "sprites": [ ]
         },
         {   "nid": "10",
             "type": "router",
