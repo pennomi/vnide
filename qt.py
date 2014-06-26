@@ -8,7 +8,7 @@ class Prop:
 
 
 class MagicQObject(QtCore.pyqtWrapperType):
-    def __new__(metaname, classname, baseclasses, attrs):
+    def __new__(cls, classname, baseclasses, attrs):
         attrs['_qt_property_data'] = {}
         for name, thing in list(attrs.items()):
             # only accept "Prop" objects
@@ -48,7 +48,20 @@ class MagicQObject(QtCore.pyqtWrapperType):
             attrs[name] = new_property
 
         # Let PyQt run its magic on the class
-        return super().__new__(metaname, classname, baseclasses, attrs)
+        return super().__new__(cls, classname, baseclasses, attrs)
+
+    def __call__(self, *args, **kwargs):
+        # Make sure the default property data is unique per instance
+        instance = super().__call__(*args, **kwargs)
+        instance._qt_property_data = instance._qt_property_data.copy()
+        return instance
+
+
+class QObjectModel(QtCore.QObject, metaclass=MagicQObject):
+    """A very simple implementation of the MagicQObject metaclass."""
+    def __init__(self, **kwargs):
+        super().__init__()
+        self._qt_property_data.update(kwargs)
 
 
 class ListModel(QtCore.QAbstractListModel):

@@ -1,11 +1,10 @@
 # noinspection PyUnresolvedReferences
 from PyQt5 import QtCore
 from uuid import uuid4
-from qt import ListModel, MagicQObject, Prop
+from qt import ListModel, QObjectModel, Prop
 
 
 class Node(QtCore.QObject):
-
     def __init__(self, **kwargs):
         super(Node, self).__init__()
 
@@ -168,19 +167,12 @@ class Node(QtCore.QObject):
         self.filename_changed.emit(value)
 
 
-class ExitCondition(QtCore.QObject, metaclass=MagicQObject):
+class ExitCondition(QObjectModel):
     condition = Prop('QString')
     nextNode = Prop('QString')
     text = Prop('QString')
     nextX = Prop(int)
     nextY = Prop(int)
-
-    def __init__(self, **kwargs):
-        super(ExitCondition, self).__init__()
-        self._qt_property_data = dict(
-            nextNode="", condition="", text="", nextX=0, nextY=0,
-        )
-        self._qt_property_data.update(kwargs)
 
 
 class SpritePosition(QtCore.QObject):
