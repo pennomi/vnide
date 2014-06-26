@@ -2,7 +2,7 @@
 from PyQt5 import QtCore
 
 
-class Prop:
+class QProperty:
     def __init__(self, property_type):
         self.t = property_type
 
@@ -12,7 +12,7 @@ class MagicQObject(QtCore.pyqtWrapperType):
         attrs['_qt_property_data'] = {}
         for name, thing in list(attrs.items()):
             # only accept "Prop" objects
-            if not isinstance(thing, Prop):
+            if not isinstance(thing, QProperty):
                 continue
 
             # initialize the data in a type-specific way
@@ -20,6 +20,8 @@ class MagicQObject(QtCore.pyqtWrapperType):
                 attrs['_qt_property_data'][name] = 0
             elif thing.t == 'QString':
                 attrs['_qt_property_data'][name] = ""
+            elif thing.t == bool:
+                attrs['_qt_property_data'][name] = False
             else:
                 attrs['_qt_property_data'][name] = None
 
