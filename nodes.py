@@ -1,10 +1,11 @@
 # noinspection PyUnresolvedReferences
 from PyQt5 import QtCore
 from uuid import uuid4
-from qt import ListModel
+from qt import ListModel, MagicQObject, Prop
 
 
 class Node(QtCore.QObject):
+
     def __init__(self, **kwargs):
         super(Node, self).__init__()
 
@@ -23,15 +24,15 @@ class Node(QtCore.QObject):
         kwargs["sprites"] = sprites
 
         # Create defaults and override them with our specified data
-        self._property_data = dict(
+        self._qt_property_data = dict(
             nid=str(uuid4()), x=0, y=0, selected=False,
             exitConditions=ListModel(),
             text="", filename="",
             type="",
             dataType="",
         )
-        self._property_data.update(kwargs)
-        assert self._property_data['type'] != "", "Specify a node type!"
+        self._qt_property_data.update(kwargs)
+        assert self._qt_property_data['type'] != "", "Specify a node type!"
 
         # connect the appropriate signals
         self.x_changed.connect(lambda i: self.moved.emit(self.nid))
@@ -50,11 +51,11 @@ class Node(QtCore.QObject):
 
     @QtCore.pyqtProperty('QString', notify=nid_changed)
     def nid(self):
-        return self._property_data["nid"]
+        return self._qt_property_data["nid"]
 
     @nid.setter
     def nid(self, value):
-        self._property_data["nid"] = value
+        self._qt_property_data["nid"] = value
         self.nid_changed.emit(value)
 
     # x
@@ -62,11 +63,11 @@ class Node(QtCore.QObject):
 
     @QtCore.pyqtProperty(int, notify=x_changed)
     def x(self):
-        return self._property_data["x"]
+        return self._qt_property_data["x"]
 
     @x.setter
     def x(self, value):
-        self._property_data["x"] = value
+        self._qt_property_data["x"] = value
         self.x_changed.emit(value)
 
     # y
@@ -74,11 +75,11 @@ class Node(QtCore.QObject):
 
     @QtCore.pyqtProperty(int, notify=y_changed)
     def y(self):
-        return self._property_data["y"]
+        return self._qt_property_data["y"]
 
     @y.setter
     def y(self, value):
-        self._property_data["y"] = value
+        self._qt_property_data["y"] = value
         self.y_changed.emit(value)
 
     # type
@@ -86,11 +87,11 @@ class Node(QtCore.QObject):
 
     @QtCore.pyqtProperty("QString", notify=type_changed)
     def type(self):
-        return self._property_data["type"]
+        return self._qt_property_data["type"]
 
     @type.setter
     def type(self, value):
-        self._property_data["type"] = value
+        self._qt_property_data["type"] = value
         self.type_changed.emit(value)
 
     # selected
@@ -98,11 +99,11 @@ class Node(QtCore.QObject):
 
     @QtCore.pyqtProperty(bool, notify=selected_changed)
     def selected(self):
-        return self._property_data["selected"]
+        return self._qt_property_data["selected"]
 
     @selected.setter
     def selected(self, value):
-        self._property_data["selected"] = value
+        self._qt_property_data["selected"] = value
         self.selected_changed.emit(value)
 
     # exitConditions
@@ -111,11 +112,11 @@ class Node(QtCore.QObject):
 
     @QtCore.pyqtProperty("QVariant", notify=exitConditions_changed)
     def exitConditions(self):
-        return self._property_data["exitConditions"]
+        return self._qt_property_data["exitConditions"]
 
     @exitConditions.setter
     def exitConditions(self, value):
-        self._property_data["exitConditions"] = value
+        self._qt_property_data["exitConditions"] = value
         self.exitConditions_changed.emit(value)
 
     # sprites
@@ -123,11 +124,11 @@ class Node(QtCore.QObject):
 
     @QtCore.pyqtProperty("QVariant", notify=sprites_changed)
     def sprites(self):
-        return self._property_data["sprites"]
+        return self._qt_property_data["sprites"]
 
     @sprites.setter
     def sprites(self, value):
-        self._property_data["sprites"] = value
+        self._qt_property_data["sprites"] = value
         self.sprites_changed.emit(value)
 
     # dataType
@@ -135,11 +136,11 @@ class Node(QtCore.QObject):
 
     @QtCore.pyqtProperty("QString", notify=dataType_changed)
     def dataType(self):
-        return self._property_data["dataType"]
+        return self._qt_property_data["dataType"]
 
     @dataType.setter
     def dataType(self, value):
-        self._property_data["dataType"] = value
+        self._qt_property_data["dataType"] = value
         self.dataType_changed.emit(value)
 
     # text
@@ -147,11 +148,11 @@ class Node(QtCore.QObject):
 
     @QtCore.pyqtProperty("QString", notify=text_changed)
     def text(self):
-        return self._property_data["text"]
+        return self._qt_property_data["text"]
 
     @text.setter
     def text(self, value):
-        self._property_data["text"] = value
+        self._qt_property_data["text"] = value
         self.text_changed.emit(value)
 
     # filename
@@ -159,101 +160,47 @@ class Node(QtCore.QObject):
 
     @QtCore.pyqtProperty("QString", notify=filename_changed)
     def filename(self):
-        return self._property_data["filename"]
+        return self._qt_property_data["filename"]
 
     @filename.setter
     def filename(self, value):
-        self._property_data["filename"] = value
+        self._qt_property_data["filename"] = value
         self.filename_changed.emit(value)
 
 
-class ExitCondition(QtCore.QObject):
+class ExitCondition(QtCore.QObject, metaclass=MagicQObject):
+    condition = Prop('QString')
+    nextNode = Prop('QString')
+    text = Prop('QString')
+    nextX = Prop(int)
+    nextY = Prop(int)
+
     def __init__(self, **kwargs):
         super(ExitCondition, self).__init__()
-        self._property_data = dict(
-            nextNode="", condititon="", text="", nextX=0, nextY=0,
+        self._qt_property_data = dict(
+            nextNode="", condition="", text="", nextX=0, nextY=0,
         )
-        self._property_data.update(kwargs)
-
-    # nextNode
-    nextNode_changed = QtCore.pyqtSignal('QString', name='nextNodeChanged')
-
-    @QtCore.pyqtProperty('QString', notify=nextNode_changed)
-    def nextNode(self):
-        return self._property_data["nextNode"]
-
-    @nextNode.setter
-    def nextNode(self, value):
-        self._property_data["nextNode"] = value
-        self.nextNode_changed.emit(value)
-
-    # condition
-    condition_changed = QtCore.pyqtSignal('QString', name='conditionChanged')
-
-    @QtCore.pyqtProperty('QString', notify=condition_changed)
-    def condition(self):
-        return self._property_data["condition"]
-
-    @condition.setter
-    def condition(self, value):
-        self._property_data["condition"] = value
-        self.condition_changed.emit(value)
-
-    # text
-    text_changed = QtCore.pyqtSignal('QString', name='textChanged')
-
-    @QtCore.pyqtProperty('QString', notify=text_changed)
-    def text(self):
-        return self._property_data["text"]
-
-    @text.setter
-    def text(self, value):
-        self._property_data["text"] = value
-        self.text_changed.emit(value)
-
-    # nextX
-    nextX_changed = QtCore.pyqtSignal(int, name='nextXChanged')
-
-    @QtCore.pyqtProperty(int, notify=nextX_changed)
-    def nextX(self):
-        return self._property_data["nextX"]
-
-    @nextX.setter
-    def nextX(self, value):
-        self._property_data["nextX"] = value
-        self.nextX_changed.emit(value)
-
-    # nextY
-    nextY_changed = QtCore.pyqtSignal(int, name='nextYChanged')
-
-    @QtCore.pyqtProperty(int, notify=nextY_changed)
-    def nextY(self):
-        return self._property_data["nextY"]
-
-    @nextY.setter
-    def nextY(self, value):
-        self._property_data["nextY"] = value
-        self.nextY_changed.emit(value)
+        self._qt_property_data.update(kwargs)
 
 
 class SpritePosition(QtCore.QObject):
     def __init__(self, **kwargs):
         super(SpritePosition, self).__init__()
-        self._property_data = dict(
+        self._qt_property_data = dict(
             startX=0, startY=0, endX=0, endY=0, filename="",
         )
-        self._property_data.update(kwargs)
+        self._qt_property_data.update(kwargs)
 
     # startX
     startX_changed = QtCore.pyqtSignal(int, name='startXChanged')
 
     @QtCore.pyqtProperty(int, notify=startX_changed)
     def startX(self):
-        return self._property_data["startX"]
+        return self._qt_property_data["startX"]
 
     @startX.setter
     def startX(self, value):
-        self._property_data["startX"] = value
+        self._qt_property_data["startX"] = value
         self.startX_changed.emit(value)
 
     # startY
@@ -261,11 +208,11 @@ class SpritePosition(QtCore.QObject):
 
     @QtCore.pyqtProperty(int, notify=startY_changed)
     def startY(self):
-        return self._property_data["startY"]
+        return self._qt_property_data["startY"]
 
     @startY.setter
     def startY(self, value):
-        self._property_data["startY"] = value
+        self._qt_property_data["startY"] = value
         self.startY_changed.emit(value)
 
     # endX
@@ -273,11 +220,11 @@ class SpritePosition(QtCore.QObject):
 
     @QtCore.pyqtProperty(int, notify=endX_changed)
     def endX(self):
-        return self._property_data["endX"]
+        return self._qt_property_data["endX"]
 
     @endX.setter
     def endX(self, value):
-        self._property_data["endX"] = value
+        self._qt_property_data["endX"] = value
         self.endX_changed.emit(value)
 
     # endY
@@ -285,11 +232,11 @@ class SpritePosition(QtCore.QObject):
 
     @QtCore.pyqtProperty(int, notify=endY_changed)
     def endY(self):
-        return self._property_data["endY"]
+        return self._qt_property_data["endY"]
 
     @endY.setter
     def endY(self, value):
-        self._property_data["endY"] = value
+        self._qt_property_data["endY"] = value
         self.endY_changed.emit(value)
 
     # filename
@@ -297,11 +244,11 @@ class SpritePosition(QtCore.QObject):
 
     @QtCore.pyqtProperty('QString', notify=filename_changed)
     def filename(self):
-        return self._property_data["filename"]
+        return self._qt_property_data["filename"]
 
     @filename.setter
     def filename(self, value):
-        self._property_data["filename"] = value
+        self._qt_property_data["filename"] = value
         self.filename_changed.emit(value)
 
 

@@ -1,15 +1,54 @@
 # noinspection PyUnresolvedReferences
 from PyQt5 import QtCore
 
-'''
-# TEMPORARY thoughts on metaclass magic
-# type(QObject)
+
+class Prop:
+    def __init__(self, property_type):
+        self.t = property_type
+
+
 class MagicQObject(QtCore.pyqtWrapperType):
-    def __call__(cls, *args, **kwargs):
-        print('__call__ of ', str(cls))
-        print('__call__ *args=', str(args))
-        return super().__call__(cls, *args, **kwargs)
-'''
+    def __new__(metaname, classname, baseclasses, attrs):
+        attrs['_qt_property_data'] = {}
+        for name, thing in list(attrs.items()):
+            # only accept "Prop" objects
+            if not isinstance(thing, Prop):
+                continue
+
+            # initialize the data in a type-specific way
+            if thing.t == int:
+                attrs['_qt_property_data'][name] = 0
+            elif thing.t == 'QString':
+                attrs['_qt_property_data'][name] = ""
+            else:
+                attrs['_qt_property_data'][name] = None
+
+            changeSignal = QtCore.pyqtSignal(thing.t, name=name + 'Changed')
+
+            def make_getter(n):
+                def getter(self):
+                    return self._qt_property_data[n]
+                getter.__name__ = n
+                return getter
+
+            def make_setter(n):
+                def setter(self, value):
+                    self._qt_property_data[n] = value
+                    getattr(self, n + 'Changed').emit(value)
+                setter.__name__ = n
+                return setter
+
+            new_property = QtCore.pyqtProperty(
+                thing.t, notify=changeSignal,
+                fget=make_getter(name), fset=make_setter(name)
+            )
+
+            # Apply it to the class
+            attrs[name + 'Changed'] = changeSignal
+            attrs[name] = new_property
+
+        # Let PyQt run its magic on the class
+        return super().__new__(metaname, classname, baseclasses, attrs)
 
 
 class ListModel(QtCore.QAbstractListModel):
