@@ -45,6 +45,7 @@ class Node(QObjectModel):
         self.yChanged.connect(lambda i: self.moved.emit(self.nid))
 
     def hasChildNid(self, nid):
+        # noinspection PyTypeChecker
         for c in self.exitConditions:
             if c.nextNode == nid:
                 return True
