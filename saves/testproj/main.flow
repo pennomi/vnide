@@ -22,7 +22,14 @@
                   "endY": 0,
                   "filename": "elf.png"
                 }
-            ]
+            ],
+            "backgroundSprite": {
+                "startX": 0,
+                "startY": 0,
+                "endX": 300,
+                "endY": 0,
+                "filename": "Tavern1600x1200_0.png"
+            }
         },
         {   "nid": "2",
             "type": "dialog",

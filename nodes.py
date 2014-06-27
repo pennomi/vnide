@@ -11,6 +11,7 @@ class Node(QObjectModel):
     type = QProperty('QString')
     selected = QProperty(bool)
     exitConditions = QProperty('QVariant')
+    backgroundSprite = QProperty('QVariant')
     sprites = QProperty('QVariant')
     dataType = QProperty('QString')
     text = QProperty('QString')
@@ -32,6 +33,11 @@ class Node(QObjectModel):
             sprites = [SpritePosition(**s) for s in sprites]
             sprites = ListModel(*sprites)
         kwargs["sprites"] = sprites
+
+        # backgroundSprite must be a sprite object
+        background = kwargs.get('backgroundSprite')
+        if background:
+            kwargs['backgroundSprite'] = SpritePosition(**background)
 
         # ensure it has a nid
         if not kwargs.get('nid'):

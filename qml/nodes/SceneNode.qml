@@ -15,4 +15,6 @@ Node {
         source: "../../saves/testproj/resources/Tavern1600x1200_0.png"
         fillMode: Image.PreserveAspectCrop
     }
+
+    editorComponent: SceneEditor{}
 }

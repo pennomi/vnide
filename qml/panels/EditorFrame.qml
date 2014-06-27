@@ -8,8 +8,7 @@ Nodes.NodeBorder {
     visible: editing
     anchors.fill: flickable
 
-    // TODO: An alternate interface border for this, please.
-    Nodes.NodeBorder {
+    Rectangle {
         anchors {
             fill: parent
             margins: 32
