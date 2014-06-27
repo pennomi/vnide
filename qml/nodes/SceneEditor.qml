@@ -1,4 +1,5 @@
 import QtQuick 2.0
+import "components" as Components
 
 Rectangle {
     id: container
@@ -18,6 +19,18 @@ Rectangle {
         }
         height: 9 / 16 * width  // 16:9 aspect ratio
 
+        function startAnimating() {
+            for (var i=0; i < spriteRepeater.count; i++) {
+                spriteRepeater.itemAt(i).startAnimating();
+            }
+        }
+
+        function stopAnimating() {
+            for (var i=0; i < spriteRepeater.count; i++) {
+                spriteRepeater.itemAt(i).stopAnimating();
+            }
+        }
+
         Image {
             id: background
             source: '../../saves/testproj/resources/' + display.backgroundSprite.filename
@@ -26,16 +39,10 @@ Rectangle {
         }
 
         Repeater {
+            id: spriteRepeater
             model: display.sprites
-            delegate: Image {
-                source: '../../saves/testproj/resources/' + display.filename
-                height: globalScale * sourceSize.height
-                width: globalScale * sourceSize.width
-                x: parent.width * display.startX
-                y: parent.width * display.startY
-                Component.onCompleted: {
-                    console.log(display.startX)
-                }
+            delegate: Components.AnimatedSprite {
+                globalScale: container.globalScale
             }
         }
 
@@ -57,11 +64,13 @@ Rectangle {
             Behavior on opacity { NumberAnimation {} }
         }
 
-        // TODO: this is temporary!
         MouseArea {
             anchors.fill: parent
             onClicked: {
-                container.showWidescreen = !showWidescreen
+                //container.showWidescreen = !showWidescreen
+                // TODO: on window resize, reset the animation like this
+                viewport.stopAnimating()
+                viewport.startAnimating()
             }
         }
     }
