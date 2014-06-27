@@ -6,7 +6,7 @@ Rectangle {
     property real itemHeight: 32
     property real padding: 5
     height: childrenRect.height + padding * 2
-    width: childrenRect.width + style.leftBorderPadding - 1
+    width: childrenRect.width + globalStyle.leftBorderPadding - 1
 
     function itemAt(index) {
         return choiceRepeater.itemAt(index)
@@ -14,7 +14,7 @@ Rectangle {
 
     Column {
         id: col
-        x: style.leftBorderPadding
+        x: globalStyle.leftBorderPadding
         width: childrenRect.width
         spacing: padding
         Repeater {

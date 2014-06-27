@@ -8,7 +8,7 @@ Rectangle {
     height: 600
     color: "black"
 
-    Style { id: style }
+    Style { id: globalStyle }
 
     Panels.FlowchartPanel {
         id: flowchart

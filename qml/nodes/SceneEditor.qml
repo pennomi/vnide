@@ -39,6 +39,13 @@ Rectangle {
             Behavior on opacity { NumberAnimation {} }
         }
 
+        Repeater {
+            model: display.sprites
+            delegate: Image {
+
+            }
+        }
+
         // TODO: this is temporary!
         MouseArea {
             anchors.fill: parent

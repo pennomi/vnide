@@ -16,32 +16,32 @@ Rectangle {
             spacing: 5
 
             InsertButton {
-                color: style.green
+                color: globalStyle.green
                 title: "scene"
             }
 
             InsertButton {
-                color: style.white
+                color: globalStyle.white
                 title: "dialog"
             }
 
             InsertButton {
-                color: style.blue
+                color: globalStyle.blue
                 title: "choice"
             }
 
             InsertButton {
-                color: style.green
+                color: globalStyle.green
                 title: "router"
             }
 
             InsertButton {
-                color: style.red
+                color: globalStyle.red
                 title: "script"
             }
 
             InsertButton {
-                color: style.red
+                color: globalStyle.red
                 title: "macro"
             }
         }
