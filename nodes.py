@@ -67,10 +67,10 @@ class ExitCondition(QObjectModel):
 
 
 class SpritePosition(QObjectModel):
-    startX = QProperty(int)
-    startY = QProperty(int)
-    endX = QProperty(int)
-    endY = QProperty(int)
+    startX = QProperty(float)
+    startY = QProperty(float)
+    endX = QProperty(float)
+    endY = QProperty(float)
     filename = QProperty('QString')
 
 

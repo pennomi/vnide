@@ -16,11 +16,17 @@
                 { "nextNode": "2" }
             ],
             "sprites": [
-                { "startX": 0,
+                { "startX": -0.5,
                   "startY": 0,
-                  "endX": 300,
+                  "endX": 0.5,
                   "endY": 0,
                   "filename": "elf.png"
+                },
+                { "startX": 0.5,
+                  "startY": 0,
+                  "endX": 1.5,
+                  "endY": 0,
+                  "filename": "dwarf.png"
                 }
             ],
             "backgroundSprite": {

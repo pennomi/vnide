@@ -18,6 +18,8 @@ class MagicQObject(QtCore.pyqtWrapperType):
             # initialize the data in a type-specific way
             if thing.t == int:
                 attrs['_qt_property_data'][name] = 0
+            elif thing.t == float:
+                attrs['_qt_property_data'][name] = 0.0
             elif thing.t == 'QString':
                 attrs['_qt_property_data'][name] = ""
             elif thing.t == bool:
