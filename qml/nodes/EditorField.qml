@@ -6,6 +6,7 @@ Item {
     signal edited(string newText)
 
     property alias title: label.text
+    property alias validator: input.validator
     property string text
     property bool multiline: false
     height: childrenRect.height

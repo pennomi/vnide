@@ -31,7 +31,8 @@ Rectangle {
         id: background
         source: '../../../saves/testproj/resources/' + display.backgroundSprite.filename
         anchors.fill: parent
-        fillMode: Image.PreserveAspectCrop
+        width: parent.width
+        //fillMode: Image.PreserveAspectCrop
     }
 
     Repeater {
