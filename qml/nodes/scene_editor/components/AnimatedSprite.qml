@@ -4,20 +4,32 @@ Image {
     id: sprite
     property real globalScale
 
-    source: '../../../saves/testproj/resources/' + display.filename
+    source: '../../../../saves/testproj/resources/' + display.filename
     height: globalScale * sourceSize.height
     width: globalScale * sourceSize.width
     x: viewport.width * display.startX
     y: viewport.width * display.startY
 
-    function startAnimating() { previewAnimation.start() }
-    function stopAnimating() { previewAnimation.stop() }
+    function startAnimating() {
+        x = viewport.width * display.startX
+        y = viewport.width * display.startY
+        previewAnimation.start()
+    }
+    function showStart() {
+        previewAnimation.stop()
+        x = viewport.width * display.startX
+        y = viewport.width * display.startY
+    }
+    function showEnd() {
+        previewAnimation.stop()
+        x = viewport.width * display.endX
+        y = viewport.width * display.endY
+    }
 
     SequentialAnimation {
         id: previewAnimation
         loops: Animation.Infinite
 
-        PauseAnimation { duration: 1000 }
         ParallelAnimation {
             NumberAnimation {
                 target: sprite
