@@ -58,6 +58,16 @@ Image {
         running: sprite.state == "animating"
         loops: Animation.Infinite
 
+        PropertyAction {
+            target: sprite
+            property: "x"
+            value: viewport.width * display.startX
+        }
+        PropertyAction {
+            target: sprite
+            property: "y"
+            value: viewport.height * display.startY
+        }
         ParallelAnimation {
             NumberAnimation {
                 target: sprite
@@ -73,15 +83,5 @@ Image {
             }
         }
         PauseAnimation { duration: 1000 }
-        PropertyAction {
-            target: sprite
-            property: "x"
-            value: viewport.width * display.startX
-        }
-        PropertyAction {
-            target: sprite
-            property: "y"
-            value: viewport.height * display.startY
-        }
     }
 }
