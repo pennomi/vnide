@@ -12,6 +12,11 @@ Item {
     height: childrenRect.height
     width: childrenRect.width
 
+    onTextChanged: {
+        input.text = container.text;
+        edit.text = container.text;
+    }
+
     Text {
         id: label
         height: 30
@@ -32,9 +37,11 @@ Item {
             anchors.fill: parent
             anchors.margins: 3
             visible: !multiline
-
-            Component.onCompleted: { text = container.text; }
-            onTextChanged: { container.edited(text); }
+            onTextChanged: {
+                if (text != container.text) {
+                    container.edited(text);
+                }
+            }
         }
 
         Elements.FlickableTextEdit {
@@ -42,9 +49,11 @@ Item {
             anchors.fill: parent
             anchors.margins: 3
             visible: multiline
-
-            Component.onCompleted: { text = container.text; }
-            onTextChanged: { container.edited(text); }
+            onTextChanged: {
+                if (text != container.text) {
+                    container.edited(text);
+                }
+            }
         }
     }
 }

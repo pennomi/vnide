@@ -13,6 +13,7 @@ Rectangle {
         }
 
         Stuff.EditorField {
+            id: startXField
             title: "Start X"
             text: display.startX
             validator: DoubleValidator {}

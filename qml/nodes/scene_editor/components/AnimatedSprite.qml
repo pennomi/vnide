@@ -8,26 +8,54 @@ Image {
     height: globalScale * sourceSize.height
     width: globalScale * sourceSize.width
     x: viewport.width * display.startX
-    y: viewport.width * display.startY
+    y: viewport.height * display.startY
+    state: "start"
 
-    function startAnimating() {
-        x = viewport.width * display.startX
-        y = viewport.width * display.startY
-        previewAnimation.start()
-    }
-    function showStart() {
-        previewAnimation.stop()
-        x = viewport.width * display.startX
-        y = viewport.width * display.startY
-    }
-    function showEnd() {
-        previewAnimation.stop()
-        x = viewport.width * display.endX
-        y = viewport.width * display.endY
+    states: [
+        State {
+            name: "start"
+            PropertyChanges {
+                target: sprite
+                x: viewport.width * display.startX
+                y: viewport.height * display.startY
+            }
+        },
+        State {
+            name: "end"
+            PropertyChanges {
+                target: sprite
+                x: viewport.width * display.endX
+                y: viewport.height * display.endY
+            }
+        },
+        State {
+            name: "animating"
+            PropertyChanges {
+                target: sprite
+                x: viewport.width * display.startX
+                y: viewport.height * display.startY
+            }
+        }
+    ]
+
+    MouseArea {
+        anchors.fill: parent
+        enabled: !previewAnimation.running
+        drag.target: sprite
+        onReleased: {
+            if (sprite.state == "start") {
+                display.startX = sprite.x / viewport.width;
+                display.startY = sprite.y / viewport.height;
+            } else if (sprite.state == "end") {
+                display.endX = sprite.x / viewport.width;
+                display.endY = sprite.y / viewport.height;
+            }
+        }
     }
 
     SequentialAnimation {
         id: previewAnimation
+        running: sprite.state == "animating"
         loops: Animation.Infinite
 
         ParallelAnimation {
@@ -40,7 +68,7 @@ Image {
             NumberAnimation {
                 target: sprite
                 property: "y"
-                to: viewport.width * display.endY
+                to: viewport.height * display.endY
                 duration: 1000
             }
         }
@@ -53,7 +81,7 @@ Image {
         PropertyAction {
             target: sprite
             property: "y"
-            value: viewport.width * display.startY
+            value: viewport.height * display.startY
         }
     }
 }

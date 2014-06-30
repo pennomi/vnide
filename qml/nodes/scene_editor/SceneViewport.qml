@@ -11,19 +11,19 @@ Rectangle {
 
     function startAnimating() {
         for (var i=0; i < spriteRepeater.count; i++) {
-            spriteRepeater.itemAt(i).startAnimating();
+            spriteRepeater.itemAt(i).state = "animating";
         }
     }
 
     function showStart() {
         for (var i=0; i < spriteRepeater.count; i++) {
-            spriteRepeater.itemAt(i).showStart();
+            spriteRepeater.itemAt(i).state = "start";
         }
     }
 
     function showEnd() {
         for (var i=0; i < spriteRepeater.count; i++) {
-            spriteRepeater.itemAt(i).showEnd();
+            spriteRepeater.itemAt(i).state = "end";
         }
     }
 
@@ -32,7 +32,6 @@ Rectangle {
         source: '../../../saves/testproj/resources/' + display.backgroundSprite.filename
         anchors.fill: parent
         width: parent.width
-        //fillMode: Image.PreserveAspectCrop
     }
 
     Repeater {
