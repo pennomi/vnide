@@ -1,9 +1,20 @@
 import QtQuick 2.0
 import '..' as Stuff
+import '../../elements' as Elements
 
 Rectangle {
     color: "light gray"
     height: childrenRect.height
+
+    Elements.ImageButton {
+        source: '../icons/delete.svg'
+        width: 30
+        height: 30
+        anchors.right: parent.right
+        onClicked: {
+            console.log("delete");
+        }
+    }
 
     Column {
         Stuff.EditorField {

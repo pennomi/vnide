@@ -1,5 +1,6 @@
 import QtQuick 2.0
 import "../nodes" as Nodes
+import "../elements" as Elements
 
 Nodes.NodeBorder {
     id: editor
@@ -28,17 +29,12 @@ Nodes.NodeBorder {
         }
     }
 
-    Image {
-        id: closeImage
+    Elements.ImageButton {
         source: "icons/close.svg"
-        width: 64
-        height: 64
+        width: 30
+        height: 30
         anchors.right: parent.right
-        MouseArea {
-            id: closeArea
-            anchors.fill: parent
-            onClicked: { node.editing = false; }
-        }
+        onClicked: { node.editing = false; }
     }
 
     Image {

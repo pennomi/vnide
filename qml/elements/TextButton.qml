@@ -8,9 +8,9 @@ Item {
     property bool active: false
 
     signal clicked()
-     Component.onCompleted: {
-         mouse.clicked.connect(clicked)
-     }
+    Component.onCompleted: {
+        mouse.clicked.connect(clicked)
+    }
 
     Rectangle {
         id: background
