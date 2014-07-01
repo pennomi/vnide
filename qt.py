@@ -119,3 +119,9 @@ class ListModel(QtCore.QAbstractListModel):
         self.beginInsertRows(QtCore.QModelIndex(), index, index)
         self._items.append(item)
         self.endInsertRows()
+
+    @QtCore.pyqtSlot(int)
+    def pop(self, index=-1):
+        if index == -1:
+            index = len(self) - 1
+        self.removeRows(index, 1)

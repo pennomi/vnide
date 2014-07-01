@@ -5,6 +5,7 @@ import '../../elements' as Elements
 Rectangle {
     color: "light gray"
     height: childrenRect.height
+    property variant displayData
 
     Elements.ImageButton {
         source: '../icons/delete.svg'
@@ -13,43 +14,44 @@ Rectangle {
         anchors.right: parent.right
         onClicked: {
             console.log("delete");
+            container.model.pop(index)
         }
     }
 
     Column {
         Stuff.EditorField {
             title: "Filename"
-            text: display.filename
-            onEdited: { display.filename = newText; }
+            text: displayData.filename
+            onEdited: { displayData.filename = newText; }
         }
 
         Stuff.EditorField {
             id: startXField
             title: "Start X"
-            text: display.startX
+            text: displayData.startX
             validator: DoubleValidator {}
-            onEdited: { display.startX = parseFloat(newText); }
+            onEdited: { displayData.startX = parseFloat(newText); }
         }
 
         Stuff.EditorField {
             title: "Start Y"
-            text: display.startY
+            text: displayData.startY
             validator: DoubleValidator {}
-            onEdited: { display.startY = parseFloat(newText); }
+            onEdited: { displayData.startY = parseFloat(newText); }
         }
 
         Stuff.EditorField {
             title: "End X"
-            text: display.endX
+            text: displayData.endX
             validator: DoubleValidator {}
-            onEdited: { display.endX = parseFloat(newText); }
+            onEdited: { displayData.endX = parseFloat(newText); }
         }
 
         Stuff.EditorField {
             title: "End Y"
-            text: display.endY
+            text: displayData.endY
             validator: DoubleValidator {}
-            onEdited: { display.endY = parseFloat(newText); }
+            onEdited: { displayData.endY = parseFloat(newText); }
         }
     }
 }
