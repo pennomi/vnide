@@ -28,16 +28,15 @@ class Node(QObjectModel):
         kwargs["exitConditions"] = exits
 
         # make sprites a ListModel if it's not already
-        sprites = kwargs.get("sprites", ListModel())
+        sprites = kwargs.get("sprites", SpriteList())
         if not isinstance(sprites, ListModel):
             sprites = [SpritePosition(**s) for s in sprites]
-            sprites = ListModel(*sprites)
+            sprites = SpriteList(*sprites)
         kwargs["sprites"] = sprites
 
         # backgroundSprite must be a sprite object
-        background = kwargs.get('backgroundSprite')
-        if background:
-            kwargs['backgroundSprite'] = SpritePosition(**background)
+        background = kwargs.get('backgroundSprite', {})
+        kwargs['backgroundSprite'] = SpritePosition(**background)
 
         # ensure it has a nid
         if not kwargs.get('nid'):
@@ -72,6 +71,12 @@ class SpritePosition(QObjectModel):
     endX = QProperty(float)
     endY = QProperty(float)
     filename = QProperty('QString')
+
+
+class SpriteList(ListModel):
+    @QtCore.pyqtSlot()
+    def addSprite(self):
+        self.append(SpritePosition())
 
 
 class NodeList(ListModel):

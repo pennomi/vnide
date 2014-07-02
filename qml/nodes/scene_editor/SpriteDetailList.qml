@@ -1,4 +1,5 @@
 import QtQuick 2.0
+import "../../elements" as Elements
 
 ListView {
     id: container
@@ -15,5 +16,12 @@ ListView {
     delegate: SpriteDetailEditor {
         width: container.width
         displayData: display
+    }
+    footer: Elements.TextButton {
+        text: "Add Sprite"
+        width: 120
+        height: 30
+        backgroundColor: "#99cc99"
+        onClicked: { container.model.addSprite() }
     }
 }
