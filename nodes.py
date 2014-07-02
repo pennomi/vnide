@@ -1,3 +1,4 @@
+import json
 # noinspection PyUnresolvedReferences
 from PyQt5 import QtCore
 from uuid import uuid4
@@ -56,6 +57,22 @@ class Node(QObjectModel):
                 return True
         return False
 
+    @property
+    def saveData(self):
+        return dict(
+            nid=self.nid,
+            x=self.x,
+            y=self.y,
+            type=self.type,
+            selected=self.selected,
+            exitConditions=[e.saveData for e in self.exitConditions],
+            backgroundSprite=self.backgroundSprite.saveData,
+            sprites=[s.saveData for s in self.sprites],
+            dataType=self.dataType,
+            text=self.text,
+            filename=self.filename,
+        )
+
 
 class ExitCondition(QObjectModel):
     condition = QProperty('QString')
@@ -64,6 +81,16 @@ class ExitCondition(QObjectModel):
     nextX = QProperty(int)
     nextY = QProperty(int)
 
+    @property
+    def saveData(self):
+        return dict(
+            condition=self.condition,
+            nextNode=self.nextNode,
+            text=self.text,
+            nextX=self.nextX,
+            nextY=self.nextY,
+        )
+
 
 class SpritePosition(QObjectModel):
     startX = QProperty(float)
@@ -71,6 +98,16 @@ class SpritePosition(QObjectModel):
     endX = QProperty(float)
     endY = QProperty(float)
     filename = QProperty('QString')
+
+    @property
+    def saveData(self):
+        return dict(
+            startX=self.startX,
+            startY=self.startY,
+            endX=self.endX,
+            endY=self.endY,
+            filename=self.filename,
+        )
 
 
 class SpriteList(ListModel):
@@ -86,6 +123,11 @@ class NodeList(ListModel):
         for node in args:
             node.moved.connect(self.nodeMovedHandler)
             self.nodeMovedHandler(node.nid)
+
+    @QtCore.pyqtSlot('QString')
+    def save(self, filename):
+        with open(filename, 'w') as outfile:
+            json.dump({"nodes": [n.saveData for n in self]}, outfile)
 
     def append(self, node):
         super(NodeList, self).append(node)

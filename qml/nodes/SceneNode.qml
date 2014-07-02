@@ -13,10 +13,8 @@ Node {
         anchors.fill: parent
         anchors.margins: 3
         anchors.leftMargin: 12
+        state: "end"
         showGuides: false
-        Component.onCompleted: {
-            console.log(display.backgroundSprite.filename)
-        }
     }
 
     editorComponent: SceneEditor{}

@@ -12,8 +12,16 @@ import signal
 signal.signal(signal.SIGINT, signal.SIG_DFL)
 
 
+SAVE_LOCATION = "saves/testproj/main.flow"
+
+
+def saveOnQuit():
+    print("INFO: Auto-saving on exit")
+    nodeList.save(SAVE_LOCATION)
+
+
 # Load the data
-with open("saves/testproj/main.flow", "r") as infile:
+with open(SAVE_LOCATION, "r") as infile:
     node_data = json.load(infile)
 nodes = [Node(**n) for n in node_data["nodes"]]
 nodeList = NodeList(*nodes)
@@ -21,6 +29,7 @@ nodeList = NodeList(*nodes)
 # Show the window
 # TODO: Handle resize events
 app = QtWidgets.QApplication(sys.argv)
+app.aboutToQuit.connect(saveOnQuit)
 view = QtQuick.QQuickView()
 view.setResizeMode(QtQuick.QQuickView.SizeRootObjectToView)
 context = view.rootContext()
