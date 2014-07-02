@@ -18,13 +18,6 @@ Node {
             console.log(display.backgroundSprite.filename)
         }
     }
-    /*Image {
-        anchors.fill: parent
-        anchors.margins: 3
-        anchors.leftMargin: 12
-        source: "../../saves/testproj/resources/Tavern1600x1200_0.png"
-        fillMode: Image.PreserveAspectCrop
-    }*/
 
     editorComponent: SceneEditor{}
 }
