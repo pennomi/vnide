@@ -30,7 +30,14 @@ Rectangle {
 
     Image {
         id: background
-        source: '../../../saves/testproj/resources/' + display.backgroundSprite.filename
+        source: {
+            if (display.backgroundSprite.filename) {
+                '../../../saves/testproj/resources/' + display.backgroundSprite.filename
+            }
+            else {
+                ""
+            }
+        }
         anchors.fill: parent
         width: parent.width
     }
