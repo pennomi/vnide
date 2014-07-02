@@ -30,5 +30,12 @@ Column {
     }
     Elements.TextButtonArray {
         model: ["Guides On", "Guides Off"]
+        onSelected: {
+            if (label == "Guides On") {
+                viewport.showGuides = true;
+            } else if (label == "Guides Off") {
+                viewport.showGuides = false;
+            }
+        }
     }
 }
