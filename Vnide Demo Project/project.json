@@ -1,0 +1,14 @@
+{
+    "tabs": [
+        {
+            "type": "scene",
+            "key": "scenes/scene1.json",
+            "active": true
+        },
+        {
+            "type": "scene",
+            "key": "scenes/scene2.json",
+            "active": false
+        }
+    ]
+}

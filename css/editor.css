@@ -1,0 +1,519 @@
+@import url('./reset.css');
+@import url('./player.css');
+/*noinspection CssUnknownTarget*/
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;700&display=swap');
+
+
+:root {
+	/* Editor color theme */
+	--editorBorderColor: #d1d1d1;
+	--editorDarkerBorderColor: #6e6e6e;
+	--windowColor: #ffffff;
+	--toolbarColor: #f2f2f2;
+	--editorSelectedColor: #d5d5d5;
+	--shadowColor: #00000088;
+
+	/* Node color theme */
+	--defaultNodeColor: #333333;
+
+	/* Editor sizing */
+	--headerHeight: 48px;
+	--headerTabHeight: 32px;
+	--editorGridSize: 64px;
+	--sidebarWidth: 256px;
+	--assetBrowserElementHeight: 48px;
+}
+
+/* PAGE STYLES */
+
+html, body {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+	font-family: 'Ubuntu', sans-serif;
+	font-weight: 300;
+	user-select: none;
+}
+
+input, textarea, select {
+	font-family: 'Ubuntu', sans-serif;
+	padding: 4px;
+}
+
+
+/* Globally override scrollbar, if possible */
+::-webkit-scrollbar {
+	width: 8px;
+}
+::-webkit-scrollbar-track {
+	background: var(--editorBorderColor);
+}
+::-webkit-scrollbar-thumb {
+	background: var(--editorDarkerBorderColor);
+}
+::-webkit-scrollbar-thumb:hover {
+	background: #555;
+}
+
+
+/* Utility classes */
+.row {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	width: 100%;
+}
+
+
+/* Header and tabs area */
+header {
+	height: var(--headerHeight);
+	background-color: var(--toolbarColor);
+	border-bottom: 1px solid var(--editorBorderColor);
+	display: flex;
+}
+
+#vnideLogo {
+	width: var(--sidebarWidth);
+	height: 100%;
+	padding: 8px 16px;
+}
+
+#vnideLogo img {
+	height: 100%;
+	-webkit-user-drag: none; /* Prevents dragging of images/divs etc */
+}
+
+#editorTabs {
+	display: flex;
+	align-items: flex-end;
+}
+
+.editorTab {
+	height: var(--headerTabHeight);
+	line-height: var(--headerTabHeight);
+	border: 1px solid var(--editorBorderColor);
+	border-bottom: none;
+	padding: 2px 8px;
+	background-color: var(--toolbarColor);
+}
+
+.editorTab.active {
+	border-bottom: 4px solid var(--editorSelectedColor);
+	background-color: var(--windowColor);
+}
+
+
+/* Project selection overlay */
+#projectSelectionMenu {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	overflow: hidden;
+	z-index: 999;
+
+	background-color: var(--toolbarColor);
+}
+
+.grid {
+	width: 100%;
+	height: 100%;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: flex-start;
+	align-content: flex-start;
+}
+
+.vnideProjectTile {
+	height: 112px;
+	width: 112px;
+	border: 1px solid black;
+	margin: 8px;
+
+	background-color: var(--windowColor);
+}
+
+
+/* Core editor  */
+
+
+#player {
+	position: absolute;
+	bottom: 8px;
+	left: 8px;
+	width: 320px;
+	height: 180px;
+	z-index: 5;
+	border: 1px solid black;
+	background: white;
+	box-shadow: 0 2px 8px 2px var(--shadowColor);
+}
+
+
+#vnideSceneEditorPanel {
+	display: flex;
+	overflow: hidden;
+	outline: 0;
+
+	position: relative;
+	width: 100%;
+	height: 100%;
+
+	background-size: 64px 64px;
+	background-image: linear-gradient(to right, #00000008 1px, transparent 1px),
+	linear-gradient(to bottom, #00000008 1px, transparent 1px);
+
+}
+
+#vnideSceneEditorPanel .vnide {
+	transform-origin: top left;
+	width: 100%;
+	height: 100%;
+}
+
+#windowContainer {
+	display: flex;
+	width: 100%;
+	height: calc(100% - var(--headerHeight));
+}
+
+#assetBrowserWindow {
+	height: 100%;
+	width: var(--sidebarWidth);
+	min-width: var(--sidebarWidth);
+	max-width: var(--sidebarWidth);
+	background-color: var(--toolbarColor);
+	font-size: 24px;
+	border-right: 1px solid var(--editorBorderColor);
+	overflow-y: scroll;
+	scrollbar-width: none;
+}
+
+#assetBrowserWindow h2 {
+	font-weight: bold;
+	line-height: var(--assetBrowserElementHeight);
+	padding: 2px 8px;
+	border-top: 1px solid var(--editorBorderColor);
+	border-bottom: 1px solid var(--editorBorderColor);
+}
+
+#assetBrowserWindow .file {
+	display: flex;
+	align-items: center;
+	font-size: 14px;
+	height: var(--assetBrowserElementHeight);
+	padding: 4px 16px;
+	margin-top: 4px;
+	margin-bottom: 4px;
+	background-color: var(--toolbarColor);
+}
+
+#assetBrowserWindow .file.selected {
+	background-color: var(--editorSelectedColor);
+}
+
+#assetBrowserWindow .file:hover {
+  filter: brightness(90%);
+}
+
+#assetBrowserWindow .file img {
+	height: var(--assetBrowserElementHeight);
+	width: var(--assetBrowserElementHeight);
+	margin-right: 8px;
+	background-color: white;
+	border: 1px solid var(--editorBorderColor);
+}
+
+#contentWindow {
+	width: 100%;
+	height: 100%;
+	display: flex;
+}
+
+/* Node editor */
+
+.vnideNode {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	position: absolute;
+	min-height: 40px;
+	border-radius: 4px;
+	z-index: 2;
+	background: var(--defaultNodeColor);
+	border: 1px solid #00000033;
+	padding: 0;
+	width: calc(var(--editorGridSize) * 4);
+	color: white;
+	font-weight: 400;
+}
+
+.vnideNode.selected {
+	box-shadow: 0 2px 8px 2px var(--shadowColor);
+}
+
+.vnideNode:hover {
+	cursor: move;
+}
+
+.vnideNode .inputs, .vnideNode .outputs {
+	display: flex;
+	height: 0;
+}
+
+.vnideNode .vnideNodeContent {
+	width: 100%;
+	display: block;
+}
+
+.vnideNode .socket {
+	position: relative;
+	z-index: 1;
+
+	height: 16px;
+	width: 16px;
+
+	background: #fff;
+	border-radius: 50%;
+	border: 1px solid var(--editorBorderColor);
+	cursor: crosshair;
+	margin-top: -8px;
+	margin-left: 4px;
+	margin-right: 4px;
+}
+
+.vnide .connection .connection {
+	stroke: #4ea9ff;
+	stroke-width: 3px;
+}
+
+.vnide .connection .connection:hover {
+	stroke: #1266ab;
+	cursor: pointer
+}
+
+.vnide .connection .connection.selected {
+	stroke: #43b993
+}
+
+.vnideNode img {
+	-webkit-user-drag: none; /* Prevents dragging of images/divs etc */
+}
+
+.vnideNode .socket:hover {
+	background: #4ea9ff;
+}
+
+.vnideNode select, .vnideNode textarea {
+	border-radius: 4px;
+	border: 1px solid var(--editorBorderColor);
+	font-size: 12px;
+	width: 100%;
+	color: #000;
+}
+
+
+.vnide svg {
+	z-index: 0;
+	position: absolute;
+	overflow: visible !important;
+	height: 1px;
+	width: 1px;
+	fill: none;
+	stroke-width: 5px;
+	stroke: #4682b4;
+}
+
+
+.vnide-delete {
+	position: absolute;
+	display: block;
+	width: 24px;
+	height: 24px;
+	background: #000;
+	color: #fff;
+	z-index: 4;
+	border: 2px solid #fff;
+	line-height: 30px;
+	font-weight: 700;
+	text-align: center;
+	border-radius: 50%;
+	font-family: monospace;
+	cursor: pointer;
+	margin-left: -15px;
+	margin-top: 15px
+}
+
+.col {
+	overflow: auto;
+	width: var(--sidebarWidth);
+	height: 100%;
+	border-right: 1px solid var(--editorBorderColor);
+}
+
+.sceneInteractiveEditor {
+	flex-grow: 1;
+}
+
+.drag-vnide {
+	line-height: 50px;
+	border-bottom: 1px solid var(--editorBorderColor);
+	padding-left: 20px;
+	cursor: move;
+	user-select: none;
+}
+
+.menu {
+	position: absolute;
+	height: 40px;
+	display: block;
+	background: white;
+	width: 100%;
+}
+
+.menu ul {
+	padding: 0;
+	margin: 0;
+	line-height: 40px;
+}
+
+.menu ul li {
+	display: inline-block;
+	margin-left: 10px;
+	border-right: 1px solid var(--editorBorderColor);
+	padding-right: 10px;
+	line-height: 40px;
+	cursor: pointer;
+}
+
+.menu ul li.selected {
+	font-weight: bold;
+}
+
+.btn-export {
+	float: right;
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	color: white;
+	font-weight: bold;
+	border: 1px solid #0e5ba3;
+	background: #4ea9ff;
+	padding: 5px 10px;
+	border-radius: 4px;
+	cursor: pointer;
+	z-index: 5;
+}
+
+.btn-clear {
+	float: right;
+	position: absolute;
+	top: 10px;
+	right: 85px;
+	color: white;
+	font-weight: bold;
+	border: 1px solid #96015b;
+	background: #e3195a;
+	padding: 5px 10px;
+	border-radius: 4px;
+	cursor: pointer;
+	z-index: 5;
+}
+
+.bar-zoom {
+	float: right;
+	position: absolute;
+	bottom: 10px;
+	right: 10px;
+	display: flex;
+	font-size: 24px;
+	color: white;
+	padding: 5px 10px;
+	background: #555555;
+	border-radius: 4px;
+	border-right: 1px solid var(--editorBorderColor);
+	z-index: 5;
+}
+
+
+/* Editing Vnide */
+
+#nodePalette {
+	background-color: var(--toolbarColor);
+}
+
+.vnide > .vnide-delete {
+	border: 2px solid #43b993;
+	background: white;
+	color: #43b993;
+	box-shadow: 0 2px 20px 2px var(--shadowColor);
+}
+
+.vnide-delete {
+	border: 2px solid #4ea9ff;
+	background: white;
+	color: #4ea9ff;
+	box-shadow: 0 2px 20px 2px var(--shadowColor);
+}
+
+.vnideNode h1 {
+	font-size: 16px;
+	font-weight: bold;
+	font-variant: small-caps;
+	margin: 0;
+	border-radius: 4px 4px 0 0;
+	padding: 8px;
+}
+
+.vnideNode .content {
+	padding: 0 16px 8px 16px;
+	font-size: 12px;
+}
+
+.vnideNode textarea {
+	height: 100px;
+	font-size: 12px;
+}
+
+
+/* Modal */
+.modal {
+	display: none;
+	position: fixed;
+	z-index: 7;
+	left: 0;
+	top: 0;
+	width: 100vw;
+	height: 100vh;
+	overflow: auto;
+	background-color: rgb(0, 0, 0);
+	background-color: rgba(0, 0, 0, 0.7);
+
+}
+
+.modal-content {
+	position: relative;
+	background-color: #fefefe;
+	margin: 15% auto; /* 15% from the top and centered */
+	padding: 20px;
+	border: 1px solid #888;
+	width: 400px; /* Could be more or less, depending on screen size */
+}
+
+/* The Close Button */
+.modal .close {
+	color: #aaa;
+	float: right;
+	font-size: 28px;
+	font-weight: bold;
+	cursor: pointer;
+}

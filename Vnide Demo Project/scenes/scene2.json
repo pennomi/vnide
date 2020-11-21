@@ -1,0 +1,183 @@
+{
+    "nodes": [
+        {
+            "id": "3f811bc0-6757-4501-9d3e-50dcfd6e5900",
+            "data": {
+                "name": "New Scene"
+            },
+            "class": "SceneStartNode",
+            "position": [
+                -1046,
+                428
+            ]
+        },
+        {
+            "id": "0657c731-9b4a-437d-97ee-ed8c9b839677",
+            "data": {
+                "choice1": "Girl",
+                "choice2": "Boy"
+            },
+            "class": "ChoiceNode",
+            "position": [
+                -13,
+                389
+            ]
+        },
+        {
+            "id": "866cc9fc-0965-4267-924b-f0ee2f39a167",
+            "data": {
+                "positionX": 0,
+                "positionY": 0,
+                "character": "Ren"
+            },
+            "class": "CharacterEnterNode",
+            "position": [
+                348,
+                482
+            ]
+        },
+        {
+            "id": "ec48356f-cb7f-4c05-99e3-d7aa8b8c0bd0",
+            "data": {
+                "positionX": 0,
+                "positionY": 0,
+                "character": "Yutsuki"
+            },
+            "class": "CharacterEnterNode",
+            "position": [
+                342,
+                294
+            ]
+        },
+        {
+            "id": "1d539d49-61c8-4302-865c-786a08097ae4",
+            "data": {
+                "backgroundImage": "static/images/backgrounds/Modern-Dormroom1.png"
+            },
+            "class": "BackgroundImageNode",
+            "position": [
+                -411,
+                103
+            ]
+        },
+        {
+            "id": "34e233f0-15c5-4e6a-823c-d9e292858e89",
+            "data": {
+                "choice1": "Day",
+                "choice2": "Night Light",
+                "choice3": "Night"
+            },
+            "class": "ChoiceNode",
+            "position": [
+                -739,
+                414
+            ]
+        },
+        {
+            "id": "e3f20e99-c5b0-43d9-83a7-51fbfde521fb",
+            "data": {
+                "backgroundImage": "static/images/backgrounds/Modern-Dormroom2.png"
+            },
+            "class": "BackgroundImageNode",
+            "position": [
+                -399,
+                357
+            ]
+        },
+        {
+            "id": "a757d633-d175-414c-93a9-053b376d9e74",
+            "data": {
+                "backgroundImage": "static/images/backgrounds/Modern-Dormroom3.png"
+            },
+            "class": "BackgroundImageNode",
+            "position": [
+                -399,
+                625
+            ]
+        },
+        {
+            "id": "cc4b66b4-9427-4fc0-90d0-9627e4b8bc93",
+            "data": {
+                "characterId": "narrator",
+                "text": "Someone was picked. Blah blah.",
+                "character": "Ren"
+            },
+            "class": "TextNode",
+            "position": [
+                854,
+                369
+            ]
+        },
+        {
+            "id": "b6e01709-dadd-4d31-a00f-4f2f1f75242a",
+            "data": {},
+            "class": "SceneEndNode",
+            "position": [
+                1299,
+                415
+            ]
+        }
+    ],
+    "connections": [
+        {
+            "source": "0657c731-9b4a-437d-97ee-ed8c9b839677",
+            "output": 0,
+            "target": "ec48356f-cb7f-4c05-99e3-d7aa8b8c0bd0"
+        },
+        {
+            "source": "0657c731-9b4a-437d-97ee-ed8c9b839677",
+            "output": 1,
+            "target": "866cc9fc-0965-4267-924b-f0ee2f39a167"
+        },
+        {
+            "source": "3f811bc0-6757-4501-9d3e-50dcfd6e5900",
+            "output": 0,
+            "target": "34e233f0-15c5-4e6a-823c-d9e292858e89"
+        },
+        {
+            "source": "34e233f0-15c5-4e6a-823c-d9e292858e89",
+            "output": 0,
+            "target": "1d539d49-61c8-4302-865c-786a08097ae4"
+        },
+        {
+            "source": "34e233f0-15c5-4e6a-823c-d9e292858e89",
+            "output": 1,
+            "target": "e3f20e99-c5b0-43d9-83a7-51fbfde521fb"
+        },
+        {
+            "source": "34e233f0-15c5-4e6a-823c-d9e292858e89",
+            "output": 2,
+            "target": "a757d633-d175-414c-93a9-053b376d9e74"
+        },
+        {
+            "source": "a757d633-d175-414c-93a9-053b376d9e74",
+            "output": 0,
+            "target": "0657c731-9b4a-437d-97ee-ed8c9b839677"
+        },
+        {
+            "source": "e3f20e99-c5b0-43d9-83a7-51fbfde521fb",
+            "output": 0,
+            "target": "0657c731-9b4a-437d-97ee-ed8c9b839677"
+        },
+        {
+            "source": "1d539d49-61c8-4302-865c-786a08097ae4",
+            "output": 0,
+            "target": "0657c731-9b4a-437d-97ee-ed8c9b839677"
+        },
+        {
+            "source": "ec48356f-cb7f-4c05-99e3-d7aa8b8c0bd0",
+            "output": 0,
+            "target": "cc4b66b4-9427-4fc0-90d0-9627e4b8bc93"
+        },
+        {
+            "source": "866cc9fc-0965-4267-924b-f0ee2f39a167",
+            "output": 0,
+            "target": "cc4b66b4-9427-4fc0-90d0-9627e4b8bc93"
+        },
+        {
+            "source": "cc4b66b4-9427-4fc0-90d0-9627e4b8bc93",
+            "output": 0,
+            "target": "b6e01709-dadd-4d31-a00f-4f2f1f75242a"
+        }
+    ]
+}

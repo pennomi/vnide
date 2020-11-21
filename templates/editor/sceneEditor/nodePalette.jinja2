@@ -1,0 +1,7 @@
+{% for nodeType in nodeTypes %}
+	<div class="drag-vnide" draggable="true"
+			 ondragstart='event.dataTransfer.setData("node", "{{ nodeType.name }}")'
+	>
+		{{nodeType.title}}
+	</div>
+{% endfor %}

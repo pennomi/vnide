@@ -1,0 +1,20 @@
+[
+    {
+        "name": "Ren",
+        "images": [
+            {
+                "name": "Happy",
+                "filepath": "static/images/characters/boy.png"
+            }
+        ]
+    },
+    {
+        "name": "Yutsuki",
+        "images": [
+            {
+                "name": "Happy",
+                "filepath": "static/images/characters/girl.png"
+            }
+        ]
+    }
+]

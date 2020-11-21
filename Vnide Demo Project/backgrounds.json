@@ -1,0 +1,22 @@
+[
+    {
+        "name": "Dormroom - Day",
+        "filepath": "static/images/backgrounds/Modern-Dormroom1.png"
+    },
+    {
+        "name": "Dormroom - Night with Light",
+        "filepath": "static/images/backgrounds/Modern-Dormroom2.png"
+    },
+    {
+        "name": "Dormroom - Night",
+        "filepath": "static/images/backgrounds/Modern-Dormroom3.png"
+    },
+    {
+        "name": "School",
+        "filepath": "static/images/backgrounds/Modern-School1.png"
+    },
+    {
+        "name": "Street",
+        "filepath": "static/images/backgrounds/Modern-Street1.png"
+    }
+]

@@ -1,0 +1,293 @@
+{
+    "nodes": [
+        {
+            "id": "3",
+            "data": {
+                "scene": "scene2"
+            },
+            "class": "RunSceneNode",
+            "position": [
+                -57,
+                1507
+            ]
+        },
+        {
+            "id": "5",
+            "data": {
+                "text": "Maybe we should write a visual novel!",
+                "character": "Ren"
+            },
+            "class": "TextNode",
+            "position": [
+                415,
+                1158
+            ]
+        },
+        {
+            "id": "6",
+            "data": {
+                "name": "RootScene"
+            },
+            "class": "SceneStartNode",
+            "position": [
+                191,
+                63
+            ]
+        },
+        {
+            "id": "11",
+            "data": {},
+            "class": "SceneEndNode",
+            "position": [
+                -59,
+                1612
+            ]
+        },
+        {
+            "id": "12",
+            "data": {
+                "text": "Ren, what do you want to do today?",
+                "character": "Yutsuki"
+            },
+            "class": "TextNode",
+            "position": [
+                193,
+                769
+            ]
+        },
+        {
+            "id": "02cb9f10-b17c-4566-bdbd-a62696a3ddc9",
+            "data": {
+                "backgroundImage": "static/images/backgrounds/Modern-School1.png"
+            },
+            "class": "BackgroundImageNode",
+            "position": [
+                191,
+                193
+            ]
+        },
+        {
+            "id": "d2b5cddc-391b-4f70-a3c9-fbac071eedd1",
+            "data": {
+                "choice2": "Let's make something",
+                "choice1": "I don't know",
+                "choice3": "Get meta"
+            },
+            "class": "ChoiceNode",
+            "position": [
+                193,
+                973
+            ]
+        },
+        {
+            "id": "ac819544-e217-4983-9471-399edc416c03",
+            "data": {
+                "text": "I don't know, Yutsuki. What do you want to do?",
+                "character": "Ren"
+            },
+            "class": "TextNode",
+            "position": [
+                -61,
+                1155
+            ]
+        },
+        {
+            "id": "e62cfb73-f3e7-44d5-b03a-9ea11f800e45",
+            "data": {
+                "key": "myVariableName",
+                "value": "\"This is a string!\""
+            },
+            "class": "VariableNode",
+            "position": [
+                -57,
+                1354
+            ]
+        },
+        {
+            "id": "4783593f-40be-4319-965d-4532d1a8a32e",
+            "data": {
+                "character": "Yutsuki",
+                "positionX": "0",
+                "positionY": "0"
+            },
+            "class": "CharacterEnterNode",
+            "position": [
+                192,
+                449
+            ]
+        },
+        {
+            "id": "cd6ab4f5-784a-4428-a5c5-0dba7712d436",
+            "data": {
+                "character": "Ren",
+                "positionX": "1000",
+                "positionY": "0"
+            },
+            "class": "CharacterEnterNode",
+            "position": [
+                193,
+                607
+            ]
+        },
+        {
+            "id": "2ee6379d-bafe-4d30-9fcb-9850b28691b2",
+            "data": {
+                "characterId": "narrator",
+                "text": "Are you serious? Only weirdos make visual novels!",
+                "character": "Yutsuki"
+            },
+            "class": "TextNode",
+            "position": [
+                415,
+                1351
+            ]
+        },
+        {
+            "id": "563eb07c-842d-4874-bedf-1ecdb517a5e0",
+            "data": {
+                "positionX": 0,
+                "positionY": 0,
+                "character": "Yutsuki"
+            },
+            "class": "CharacterExitNode",
+            "position": [
+                420,
+                1763
+            ]
+        },
+        {
+            "id": "c7581758-5f48-4fd1-b590-f72a3c8fa203",
+            "data": {
+                "characterId": "narrator",
+                "text": "I'm outta here!",
+                "character": "Yutsuki"
+            },
+            "class": "TextNode",
+            "position": [
+                420,
+                1547
+            ]
+        },
+        {
+            "id": "f8da0e7c-d0fd-4600-aeaa-a2f667dcdf58",
+            "data": {},
+            "class": "SceneEndNode",
+            "position": [
+                422,
+                2344
+            ]
+        },
+        {
+            "id": "7d19d23e-3176-4b82-99bc-fd688dbd95b6",
+            "data": {
+                "characterId": "narrator",
+                "text": "...",
+                "character": "Ren"
+            },
+            "class": "TextNode",
+            "position": [
+                420,
+                1926
+            ]
+        },
+        {
+            "id": "b37f1c96-a677-4603-95ba-d051cec021b6",
+            "data": {
+                "characterId": "narrator",
+                "text": ".:. Bad Ending"
+            },
+            "class": "TextNode",
+            "position": [
+                417,
+                2135
+            ]
+        }
+    ],
+    "connections": [
+        {
+            "source": "12",
+            "output": 0,
+            "target": "d2b5cddc-391b-4f70-a3c9-fbac071eedd1"
+        },
+        {
+            "source": "6",
+            "output": 0,
+            "target": "02cb9f10-b17c-4566-bdbd-a62696a3ddc9"
+        },
+        {
+            "source": "02cb9f10-b17c-4566-bdbd-a62696a3ddc9",
+            "output": 0,
+            "target": "4783593f-40be-4319-965d-4532d1a8a32e"
+        },
+        {
+            "source": "d2b5cddc-391b-4f70-a3c9-fbac071eedd1",
+            "output": 1,
+            "target": "5"
+        },
+        {
+            "source": "d2b5cddc-391b-4f70-a3c9-fbac071eedd1",
+            "output": 0,
+            "target": "ac819544-e217-4983-9471-399edc416c03"
+        },
+        {
+            "source": "d2b5cddc-391b-4f70-a3c9-fbac071eedd1",
+            "output": 2,
+            "target": "5"
+        },
+        {
+            "source": "ac819544-e217-4983-9471-399edc416c03",
+            "output": 0,
+            "target": "e62cfb73-f3e7-44d5-b03a-9ea11f800e45"
+        },
+        {
+            "source": "e62cfb73-f3e7-44d5-b03a-9ea11f800e45",
+            "output": 0,
+            "target": "3"
+        },
+        {
+            "source": "5",
+            "output": 0,
+            "target": "2ee6379d-bafe-4d30-9fcb-9850b28691b2"
+        },
+        {
+            "source": "3",
+            "output": 0,
+            "target": "11"
+        },
+        {
+            "source": "4783593f-40be-4319-965d-4532d1a8a32e",
+            "output": 0,
+            "target": "cd6ab4f5-784a-4428-a5c5-0dba7712d436"
+        },
+        {
+            "source": "cd6ab4f5-784a-4428-a5c5-0dba7712d436",
+            "output": 0,
+            "target": "12"
+        },
+        {
+            "source": "2ee6379d-bafe-4d30-9fcb-9850b28691b2",
+            "output": 0,
+            "target": "c7581758-5f48-4fd1-b590-f72a3c8fa203"
+        },
+        {
+            "source": "c7581758-5f48-4fd1-b590-f72a3c8fa203",
+            "output": 0,
+            "target": "563eb07c-842d-4874-bedf-1ecdb517a5e0"
+        },
+        {
+            "source": "563eb07c-842d-4874-bedf-1ecdb517a5e0",
+            "output": 0,
+            "target": "7d19d23e-3176-4b82-99bc-fd688dbd95b6"
+        },
+        {
+            "source": "7d19d23e-3176-4b82-99bc-fd688dbd95b6",
+            "output": 0,
+            "target": "b37f1c96-a677-4603-95ba-d051cec021b6"
+        },
+        {
+            "source": "b37f1c96-a677-4603-95ba-d051cec021b6",
+            "output": 0,
+            "target": "f8da0e7c-d0fd-4600-aeaa-a2f667dcdf58"
+        }
+    ]
+}

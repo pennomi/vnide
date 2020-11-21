@@ -1,0 +1,6 @@
+{% for tab in project.tabs %}
+	<div class="editorTab {% if tab.active %}active{% endif %}" onclick="editor.switchToTab({{ loop.index0 }})">
+		{{ tab.name }}
+		<button onclick="arguments[0].stopPropagation(); editor.closeTab({{ loop.index0 }})">x</button>
+	</div>
+{% endfor %}

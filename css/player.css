@@ -1,0 +1,139 @@
+/*
+Hardware survey notes:
+
+https://store.steampowered.com/hwsurvey/
+The most common screen size on desktop is 1920x1080 (16:9) with 68% of all screens. It's also a reasonable resolution
+for mobile devices. We'll make this the size of the "safe" zone.
+
+Aspect ratios will vary widely:
+ - iPads start at 4:3. These are very common devices.
+ - Average device is around 16:9, especially on desktop.
+ - Long phones can be up to 2.2:1 (iPhone X) or even 2.332:1 (Galaxy Fold). We'll pick the iPhone X as the upper limit.
+
+This means that in order to fit all possible aspect ratios while maintaining the safe area the image must be at
+least 2376x1440. (1.65:1) Sadly this won't fit in a 2048x1024 texture :(
+
+If we want to go more extreme than that, we'll need to letterbox the game. Possibly add a "Please rotate your screen".
+
+*/
+
+
+@import url('./reset.css');
+
+
+:root {
+    --safe-width: 1920px;
+    --safe-height: 1080px;
+}
+
+.vnide-player {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: flex-end;
+
+    user-select: none;
+
+    font-size: 42px;
+
+    /* This will get overridden during playback */
+    background-color: black;
+    background-image: unset;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    -webkit-user-drag: none;
+}
+
+.vnide-player .safe-area {
+    position: absolute;
+
+    min-width: var(--safe-width);
+    width: var(--safe-width);
+    max-width: var(--safe-width);
+    min-height: var(--safe-height);
+    height: var(--safe-height);
+    max-height: var(--safe-height);
+
+    border: 3px dashed #ffffff44;
+
+    transform-origin: bottom;
+    transform: scale(0.5);
+}
+
+.vnide-player .text-area {
+    position: absolute;
+    width: 100%;
+    height: 25%;
+    z-index: 2;
+    visibility: hidden;
+
+    bottom: 0;
+    padding: 64px 128px;
+
+    background-color: #000000dd;
+    color: white;
+}
+
+.vnide-player .text-area h1 {
+    position: absolute;
+    top: -64px;
+    background-color: white;
+    color: black;
+    padding: 16px 32px;
+    border: 4px solid black;
+}
+
+.vnide-player .character {
+    position: absolute;
+    padding: 0;
+    z-index: 1;
+    width: 800px;
+    bottom: 0;
+}
+
+.vnide-player .character img {
+    position: absolute;
+    bottom: 0;
+    -webkit-user-drag: none;
+}
+
+.vnide-player .choice-area {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 3;
+    visibility: hidden;
+
+    background-color: transparent;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    top: 0;
+    left: 0;
+    padding: 64px 128px;
+
+}
+
+.vnide-player .choice-area button {
+    padding: 32px 64px;
+    background-color: white;
+    color: black;
+    border: 4px solid black;
+    margin: 16px;
+    width: 600px;
+
+    font-size: 36px;
+}
+
+.vnide-player .choice-area button:hover {
+    background-color: #dddddd;
+}

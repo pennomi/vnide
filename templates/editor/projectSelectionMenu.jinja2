@@ -1,0 +1,12 @@
+<h1>Projects</h1>
+<div class="grid">
+	{% for project in projects %}
+	<div class="vnideProjectTile" onclick="editor.loadProject('{{project.id}}')">
+		<h2>{{project.fileHandle.name}}</h2>
+		<p>{{project.lastLoaded.toLocaleDateString()}}</p>
+		<p>{{project.lastLoaded.toLocaleTimeString()}}</p>
+		<button onclick="arguments[0].stopPropagation(); editor.unlinkProject('{{project.id}}');">x</button>
+	</div>
+	{% endfor %}
+	<div class="vnideProjectTile" onclick="editor.createNewProject()">Create New +</div>
+</div>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Game Test</title>
+	<link rel="stylesheet" href="css/player.css" />
+	<style>
+		html, body, #player { overflow: hidden; position: absolute; width: 100vw; height: 100vh;}
+	</style>
+	<meta name='viewport'
+     content='width=device-width, initial-scale=1.0, maximum-scale=1.0,
+     user-scalable=0' >
+</head>
+<body>
+<div id="player"></div>
+<button onclick="window.loadFileSystem();" style="position:absolute; z-index: 1000;">Load FileSystem</button>
+
+<script type="module">
+import {VnideProject} from "./jsm/vnide/project.js";
+import {VnidePlayer} from "./jsm/vnide/player/player.js";
+import {VnideVirtualFileSystem} from "./jsm/vnide/files.js";
+
+
+async function main() {
+	let filesystem = new VnideVirtualFileSystem();
+	console.warn("We failed to load the filesystem");
+	let project = new VnideProject('data/demoProject');
+	await project.load();
+	let player = new VnidePlayer(document.querySelector("#player"), project);
+}
+
+main().then();
+
+</script>
+</body>
+</html>
