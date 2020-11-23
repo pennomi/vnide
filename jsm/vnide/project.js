@@ -47,6 +47,18 @@ class EditorTab {
 		if (data.type === "scene") {
 			let scene = project.getSceneByPath(data.key);
 			tab = new EditorTab(data.type, data.key, scene.name, scene);
+		} else if (data.type === "character") {
+			let character = project.getCharacterByName(data.key);
+			tab = new EditorTab(data.type, data.key, character.name, character);
+		} else if (data.type === "background") {
+			let bg = project.getBackgroundByPath(data.key);
+			tab = new EditorTab(data.type, data.key, bg.name, bg);
+		} else if (data.type === "music") {
+			let music = project.getMusicByPath(data.key);
+			tab = new EditorTab(data.type, data.key, music.name, music);
+		} else if (data.type === "sound") {
+			let sound = project.getSoundByPath(data.key);
+			tab = new EditorTab(data.type, data.key, sound.name, sound);
 		} else {
 			throw Error("Failed to open the asset for editing: " + data.type + " - " + data.key);
 		}
@@ -72,6 +84,8 @@ export class VnideProject {
 		this.tabs = [];
 	}
 
+
+	/* Loading and saving */
 	async load() {
 		// First load the objects themselves
 		await Promise.all([
@@ -170,6 +184,12 @@ export class VnideProject {
 		}
 	}
 
+	// Create new assets
+	createNewAsset(type, key) {
+		console.error("We need to create: " + type + " " + key);
+	}
+
+
 	// Tab Management
 	openTab(type, key) {
 		// Don't duplicate an open tab, instead switch to it.
@@ -219,6 +239,33 @@ export class VnideProject {
 			}
 		}
 		throw Error(`Scene "${filepath}" not found.`);
+	}
+
+	getBackgroundByPath(filepath) {
+		for (let _ of this.backgrounds) {
+			if (_.filepath === filepath) {
+				return _;
+			}
+		}
+		throw Error(`Background "${filepath}" not found.`);
+	}
+
+	getMusicByPath(filepath) {
+		for (let _ of this.music) {
+			if (_.filepath === filepath) {
+				return _;
+			}
+		}
+		throw Error(`Music "${filepath}" not found.`);
+	}
+
+	getSoundByPath(filepath) {
+		for (let _ of this.sound) {
+			if (_.filepath === filepath) {
+				return _;
+			}
+		}
+		throw Error(`Sound "${filepath}" not found.`);
 	}
 
 	getSceneForNode(node) {

@@ -61,6 +61,12 @@ input, textarea, select {
 }
 
 
+/* Set global dialog style */
+dialog::backdrop {
+  background: #00000088;
+  backdrop-filter: blur(3px);
+}
+
 /* Utility classes */
 .row {
 	display: flex;

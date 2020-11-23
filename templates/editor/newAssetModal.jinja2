@@ -1,0 +1,10 @@
+<dialog id="newAssetModal">
+	<button onclick="this.parentElement.close()">x</button>
+	<h1>Create new {{ type }}...</h1>
+	<form method="dialog">
+	<label>
+		Name <input type="text" required pattern="[a-zA-Z\d -_]{1,100}"/>
+	</label>
+	<button value="create">Create</button>
+	</form>
+</dialog>

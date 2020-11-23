@@ -1,4 +1,10 @@
-import {convertPointFromPageToNode, renderElementContents, uuidv4, Vector2} from "../utils.js";
+import {
+	convertPointFromPageToNode,
+	createElementFromTemplate,
+	renderElementContents,
+	uuidv4,
+	Vector2
+} from "../utils.js";
 import {VnideSocket} from "../nodes/node.js";
 import {VnidePlayer} from "../player/player.js";
 import {VnideProject} from "../project.js";
@@ -135,6 +141,38 @@ export class VnideEditor {
 	async unlinkProject(projectId) {
 		await this.filesystem.unlinkProject(projectId);
 		await this.presentProjectSelector();  // Re-renders the file list
+	}
+
+	async startEditingNew(type) {
+		let key = await this.openNewAssetModal(type);
+		if (key === "") {
+			return;
+		}
+
+		this.project.createNewAsset(type, key);
+		this.project.openTab(type, key);
+		renderElementContents("#editorTabs", "editor/tabMenu.jinja2", {project: this.project});
+	}
+
+	async openNewAssetModal(type) {
+		// Create and show the dialog
+		let dialog = createElementFromTemplate("editor/newAssetModal.jinja2", {type: type})
+		document.querySelector("body").appendChild(dialog);
+		dialog.showModal();
+
+		// Wait for the modal to close asynchronously
+		let key = await new Promise((resolve, reject) => {
+			dialog.addEventListener('close', (e) => {
+				if (document.activeElement.value === "create") {
+					resolve(dialog.querySelector("input").value);
+				}
+				resolve("");
+			});
+		});
+
+		// Cleanup and return
+		dialog.remove();
+		return key;
 	}
 
 	startEditing(type, key) {
