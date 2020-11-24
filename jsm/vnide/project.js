@@ -184,6 +184,7 @@ export class VnideProject {
 		}
 	}
 
+
 	// Create new assets
 	createNewAsset(type, key) {
 		if (type === "character") {
@@ -299,5 +300,14 @@ export class VnideProject {
 			}
 		}
 		throw Error(`Scene for node "${node.id}" not found.`);
+	}
+
+	getActiveTab() {
+		for (let tab of this.tabs) {
+			if (tab.active) {
+				return tab;
+			}
+		}
+		throw Error(`No active tab.`);
 	}
 }

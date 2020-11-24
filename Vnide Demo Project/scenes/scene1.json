@@ -52,8 +52,8 @@
             },
             "class": "TextNode",
             "position": [
-                193,
-                769
+                301,
+                765
             ]
         },
         {
@@ -71,13 +71,13 @@
             "id": "d2b5cddc-391b-4f70-a3c9-fbac071eedd1",
             "data": {
                 "choice2": "Let's make something",
-                "choice1": "I don't know",
+                "choice1": "I don't knoo",
                 "choice3": "Get meta"
             },
             "class": "ChoiceNode",
             "position": [
-                193,
-                973
+                235,
+                983
             ]
         },
         {
@@ -88,8 +88,8 @@
             },
             "class": "TextNode",
             "position": [
-                -61,
-                1155
+                -108,
+                1095
             ]
         },
         {

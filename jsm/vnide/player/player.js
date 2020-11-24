@@ -19,7 +19,7 @@ const PLAYER_TEMPLATE = `
 export class VnidePlayer {
 	activeCharacters = {};
 
-	constructor(container, project) {
+	constructor(container, project, scene) {
 		this.container = container;
 		this.recreatePlayerElement();
 
@@ -41,7 +41,8 @@ export class VnidePlayer {
 
 		// Initialize the project
 		this.project = project;
-		this.scene = this.project.scenes[0];  // For now, the first scene is always the starting scene.
+		this.scene = scene;
+
 
 		this.advance().then();
 	}

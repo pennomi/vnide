@@ -1,3 +1,14 @@
 {
-    "tabs": []
+    "tabs": [
+        {
+            "type": "scene",
+            "key": "84c0eb09-163e-4587-a980-0408ebee93a9",
+            "active": true
+        },
+        {
+            "type": "scene",
+            "key": "5fbfd64a-72a1-445e-aa75-9558f641dd4d",
+            "active": false
+        }
+    ]
 }
