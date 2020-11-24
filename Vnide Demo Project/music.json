@@ -1,49 +1,61 @@
 [
     {
+        "id": "9e35af7b-c072-4390-9672-d605a262fc3e",
         "name": "Stepping Pebbles (Full)",
         "filepath": "static/music/FullSteppingPebbles.wav"
     },
     {
+        "id": "0e8b7319-360b-4c94-be83-2a31134b112e",
         "name": "Stepping Pebbles (Full, No Drums)",
         "filepath": "static/music/FullSteppingPebblesNoDrums.wav"
     },
     {
+        "id": "f09f1054-2e0e-41eb-bad2-085fb4ba4f06",
         "name": "Stepping Stones (Full)",
         "filepath": "static/music/FullSteppingStones.wav"
     },
     {
+        "id": "c68d3fd8-2b8a-4616-8fb3-cb5550a01d55",
         "name": "Stepping Stones (Full, No Drums)",
         "filepath": "static/music/FullSteppingStonesNoDrums.wav"
     },
     {
+        "id": "3a3836d0-f355-455c-ae81-0e4d3d6cd29f",
         "name": "StepPebble 1",
         "filepath": "static/music/LoopStepPebble1.wav"
     },
     {
+        "id": "6b8b6bce-af10-44ba-8dcb-c3e549ef8dc7",
         "name": "StepPebble 2",
         "filepath": "static/music/LoopStepPebble2.wav"
     },
     {
+        "id": "a4b76bed-fa31-4263-9ff0-cce3da3dc5f6",
         "name": "StepPebble 3A",
         "filepath": "static/music/LoopStepPebble3A.wav"
     },
     {
+        "id": "7f003dee-bc26-43a7-9c78-df692ddaaa86",
         "name": "StepPebble 3B",
         "filepath": "static/music/LoopStepPebble3B.wav"
     },
     {
+        "id": "65c6f53e-93c9-477a-8106-14cbe4ddedc7",
         "name": "StepPebble 3C",
         "filepath": "static/music/LoopStepPebble3C.wav"
     },
     {
+        "id": "90e256a7-67ef-464c-b94a-4956d75b108e",
         "name": "StepPebble 1 (No Drums)",
         "filepath": "static/music/LoopStepPebbleNoDrums1.wav"
     },
     {
+        "id": "fc8f05f5-4b1c-4fec-81b1-8f33229b4e70",
         "name": "StepPebble 2 (No Drums)",
         "filepath": "static/music/LoopStepPebbleNoDrums2.wav"
     },
     {
+        "id": "50827a1d-0216-4af3-90e2-b4fbe2ca0282",
         "name": "StepPebble 3 (No Drums)",
         "filepath": "static/music/LoopStepPebbleNoDrums3.wav"
     }

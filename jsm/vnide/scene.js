@@ -9,7 +9,7 @@ export class Scene {
 		this.nodes = [];
 		this.connections = [];
 		this.path = [];
-		this.filename = null;
+		this.filepath = null;
 		this.name = "";
 	}
 
@@ -31,12 +31,16 @@ export class Scene {
 		return scene;
 	}
 
-	static createNew() {
+	static createNew(name, project) {
 		let scene = new Scene();
+		scene.name = name;
+		scene.filepath = `scenes/${name}.json`;
 
 		// Every graph needs a singular start node
-		let startNode = new SceneStartNode("start", new Vector2(0, 0));
+		let startNode = new SceneStartNode(project, "start", new Vector2(0, 0));
 		scene.addNode(startNode);
+
+		return scene;
 	}
 
 	addNode(node) {

@@ -1,21 +1,26 @@
 [
     {
+        "id": "6377ff14-2bf5-405f-8e09-09620e0527bb",
         "name": "Dormroom - Day",
         "filepath": "static/images/backgrounds/Modern-Dormroom1.png"
     },
     {
+        "id": "1a2bbf56-c191-4139-80b1-9cee44ed1ac8",
         "name": "Dormroom - Night with Light",
         "filepath": "static/images/backgrounds/Modern-Dormroom2.png"
     },
     {
+        "id": "292b79aa-442d-4214-8c5f-7cfe14de2a60",
         "name": "Dormroom - Night",
         "filepath": "static/images/backgrounds/Modern-Dormroom3.png"
     },
     {
+        "id": "dbade930-0a55-423c-a4d8-e211a97b1a75",
         "name": "School",
         "filepath": "static/images/backgrounds/Modern-School1.png"
     },
     {
+        "id": "a30a807b-955c-446c-9a83-25dd3e47d33d",
         "name": "Street",
         "filepath": "static/images/backgrounds/Modern-Street1.png"
     }

@@ -8,6 +8,11 @@
         {
             "type": "scene",
             "key": "scenes/scene1.json",
+            "active": false
+        },
+        {
+            "type": "character",
+            "key": "adsf",
             "active": true
         }
     ]

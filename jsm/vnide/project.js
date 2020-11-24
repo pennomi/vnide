@@ -1,4 +1,4 @@
-import {VnideImage, VnideSound} from "./media/media.js";
+import {VnideMedia} from "./media/media.js";
 import {Character} from "./media/characters.js";
 import {Scene} from "./scene.js";
 
@@ -108,7 +108,7 @@ export class VnideProject {
 
 	async loadBackgrounds() {
 		let backgrounds = await this.filesystem.readFileJson('backgrounds.json');
-		this.backgrounds.push(...backgrounds.map(_=>VnideImage.deserialize(_)));
+		this.backgrounds.push(...backgrounds.map(_=>VnideMedia.deserialize(_)));
 		await Promise.all(this.backgrounds.map(async _=>await _.load(this.filesystem)));
 	}
 
@@ -120,13 +120,13 @@ export class VnideProject {
 
 	async loadSounds() {
 		let sounds = await this.filesystem.readFileJson("sounds.json");
-		this.sounds.push(...sounds.map(_=>VnideSound.deserialize(_)));
+		this.sounds.push(...sounds.map(_=>VnideMedia.deserialize(_)));
 		await Promise.all(this.sounds.map(async _=>await _.load(this.filesystem)));
 	}
 
 	async loadMusic() {
 		let music = await this.filesystem.readFileJson("music.json");
-		this.music.push(...music.map(_=>VnideSound.deserialize(_)));
+		this.music.push(...music.map(_=>VnideMedia.deserialize(_)));
 		await Promise.all(this.music.map(async _=>await _.load(this.filesystem)));
 	}
 
@@ -186,7 +186,31 @@ export class VnideProject {
 
 	// Create new assets
 	createNewAsset(type, key) {
-		console.error("We need to create: " + type + " " + key);
+		if (type === "character") {
+			let newCharacter = new Character(key);
+			this.characters.push(newCharacter);
+			key = newCharacter.id;
+		} else if (type === "scene") {
+			let newScene = Scene.createNew(key, this);
+			this.scenes.push(newScene);
+			key = newScene.id;
+		} else if (type === "background") {
+			let _ = new VnideMedia(key);
+			this.backgrounds.push(_);
+			key = _.id;
+		} else if (type === "music") {
+			let _ = new VnideMedia(key);
+			this.music.push(_);
+			key = _.id;
+		} else if (type === "sound") {
+			let _ = new VnideMedia(key);
+			this.sounds.push(_);
+			key = _.id;
+		} else {
+			throw Error("Cannot create asset of type: " + type);
+		}
+
+		return key;
 	}
 
 

@@ -1,5 +1,8 @@
-export class VnideImage {
-	constructor (name, filepath) {
+import {uuidv4} from "../utils.js";
+
+export class VnideMedia {
+	constructor (name, filepath, id=undefined) {
+		this.id = id || uuidv4();
 		this.name = name;
 		this.filepath = filepath;
 		this.url = null;
@@ -7,37 +10,14 @@ export class VnideImage {
 
 	serialize() {
 		return {
+			id: this.id,
 			name: this.name,
 			filepath: this.filepath,
 		}
 	}
 
 	static deserialize(data) {
-		return new VnideImage(data.name, data.filepath);
-	}
-
-	async load(filesystem) {
-		this.url = await filesystem.getFileImageUrl(this.filepath);
-	}
-}
-
-
-export class VnideSound {
-	constructor (name, filepath) {
-		this.name = name;
-		this.filepath = filepath;
-		this.url = null;
-	}
-
-	serialize() {
-		return {
-			name: this.name,
-			filepath: this.filepath,
-		}
-	}
-
-	static deserialize(data) {
-		return new VnideSound(data.name, data.filepath);
+		return new VnideMedia(data.name, data.filepath, data.id);
 	}
 
 	async load(filesystem) {

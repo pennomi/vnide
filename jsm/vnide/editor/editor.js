@@ -149,8 +149,9 @@ export class VnideEditor {
 			return;
 		}
 
-		this.project.createNewAsset(type, key);
-		this.project.openTab(type, key);
+		let newKey = this.project.createNewAsset(type, key);
+		this.project.openTab(type, newKey);
+		renderElementContents("#assetBrowserWindow", "editor/assetBrowser.jinja2", {project: this.project});
 		renderElementContents("#editorTabs", "editor/tabMenu.jinja2", {project: this.project});
 	}
 
@@ -163,7 +164,7 @@ export class VnideEditor {
 		// Wait for the modal to close asynchronously
 		let key = await new Promise((resolve, reject) => {
 			dialog.addEventListener('close', (e) => {
-				if (document.activeElement.value === "create") {
+				if (document.activeElement.value !== "cancel") {
 					resolve(dialog.querySelector("input").value);
 				}
 				resolve("");

@@ -1,20 +1,29 @@
 [
     {
+        "id": "5e0d90d0-2878-42a7-aeb4-3d4f83a1f14e",
         "name": "Ren",
         "images": [
             {
+                "id": "3f38e97b-036c-427f-9f39-14d7f0fa5ea8",
                 "name": "Happy",
                 "filepath": "static/images/characters/boy.png"
             }
         ]
     },
     {
+        "id": "4040a288-1142-49ce-81e5-57dd1294e5e3",
         "name": "Yutsuki",
         "images": [
             {
+                "id": "fca1d29e-1a41-4219-95ee-ed76053a0f2c",
                 "name": "Happy",
                 "filepath": "static/images/characters/girl.png"
             }
         ]
+    },
+    {
+        "id": "2ed9fc72-2cbf-424c-b0a0-bd7081cb6d33",
+        "name": "adsf",
+        "images": []
     }
 ]
