@@ -62,8 +62,8 @@ export class SceneEditor {
 
 	removeAllListeners() {
 		document.removeEventListener('mousemove', this.positionListener);
-		document.removeEventListener('mousemove', this.mouseupListener);
-		document.removeEventListener('mousemove', this.contextListener);
+		document.removeEventListener('mouseup', this.mouseupListener);
+		document.removeEventListener('contextmenu', this.contextListener);
 	}
 
 	dropExternalStuff(ev) {
