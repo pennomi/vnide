@@ -2,7 +2,14 @@
 	<div id="mediaEditor">
 		<div class="linkedFileEditor">
 			<p>{{ media.name }}</p>
+			{% if type == "image" %}
 			<img src="{{ media.url }}" alt="Media Image"/>
+			{% endif %}
+			{% if type == "audio" %}
+				<audio controls>
+					<source src="{{ media.url }}">
+				</audio>
+			{% endif %}
 		</div>
 	</div>
 </div>

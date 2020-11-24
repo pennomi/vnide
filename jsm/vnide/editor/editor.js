@@ -128,7 +128,13 @@ export class VnideEditor {
 			renderElementContents("#contentWindow", "editor/editorWindows/characterEditor.jinja2", {character: character});
 		} else if (type === 'background') {
 			let background = this.project.getBackgroundById(key);
-			renderElementContents("#contentWindow", "editor/editorWindows/mediaEditor.jinja2", {media: background});
+			renderElementContents("#contentWindow", "editor/editorWindows/mediaEditor.jinja2", {media: background, type: "image"});
+		} else if (type === 'music') {
+			let music = this.project.getMusicById(key);
+			renderElementContents("#contentWindow", "editor/editorWindows/mediaEditor.jinja2", {media: music, type: "audio"});
+		} else if (type === 'sound') {
+			let sound = this.project.getSoundById(key);
+			renderElementContents("#contentWindow", "editor/editorWindows/mediaEditor.jinja2", {media: sound, type: "audio"});
 		} else {
 			throw Error("Unknown type of editor: " + type)
 		}
@@ -146,8 +152,13 @@ export class VnideEditor {
 	closeTab(index) {
 		let tab = this.project.tabs[index];
 		this.project.closeTab(tab);
-		let newTab = this.project.getActiveTab();
-		this.startEditing(newTab.type, newTab.key)
+		if (this.project.tabs.length > 0) {
+			let newTab = this.project.getActiveTab();
+			this.startEditing(newTab.type, newTab.key)
+		} else {
+			renderElementContents("#editorTabs", "editor/tabMenu.jinja2", {project: this.project});
+			renderElementContents("#contentWindow", "editor/editorWindows/noEditor.jinja2", {project: this.project});
+		}
 	}
 
 }

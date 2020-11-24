@@ -506,6 +506,7 @@ header {
 	flex-direction: row;
 	justify-content: space-between;
 	width: 512px;
+	padding: 16px;
 	border: 1px solid var(--editorBorderColor);
 }
 
