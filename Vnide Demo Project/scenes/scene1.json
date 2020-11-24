@@ -1,4 +1,5 @@
 {
+    "id": "5fbfd64a-72a1-445e-aa75-9558f641dd4d",
     "nodes": [
         {
             "id": "3",
@@ -15,7 +16,7 @@
             "id": "5",
             "data": {
                 "text": "Maybe we should write a visual novel!",
-                "character": "Ren"
+                "character": "5e0d90d0-2878-42a7-aeb4-3d4f83a1f14e"
             },
             "class": "TextNode",
             "position": [
@@ -47,7 +48,7 @@
             "id": "12",
             "data": {
                 "text": "Ren, what do you want to do today?",
-                "character": "Yutsuki"
+                "character": "4040a288-1142-49ce-81e5-57dd1294e5e3"
             },
             "class": "TextNode",
             "position": [
@@ -83,7 +84,7 @@
             "id": "ac819544-e217-4983-9471-399edc416c03",
             "data": {
                 "text": "I don't know, Yutsuki. What do you want to do?",
-                "character": "Ren"
+                "character": "5e0d90d0-2878-42a7-aeb4-3d4f83a1f14e"
             },
             "class": "TextNode",
             "position": [
@@ -106,7 +107,7 @@
         {
             "id": "4783593f-40be-4319-965d-4532d1a8a32e",
             "data": {
-                "character": "Yutsuki",
+                "character": "4040a288-1142-49ce-81e5-57dd1294e5e3",
                 "positionX": "0",
                 "positionY": "0"
             },
@@ -119,7 +120,7 @@
         {
             "id": "cd6ab4f5-784a-4428-a5c5-0dba7712d436",
             "data": {
-                "character": "Ren",
+                "character": "5e0d90d0-2878-42a7-aeb4-3d4f83a1f14e",
                 "positionX": "1000",
                 "positionY": "0"
             },
@@ -134,7 +135,7 @@
             "data": {
                 "characterId": "narrator",
                 "text": "Are you serious? Only weirdos make visual novels!",
-                "character": "Yutsuki"
+                "character": "4040a288-1142-49ce-81e5-57dd1294e5e3"
             },
             "class": "TextNode",
             "position": [
@@ -147,7 +148,7 @@
             "data": {
                 "positionX": 0,
                 "positionY": 0,
-                "character": "Yutsuki"
+                "character": "4040a288-1142-49ce-81e5-57dd1294e5e3"
             },
             "class": "CharacterExitNode",
             "position": [
@@ -160,7 +161,7 @@
             "data": {
                 "characterId": "narrator",
                 "text": "I'm outta here!",
-                "character": "Yutsuki"
+                "character": "4040a288-1142-49ce-81e5-57dd1294e5e3"
             },
             "class": "TextNode",
             "position": [
@@ -182,7 +183,7 @@
             "data": {
                 "characterId": "narrator",
                 "text": "...",
-                "character": "Ren"
+                "character": "5e0d90d0-2878-42a7-aeb4-3d4f83a1f14e"
             },
             "class": "TextNode",
             "position": [

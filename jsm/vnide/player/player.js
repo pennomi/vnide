@@ -123,11 +123,11 @@ export class VnidePlayer {
 			let url = await this.project.filesystem.getFileImageUrl(node.data.backgroundImage);
 			this.element.style.backgroundImage = `url(${url}`;
 		} else if (node.constructor === CharacterEnterNode) {
-			let character = this.project.getCharacterByName(node.data.character);
+			let character = this.project.getCharacterById(node.data.character);
 			this.activeCharacters[character.name] = new CharacterElement(character, new Vector2(node.data.positionX, node.data.positionY), this.project);
 			this.safeAreaElement.appendChild(this.activeCharacters[character.name].element);
 		} else if (node.constructor === CharacterExitNode) {
-			let character = this.project.getCharacterByName(node.data.character);
+			let character = this.project.getCharacterById(node.data.character);
 			let toDelete = this.activeCharacters[character.name];
 			toDelete.element.remove();
 		} else if (node.constructor === TextNode) {

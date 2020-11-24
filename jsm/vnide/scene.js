@@ -1,11 +1,12 @@
 import {SceneStartNode} from "./nodes/nodeTypes/sceneNodes.js";
-import {Vector2} from "./utils.js";
+import {uuidv4, Vector2} from "./utils.js";
 import {VnideConnection} from "./nodes/connection.js";
 import {VnideNode} from "./nodes/node.js";
 
 
 export class Scene {
-	constructor() {
+	constructor(id) {
+		this.id = id || uuidv4();
 		this.nodes = [];
 		this.connections = [];
 		this.path = [];
@@ -15,6 +16,7 @@ export class Scene {
 
 	serialize() {
 		let data = {
+			id: this.id,
 			nodes: this.nodes.map(n=>n.serialize()),
 			connections: this.connections.map(c=>c.serialize()),
 		};
@@ -23,7 +25,7 @@ export class Scene {
 	}
 
 	static deserialize(data, project, filepath) {
-		let scene = new Scene();
+		let scene = new Scene(data.id);
 		scene.filepath = filepath;
 		scene.name = data.name || "Untitled Scene";
 		scene.nodes = data.nodes.map(_ => VnideNode.deserialize(_, project));

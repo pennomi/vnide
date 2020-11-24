@@ -52,13 +52,13 @@ export class CharacterEnterNode extends VnideNode {
 
 		let html = '';
 		for (let character of project.characters) {
-			html += `<option value="${character.name}">${character.name}</option>`
+			html += `<option value="${character.id}">${character.name}</option>`
 		}
 		selectElement.innerHTML = html;
 
 		await super.updateData();
 
-		let selectedCharacter = project.getCharacterByName(selectElement.value);
+		let selectedCharacter = project.getCharacterById(selectElement.value);
 		let img = this.element.querySelector('img');
 		img.src = await project.filesystem.getFileImageUrl(selectedCharacter.images[0].filepath);
 	}

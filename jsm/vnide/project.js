@@ -45,19 +45,19 @@ class EditorTab {
 	static deserialize(data, project) {
 		let tab = null;
 		if (data.type === "scene") {
-			let scene = project.getSceneByPath(data.key);
+			let scene = project.getSceneById(data.key);
 			tab = new EditorTab(data.type, data.key, scene.name, scene);
 		} else if (data.type === "character") {
-			let character = project.getCharacterByName(data.key);
+			let character = project.getCharacterById(data.key);
 			tab = new EditorTab(data.type, data.key, character.name, character);
 		} else if (data.type === "background") {
-			let bg = project.getBackgroundByPath(data.key);
+			let bg = project.getBackgroundById(data.key);
 			tab = new EditorTab(data.type, data.key, bg.name, bg);
 		} else if (data.type === "music") {
-			let music = project.getMusicByPath(data.key);
+			let music = project.getMusicById(data.key);
 			tab = new EditorTab(data.type, data.key, music.name, music);
 		} else if (data.type === "sound") {
-			let sound = project.getSoundByPath(data.key);
+			let sound = project.getSoundById(data.key);
 			tab = new EditorTab(data.type, data.key, sound.name, sound);
 		} else {
 			throw Error("Failed to open the asset for editing: " + data.type + " - " + data.key);
@@ -247,49 +247,49 @@ export class VnideProject {
 	}
 
 	// Convenient getters
-	getCharacterByName(name) {
+	getCharacterById(id) {
 		for (let character of this.characters) {
-			if (character.name === name) {
+			if (character.id === id) {
 				return character;
 			}
 		}
-		throw Error(`Character "${name}" not found.`);
+		throw Error(`Character "${id}" not found.`);
 	}
 
-	getSceneByPath(filepath) {
+	getSceneById(id) {
 		for (let scene of this.scenes) {
-			if (scene.filepath === filepath) {
+			if (scene.id === id) {
 				return scene;
 			}
 		}
-		throw Error(`Scene "${filepath}" not found.`);
+		throw Error(`Scene "${id}" not found.`);
 	}
 
-	getBackgroundByPath(filepath) {
+	getBackgroundById(id) {
 		for (let _ of this.backgrounds) {
-			if (_.filepath === filepath) {
+			if (_.id === id) {
 				return _;
 			}
 		}
-		throw Error(`Background "${filepath}" not found.`);
+		throw Error(`Background "${id}" not found.`);
 	}
 
-	getMusicByPath(filepath) {
+	getMusicById(id) {
 		for (let _ of this.music) {
-			if (_.filepath === filepath) {
+			if (_.id === id) {
 				return _;
 			}
 		}
-		throw Error(`Music "${filepath}" not found.`);
+		throw Error(`Music "${id}" not found.`);
 	}
 
-	getSoundByPath(filepath) {
-		for (let _ of this.sound) {
-			if (_.filepath === filepath) {
+	getSoundById(id) {
+		for (let _ of this.sounds) {
+			if (_.id === id) {
 				return _;
 			}
 		}
-		throw Error(`Sound "${filepath}" not found.`);
+		throw Error(`Sound "${id}" not found.`);
 	}
 
 	getSceneForNode(node) {

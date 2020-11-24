@@ -1,4 +1,5 @@
 {
+    "id": "84c0eb09-163e-4587-a980-0408ebee93a9",
     "nodes": [
         {
             "id": "3f811bc0-6757-4501-9d3e-50dcfd6e5900",
@@ -28,7 +29,7 @@
             "data": {
                 "positionX": 0,
                 "positionY": 0,
-                "character": "Ren"
+                "character": "5e0d90d0-2878-42a7-aeb4-3d4f83a1f14e"
             },
             "class": "CharacterEnterNode",
             "position": [
@@ -41,7 +42,7 @@
             "data": {
                 "positionX": 0,
                 "positionY": 0,
-                "character": "Yutsuki"
+                "character": "4040a288-1142-49ce-81e5-57dd1294e5e3"
             },
             "class": "CharacterEnterNode",
             "position": [
@@ -100,7 +101,7 @@
             "data": {
                 "characterId": "narrator",
                 "text": "Someone was picked. Blah blah.",
-                "character": "Ren"
+                "character": "5e0d90d0-2878-42a7-aeb4-3d4f83a1f14e"
             },
             "class": "TextNode",
             "position": [

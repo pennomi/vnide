@@ -1,6 +1,6 @@
 <h2>Scenes ({{ project.scenes.length }})</h2>
 {% for scene in project.scenes %}
-<div class="file" ondblclick="editor.startEditing('scene', '{{ scene.filepath }}')">
+<div class="file" ondblclick="editor.startEditing('scene', '{{ scene.id }}')">
 	<img src="./images/ScenePlaceholderIcon.svg" alt="file preview">
 	<span>{{ scene.name }}</span>
 </div>
@@ -12,7 +12,7 @@
 
 <h2>Characters ({{ project.characters.length }})</h2>
 {% for character in project.characters %}
-<div class="file" ondblclick="editor.startEditing('character', '{{ character.name }}')">
+<div class="file" ondblclick="editor.startEditing('character', '{{ character.id }}')">
 	<img src="{{ character.images[0].url }}" alt="file preview">
 	<span>{{ character.name }}</span>
 </div>
@@ -24,7 +24,7 @@
 
 <h2>Backgrounds ({{ project.backgrounds.length }})</h2>
 {% for bg in project.backgrounds %}
-<div class="file" ondblclick="editor.startEditing('background', '{{ bg.filepath }}')">
+<div class="file" ondblclick="editor.startEditing('background', '{{ bg.id }}')">
 	<img src="{{ bg.url }}" alt="file preview">
 	<span>{{ bg.name }}</span>
 </div>
@@ -36,7 +36,7 @@
 
 <h2>Music ({{ project.music.length }})</h2>
 {% for music in project.music %}
-<div class="file" ondblclick="editor.startEditing('music', '{{ music.filepath }}')">
+<div class="file" ondblclick="editor.startEditing('music', '{{ music.id }}')">
 	<img src="./images/MusicPlaceholderIcon.svg" alt="file preview">
 	<span>{{ music.name }}</span>
 </div>
@@ -48,7 +48,7 @@
 
 <h2>Sounds ({{ project.sounds.length }})</h2>
 {% for sound in project.sounds %}
-<div class="file" ondblclick="editor.startEditing('sound', '{{ sound.filepath }}')">
+<div class="file" ondblclick="editor.startEditing('sound', '{{ sound.id }}')">
 	<img src="./images/SoundPlaceholderIcon.svg" alt="file preview">
 	<span>{{ sound.name }}</span>
 </div>
