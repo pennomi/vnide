@@ -4,6 +4,7 @@ import {VnideSocket} from "../nodes/node.js";
 
 export class SceneEditor {
 	constructor(project, scene) {
+		this.project = project;
 		this.scene = scene;
 
 		// Drag state
@@ -32,22 +33,17 @@ export class SceneEditor {
 		this.editorPanel.addEventListener("drop", this.dropExternalStuff.bind(this));
 		this.editorPanel.addEventListener("dragover", (e) => { e.preventDefault(); });
 		this.editorPanel.addEventListener('mousedown', this.handleMouseDown.bind(this));
-		document.addEventListener('mousemove', this.position.bind(this));
-		document.addEventListener('mouseup', this.dragEnd.bind(this));
-		document.addEventListener('contextmenu', this.contextmenu.bind(this));
-		document.addEventListener('keydown', this.handleKeypress.bind(this));
-		// Handle scroll wheel zoom
 		this.editorPanel.addEventListener('wheel', (e) => {
 			e.preventDefault();
 			e.deltaY > 0 ? this.zoomOut(e) : this.zoomIn(e);
 		});
-		// Handle Ctrl-S shortcut
-		document.addEventListener("keydown", (e) => {
-			if (e.code === "KeyS" && (e.metaKey || e.ctrlKey)) {
-				e.preventDefault();
-				this.save().then();
-			}
-		}, false);
+
+		this.positionListener = this.position.bind(this);
+		this.mouseupListener = this.dragEnd.bind(this);
+		this.contextListener = this.contextmenu.bind(this);
+		document.addEventListener('mousemove', this.positionListener);
+		document.addEventListener('mouseup', this.mouseupListener);
+		document.addEventListener('contextmenu', this.contextListener);
 
 		// Add the elements for the graph editor
 		for (let node of this.scene.nodes) {
@@ -60,9 +56,14 @@ export class SceneEditor {
 		}
 
 		// Create the player preview container
-		this.player = new VnidePlayer(this.playerContainer, project, this.scene);
+		this.player = new VnidePlayer(this.playerContainer, this.project, this.scene);
 		this.player.frozen = true;
+	}
 
+	removeAllListeners() {
+		document.removeEventListener('mousemove', this.positionListener);
+		document.removeEventListener('mousemove', this.mouseupListener);
+		document.removeEventListener('mousemove', this.contextListener);
 	}
 
 	dropExternalStuff(ev) {
@@ -233,18 +234,6 @@ export class SceneEditor {
 	contextmenuDel() {
 		if (this.sceneContainer.getElementsByClassName("vnide-delete").length) {
 			this.sceneContainer.getElementsByClassName("vnide-delete")[0].remove()
-		}
-	}
-
-	handleKeypress(e) {
-		if (document.activeElement.tagName.toLowerCase() !== "body") {
-			// We must be in an editable field, which means we should suspend this function.
-			return;
-		}
-		if (e.key === 'Delete' || (e.key === 'Backspace' && e.metaKey)) {
-			if (this.selectedNode != null) {
-				this.scene.removeNode(this.selectedNode.jsObject);
-			}
 		}
 	}
 

@@ -1,12 +1,4 @@
-import {
-	convertPointFromPageToNode,
-	createElementFromTemplate,
-	renderElementContents,
-	uuidv4,
-	Vector2
-} from "../utils.js";
-import {VnideSocket} from "../nodes/node.js";
-import {VnidePlayer} from "../player/player.js";
+import {createElementFromTemplate, renderElementContents} from "../utils.js";
 import {VnideProject} from "../project.js";
 import {VnideVirtualFileSystem} from "../files.js";
 import {SceneEditor} from "./sceneEditor.js";
@@ -22,6 +14,14 @@ export class VnideEditor {
 		// References to the currently loaded data elements (what are we editing?)
 		this.filesystem = new VnideVirtualFileSystem();
 		this.project = null;
+
+		// Handle Ctrl-S shortcut
+		document.addEventListener("keydown", (e) => {
+			if (e.code === "KeyS" && (e.metaKey || e.ctrlKey)) {
+				e.preventDefault();
+				this.save().then();
+			}
+		}, false);
 	}
 
 	async presentProjectSelector() {
@@ -119,6 +119,7 @@ export class VnideEditor {
 		let tabTemplate = "editor/sceneEditor.jinja2";
 		renderElementContents("#contentWindow", tabTemplate, {project: this.project});
 		let scene = this.project.getSceneById(key);
+		this.editor?.removeAllListeners();
 		this.editor = new SceneEditor(this.project, scene);
 
 		renderElementContents("#assetBrowserWindow", "editor/assetBrowser.jinja2", {project: this.project});
