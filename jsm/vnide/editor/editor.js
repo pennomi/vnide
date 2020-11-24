@@ -116,11 +116,22 @@ export class VnideEditor {
 	startEditing(type, key) {
 		this.project.openTab(type, key);
 
-		let tabTemplate = "editor/sceneEditor.jinja2";
-		renderElementContents("#contentWindow", tabTemplate, {project: this.project});
-		let scene = this.project.getSceneById(key);
+		// Clean up any old editor
 		this.editor?.removeAllListeners();
-		this.editor = new SceneEditor(this.project, scene);
+
+		if (type === 'scene') {
+			renderElementContents("#contentWindow", "editor/editorWindows/sceneEditor.jinja2", {project: this.project});
+			let scene = this.project.getSceneById(key);
+			this.editor = new SceneEditor(this.project, scene);
+		} else if (type === 'character') {
+			let character = this.project.getCharacterById(key);
+			renderElementContents("#contentWindow", "editor/editorWindows/characterEditor.jinja2", {character: character});
+		} else if (type === 'background') {
+			let background = this.project.getBackgroundById(key);
+			renderElementContents("#contentWindow", "editor/editorWindows/mediaEditor.jinja2", {media: background});
+		} else {
+			throw Error("Unknown type of editor: " + type)
+		}
 
 		renderElementContents("#assetBrowserWindow", "editor/assetBrowser.jinja2", {project: this.project});
 		renderElementContents("#editorTabs", "editor/tabMenu.jinja2", {project: this.project});

@@ -9,6 +9,16 @@
             "type": "scene",
             "key": "5fbfd64a-72a1-445e-aa75-9558f641dd4d",
             "active": true
+        },
+        {
+            "type": "character",
+            "key": "5e0d90d0-2878-42a7-aeb4-3d4f83a1f14e",
+            "active": false
+        },
+        {
+            "type": "background",
+            "key": "1a2bbf56-c191-4139-80b1-9cee44ed1ac8",
+            "active": false
         }
     ]
 }

@@ -1,0 +1,10 @@
+<div id="standardEditor">
+	<h1>{{ character.name }}</h1>
+
+	{% for img in character.images %}
+		<div class="linkedFileEditor">
+			<p>{{ img.name }}</p>
+			<img src="{{ img.url }}" alt="Character Portrait"/>
+		</div>
+	{% endfor %}
+</div>

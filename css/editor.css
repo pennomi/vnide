@@ -45,6 +45,10 @@ input, textarea, select {
 	padding: 4px;
 }
 
+h1 {
+	font-size: 32px;
+	margin-bottom: 8px;
+}
 
 /* Globally override scrollbar, if possible */
 ::-webkit-scrollbar {
@@ -237,6 +241,7 @@ header {
 	margin-right: 8px;
 	background-color: white;
 	border: 1px solid var(--editorBorderColor);
+	object-fit: cover;
 }
 
 #contentWindow {
@@ -491,35 +496,23 @@ header {
 }
 
 
-/* Modal */
-.modal {
-	display: none;
-	position: fixed;
-	z-index: 7;
-	left: 0;
-	top: 0;
-	width: 100vw;
-	height: 100vh;
-	overflow: auto;
-	background-color: rgb(0, 0, 0);
-	background-color: rgba(0, 0, 0, 0.7);
-
+/* Character Editor */
+#standardEditor {
+	padding: 16px;
 }
 
-.modal-content {
-	position: relative;
-	background-color: #fefefe;
-	margin: 15% auto; /* 15% from the top and centered */
-	padding: 20px;
-	border: 1px solid #888;
-	width: 400px; /* Could be more or less, depending on screen size */
+.linkedFileEditor {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	width: 512px;
+	border: 1px solid var(--editorBorderColor);
 }
 
-/* The Close Button */
-.modal .close {
-	color: #aaa;
-	float: right;
-	font-size: 28px;
-	font-weight: bold;
-	cursor: pointer;
+.linkedFileEditor img {
+	height: 256px;
+	width: 256px;
+	object-fit: contain;
+	border: 1px solid var(--editorBorderColor);
+	background-color: black;
 }
